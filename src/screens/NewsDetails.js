@@ -13,9 +13,20 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import {
+  useFonts,
+  Poppins_400Regular,
+  Poppins_700Bold,
+} from '@expo-google-fonts/poppins';
+
 const { height, width } = Dimensions.get('window');
 
 export default function NewsDetails() {
+  const [fontsLoaded] = useFonts({
+    Poppins_400Regular,
+    Poppins_700Bold,
+  });
+
   const { item, tituloCategoria } = useRoute().params;
 
   const [visible, setVisible] = useState(false);
@@ -63,8 +74,12 @@ export default function NewsDetails() {
     const TituloNoticia = document.querySelector("[data-id='a86e2df']");
     TituloNoticia.style.width = "100%";
 
+    const TituloNoticiaFont = document.querySelector("[class='elementor-heading-title elementor-size-default']");
+    TituloNoticiaFont.style.fontSize = "24px";
+    TituloNoticiaFont.style.width = "99%";
+    
     const TextoNoticia = document.querySelector("[data-id='4a7d0f5']");
-    TextoNoticia.style.marginTop = "5%";
+    TextoNoticia.style.marginTop = "3%";
 
     const FotoNoticia = document.querySelector("[data-id='27eacb1']");
     
@@ -74,20 +89,21 @@ export default function NewsDetails() {
     contenedor.insertBefore(TituloNoticia, FotoNoticia);
     contenedor.insertBefore(AutorFecha, FotoNoticia);
 
+    const AutoriaFechaCuadro = document.querySelector(".elementor-inline-items.elementor-icon-list-items.elementor-post-info");
+    AutoriaFechaCuadro.style.listStyle = "none";
 
 
-
-
-
-    
 
     true; 
   })()
 `;
 
+  if (!fontsLoaded) {
+    return <Text />;
+  }
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <View className="flex-row justify-between items-center px-2 pb-12 bg-blue-700" />
+      <View className="flex-row justify-between items-center px-2 pb-12 bg-[#0303B2] " />
 
       <View className="items-center bg-white">
         <Image
@@ -99,16 +115,18 @@ export default function NewsDetails() {
         />
       </View>
 
-      <View className="flex-row items-center px-2 pb-0">
-        <View className="p-2 rounded-full items-center justify-center mt-1">
+      <View className="px-2 pb-0 bg-white">
+        <View className="rounded-full ml-2">
           <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Icon name="arrow-left" size={25} strokeWidth={3} color="blue" />
+            <Icon name="arrow-left" size={30} strokeWidth={3} color="blue" />
           </TouchableOpacity>
         </View>
         <Text
-          className="pl-4 text-blue-800"
+          className="mt-4 pl-4 text-[#0303B2]"
           style={{
-            fontFamily: 'SpaceGroteskBold',
+            // fontFamily: 'SpaceGroteskBold',
+            fontFamily: 'Poppins_400Regular',
+
             fontSize: 20,
           }}
         >

@@ -53,7 +53,7 @@ export default function CategoriesCard({
         {categories.map((category, index) => {
           const isActive = category.id === activeCategory;
           const activeButtonClass = isActive
-            ? 'bg-blue-700 '
+            ? 'bg-[#0303B2]'
             : 'border-2 bg-slate-50';
           const activeTextClass = isActive
             ? 'text-white'
@@ -76,7 +76,7 @@ export default function CategoriesCard({
                 className="flex items-center space-y-1"
               >
                 <View
-                  className={`py-2 px-4 ${activeButtonClass}`}
+                  className={`py-1 px-4 ${activeButtonClass}`}
                   style={{ borderRadius: 50 }}
                 >
                   <Text
