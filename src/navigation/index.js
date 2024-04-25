@@ -19,6 +19,8 @@ import RadioScreen from '../screens/RadioScreen';
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
+// migben - note: 25-04-2024 - 11:13 am
+
 TrackPlayer.registerPlaybackService(() => require('../../service'));
 
 export default function AppNavigation() {
