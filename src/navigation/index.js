@@ -43,7 +43,7 @@ export default function AppNavigation() {
               <Ionicons
                 name={iconName}
                 size={customizeSize}
-                color={focused ? 'blue' : 'gray'}
+                color={focused ? 'red' : 'gray'}
               />
             );
           },
