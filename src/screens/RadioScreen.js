@@ -88,8 +88,8 @@ function Playlist() {
             height: 120,
             width: 120,
             marginLeft: 11,
-            marginTop: 11,
-            marginBottom: 11,
+            marginTop: 5,
+            marginBottom: 1,
             borderRadius: 12,
             borderColor: 'gray',
             borderWidth: 1,
@@ -261,13 +261,14 @@ const styles = StyleSheet.create({
   },
   songTitle: {
     fontSize: 20,
-    marginBottom:6,
+    marginBottom: 16,
+    marginTop: 16,
     color: 'blue',
     textAlign: 'center',
   },
 
   playlist: {
-    marginBottom: 0,
+    marginTop: 0,
   },
 
   button: {
