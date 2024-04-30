@@ -1,6 +1,6 @@
 # Noticiero Altavoz React Native Mobile App
 
-  ![Image](https://miky.migben.com/images/migben-miniatura-Youtube-template-2.jpg?resize=1504x846)
+  ![Image](https://miky.migben.com/images/migben-miniatura-Youtube-template-2.jpg?resize=900x600)
   
   <p align="left">
     <a href="https://www.youtube.com/channel/UCjlkqfaLpp-Ird787uzGCdw/?sub_confirmation=1"><img alt="Youtube" title="Youtube"  src="https://img.shields.io/badge/-Subscribe-red?style=for-the-badge&logo=youtube&logoColor=white"/></a>
