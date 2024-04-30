@@ -1,6 +1,6 @@
 # Noticiero Altavoz React Native Mobile App
 
-  ![alt text](http://url/to/img.png)
+  ![Image](https://cdn.dribbble.com/userupload/11230077/file/original-5bd1c582562508ab6d9e5fb52be12d6b.png?resize=1504x846)
   
   <p align="left">
     <a href="https://www.youtube.com/channel/UCjlkqfaLpp-Ird787uzGCdw/?sub_confirmation=1"><img alt="Youtube" title="Youtube"  src="https://img.shields.io/badge/-Subscribe-red?style=for-the-badge&logo=youtube&logoColor=white"/></a>
