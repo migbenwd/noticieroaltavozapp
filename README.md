@@ -1,6 +1,6 @@
 # Noticiero Altavoz React Native Mobile App
 
-![Image](https://i3.ytimg.com/vi/UORDfLgpxrg/maxresdefault.jpg)
+![Image]([https://i3.ytimg.com/vi/UORDfLgpxrg/maxresdefault.jpg](https://miky.migben.com/images/migben-miniatura-Youtube-template-2.jpg))
 
   
   <p align="left">
