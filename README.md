@@ -1,4 +1,4 @@
-# Noticiero Aaltavoz-React-Native-Mobile-App
+# Noticiero Altavoz React Native Mobile App
 
 ![Image](https://i3.ytimg.com/vi/UORDfLgpxrg/maxresdefault.jpg)
 
