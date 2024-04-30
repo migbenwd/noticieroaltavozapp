@@ -19,6 +19,7 @@ import TrackPlayer, {
   Event,
   State,
 } from 'react-native-track-player';
+// import Icon from 'react-native-vector-icons/FontAwesome';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useColorScheme } from 'nativewind';
@@ -84,19 +85,19 @@ function Playlist() {
         <Image
           style={{
             resizeMode: 'contain',
-            height: 130,
-            width: 130,
+            height: 120,
+            width: 120,
             marginLeft: 11,
             marginTop: 11,
             marginBottom: 11,
-            borderRadius: 30,
+            borderRadius: 12,
             borderColor: 'gray',
             borderWidth: 1,
 
             ...{
               backgroundColor: isCurrent
-                ? 'rgb(62, 250, 223)'
-                : 'rgba(82, 176, 230, 0.87)',
+                ? '#7070E7'
+                : '#0404B2',
             },
           }}
           source={{
