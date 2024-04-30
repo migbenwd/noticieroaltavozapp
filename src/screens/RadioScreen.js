@@ -117,6 +117,15 @@ function Playlist() {
 
   return (
     <View>
+      <View
+        style={{
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <Text style={styles.nombreAviso}> Escucha La Radio EN VIVO </Text>
+      </View>
+
       <View style={styles.playlist}>
         <FlatList
           horizontal={false}
@@ -269,6 +278,12 @@ const styles = StyleSheet.create({
 
   playlist: {
     marginTop: 0,
+  },
+
+  nombreAviso: {
+    backgroundColor: 'blue',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 
   button: {
