@@ -88,8 +88,8 @@ function Playlist() {
             height: 120,
             width: 120,
             marginLeft: 11,
-            marginTop: 5,
-            marginBottom: 1,
+            marginTop: 0,
+            marginBottom: 11,
             borderRadius: 12,
             borderColor: 'gray',
             borderWidth: 1,
@@ -173,7 +173,7 @@ function Controls({ onShuffle }) {
       <View style={styles.button}>
         <Icon
           name="arrow-left"
-          size={30}
+          size={25}
           color="white"
           onPress={() => TrackPlayer.skipToPrevious()}
         />
@@ -183,7 +183,7 @@ function Controls({ onShuffle }) {
         <Icon
           // name="play"
           name={playerState === State.Playing ? 'pause' : 'play'}
-          size={30}
+          size={25}
           color="white"
           onPress={handlePlayPress}
         />
@@ -192,7 +192,7 @@ function Controls({ onShuffle }) {
       <View style={styles.button}>
         <Icon
           name="arrow-right"
-          size={30}
+          size={25}
           color="white"
           onPress={() => TrackPlayer.skipToNext()}
         />
@@ -263,7 +263,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginBottom: 16,
     marginTop: 16,
-    color: 'blue',
+    color: 'black',
     textAlign: 'center',
   },
 
@@ -272,12 +272,12 @@ const styles = StyleSheet.create({
   },
 
   button: {
-    width: 50,
-    height: 50,
+    width: 45,
+    height: 45,
     borderRadius: 25,
     backgroundColor: 'blue',
     justifyContent: 'center',
     alignItems: 'center',
-    margin: 4,
+    margin: 10,
   },
 });
