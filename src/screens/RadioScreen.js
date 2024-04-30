@@ -165,10 +165,15 @@ function Controls({ onShuffle }) {
     <View
       style={{
         flexDirection: 'row',
+        alignContent: 'center',
+        alignItems: 'center',
       }}
     >
       <Icon.Button
         style={styles.iconoPlayer}
+        backgroundColor="transparent"
+        marginLeft={5}
+        marginRight={5}
         borderRadius={50}
         justifyContent="center"
         alignItems="center"
@@ -179,9 +184,13 @@ function Controls({ onShuffle }) {
       />
       <Icon.Button
         style={styles.iconoPlayer}
+        backgroundColor="transparent"
+        marginLeft={5}
+        marginRight={5}
         borderRadius={50}
         justifyContent="center"
         alignItems="center"
+        textAlign="center"
         color="white"
         name={playerState == State.Playing ? 'pause' : 'play'}
         size={28}
@@ -189,6 +198,9 @@ function Controls({ onShuffle }) {
       />
       <Icon.Button
         style={styles.iconoPlayer}
+        backgroundColor="transparent"
+        marginLeft={5}
+        marginRight={5}
         borderRadius={50}
         justifyContent="center"
         alignItems="center"
@@ -273,7 +285,9 @@ const styles = StyleSheet.create({
 
   iconoPlayer: {
     backgroundColor: 'blue',
-    height: 50,
-    width: 50,
+    height: 55,
+    width: 55,
+    // marginLeft: 15,
+
   },
 });
