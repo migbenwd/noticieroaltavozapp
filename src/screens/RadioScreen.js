@@ -95,9 +95,7 @@ function Playlist() {
             borderWidth: 1,
 
             ...{
-              backgroundColor: isCurrent
-                ? '#7070E7'
-                : '#0404B2',
+              backgroundColor: isCurrent ? '#7070E7' : '#0404B2',
             },
           }}
           source={{
@@ -164,26 +162,39 @@ function Controls({ onShuffle }) {
   }
 
   return (
-    <View style={{ flexDirection: 'row' }}>
+    <View
+      style={{
+        flexDirection: 'row',
+      }}
+    >
       <Icon.Button
-        color="blue"
+        style={styles.iconoPlayer}
+        borderRadius={50}
+        justifyContent="center"
+        alignItems="center"
+        color="white"
         name="arrow-left"
         size={28}
-        backgroundColor="transparent"
         onPress={() => TrackPlayer.skipToPrevious()}
       />
       <Icon.Button
-        color="blue"
+        style={styles.iconoPlayer}
+        borderRadius={50}
+        justifyContent="center"
+        alignItems="center"
+        color="white"
         name={playerState == State.Playing ? 'pause' : 'play'}
         size={28}
-        backgroundColor="transparent"
         onPress={handlePlayPress}
       />
       <Icon.Button
-        color="blue"
+        style={styles.iconoPlayer}
+        borderRadius={50}
+        justifyContent="center"
+        alignItems="center"
+        color="white"
         name="arrow-right"
         size={28}
-        backgroundColor="transparent"
         onPress={() => TrackPlayer.skipToNext()}
       />
     </View>
@@ -250,7 +261,7 @@ const styles = StyleSheet.create({
   },
   songTitle: {
     fontSize: 20,
-    marginBottom: 0,
+    marginBottom: 15,
     color: 'blue',
     textAlign: 'center',
   },
@@ -258,5 +269,11 @@ const styles = StyleSheet.create({
   playlist: {
     marginTop: 0,
     marginBottom: 0,
+  },
+
+  iconoPlayer: {
+    backgroundColor: 'blue',
+    height: 50,
+    width: 50,
   },
 });
