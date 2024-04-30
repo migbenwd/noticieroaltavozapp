@@ -1,6 +1,6 @@
 /* eslint-disable global-require */
 
-// migben 
+// migben
 import {
   View,
   Text,
