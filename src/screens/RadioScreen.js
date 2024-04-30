@@ -165,50 +165,38 @@ function Controls({ onShuffle }) {
     <View
       style={{
         flexDirection: 'row',
-        alignContent: 'center',
-        alignItems: 'center',
+        // justifyContent: 'space-around',
+        // backgroundColor: 'red',
+        padding: 0,
       }}
     >
-      <Icon.Button
-        style={styles.iconoPlayer}
-        backgroundColor="transparent"
-        marginLeft={5}
-        marginRight={5}
-        borderRadius={50}
-        justifyContent="center"
-        alignItems="center"
-        color="white"
-        name="arrow-left"
-        size={28}
-        onPress={() => TrackPlayer.skipToPrevious()}
-      />
-      <Icon.Button
-        style={styles.iconoPlayer}
-        backgroundColor="transparent"
-        marginLeft={5}
-        marginRight={5}
-        borderRadius={50}
-        justifyContent="center"
-        alignItems="center"
-        textAlign="center"
-        color="white"
-        name={playerState == State.Playing ? 'pause' : 'play'}
-        size={28}
-        onPress={handlePlayPress}
-      />
-      <Icon.Button
-        style={styles.iconoPlayer}
-        backgroundColor="transparent"
-        marginLeft={5}
-        marginRight={5}
-        borderRadius={50}
-        justifyContent="center"
-        alignItems="center"
-        color="white"
-        name="arrow-right"
-        size={28}
-        onPress={() => TrackPlayer.skipToNext()}
-      />
+      <View style={styles.button}>
+        <Icon
+          name="arrow-left"
+          size={30}
+          color="white"
+          onPress={() => TrackPlayer.skipToPrevious()}
+        />
+      </View>
+
+      <View style={styles.button}>
+        <Icon
+          // name="play"
+          name={playerState === State.Playing ? 'pause' : 'play'}
+          size={30}
+          color="white"
+          onPress={handlePlayPress}
+        />
+      </View>
+
+      <View style={styles.button}>
+        <Icon
+          name="arrow-right"
+          size={30}
+          color="white"
+          onPress={() => TrackPlayer.skipToNext()}
+        />
+      </View>
     </View>
   );
 }
@@ -273,21 +261,22 @@ const styles = StyleSheet.create({
   },
   songTitle: {
     fontSize: 20,
-    marginBottom: 15,
+    marginBottom:6,
     color: 'blue',
     textAlign: 'center',
   },
 
   playlist: {
-    marginTop: 0,
     marginBottom: 0,
   },
 
-  iconoPlayer: {
+  button: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
     backgroundColor: 'blue',
-    height: 55,
-    width: 55,
-    // marginLeft: 15,
-
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: 4,
   },
 });
