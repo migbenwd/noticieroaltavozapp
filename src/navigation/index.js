@@ -2,6 +2,9 @@
 /* eslint-disable react/jsx-no-bind */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable react/no-unstable-nested-components */
+
+// migben - cambiar menu radical
+
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
