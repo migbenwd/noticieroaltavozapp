@@ -87,9 +87,9 @@ function Playlist() {
             resizeMode: 'contain',
             height: 120,
             width: 120,
-            marginLeft: 11,
-            marginTop: 0,
-            marginBottom: 11,
+            marginLeft: 20,
+            marginTop: 10,
+            marginBottom: 1,
             borderRadius: 12,
             borderColor: 'gray',
             borderWidth: 1,
@@ -123,7 +123,10 @@ function Playlist() {
           alignItems: 'center',
         }}
       >
-        <Text style={styles.nombreAviso}> Escucha La Radio EN VIVO </Text>
+        <Text style={styles.nombreAviso}>Escucha la
+        {' '}
+      <Text style={{ fontWeight: 'bold' }}> radio en vivo</Text>
+        </Text>
       </View>
 
       <View style={styles.playlist}>
@@ -270,8 +273,8 @@ const styles = StyleSheet.create({
   },
   songTitle: {
     fontSize: 20,
-    marginBottom: 16,
-    marginTop: 16,
+    marginBottom: 2,
+    marginTop: 7,
     color: 'black',
     textAlign: 'center',
   },
@@ -281,9 +284,11 @@ const styles = StyleSheet.create({
   },
 
   nombreAviso: {
-    backgroundColor: 'blue',
+    // backgroundColor: 'blue',
     justifyContent: 'center',
     alignItems: 'center',
+    fontSize: 20,
+    marginBottom: 5,
   },
 
   button: {
@@ -293,6 +298,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'blue',
     justifyContent: 'center',
     alignItems: 'center',
-    margin: 10,
+    margin: 8,
   },
 });
