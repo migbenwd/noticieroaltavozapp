@@ -14,6 +14,8 @@ import { Ionicons } from '@expo/vector-icons';
 import { useColorScheme } from 'nativewind';
 import TrackPlayer from 'react-native-track-player';
 
+import { View, Text } from 'react-native';
+
 import HomeScreen from '../screens/HomeScreen';
 import NewsDetails from '../screens/NewsDetails';
 import WelcomeScreen from '../screens/WelcomeScreen';
@@ -43,23 +45,46 @@ export default function AppNavigation() {
               iconName = 'radio';
             }
 
-            const customizeSize = 25;
+            const customizeSize = 22;
 
             return (
-              <Ionicons
-                name={iconName}
-                size={customizeSize}
-                color={focused ? 'blue' : 'gray'}
-              />
+              <View
+                style={{
+                  // position: 'absolute',
+                  marginTop: 12,
+                  marginVertical: 'center',
+                  borderRadius: 5,
+                  padding: 5,
+                  height: 45,
+                  alignItems: 'center',
+                  backgroundColor: focused ? 'blue' : 'transparent',
+                }}
+              >
+                <Ionicons
+                  name={iconName}
+                  size={customizeSize}
+                  color={focused ? 'white' : 'gray'}
+                />
+
+                <Text
+                  style={{
+                    fontSize: 12,
+                    color: focused ? 'white' : 'gray',
+                  }}
+                >
+                  {route.name}
+                </Text>
+              </View>
             );
           },
 
-          tabBarActiveTintColor: 'blue',
+          tabBarActiveTintColor: 'white',
           tabBarInactiveTintColor: 'gray',
+
           tabBarLabelStyle: {
-            fontSize: 12,
-            fontFamily: 'SpaceGroteskMedium',
+            color: 'transparent',
           },
+
           tabBarStyle: {
             backgroundColor: colorScheme == 'dark' ? 'black' : 'white',
           },
