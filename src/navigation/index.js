@@ -4,6 +4,7 @@
 /* eslint-disable react/no-unstable-nested-components */
 
 // migben - cambiar menu radical
+// migben jueves - 08:20 am
 
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
