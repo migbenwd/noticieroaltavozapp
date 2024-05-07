@@ -99,7 +99,8 @@ export default function AppNavigation() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="SplashS"
+        initialRouteName="Welcome"
+        // initialRouteName="SplashS"
         // initialRouteName="RadioS"
         screenOptions={{
           headerShown: false,
