@@ -5,6 +5,7 @@ import {
   StyleSheet,
   ScrollView,
   Dimensions,
+  Image,
 } from 'react-native';
 import React, { useEffect, useState, useRef } from 'react';
 import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
@@ -75,6 +76,10 @@ export default function CategoriesCard({
             ? 'text-[#FFFFFF]'
             : 'text-[#FF0000]';
 
+          const imageSource = isActive
+            ? require('../../assets/images/alarma_2.png')
+            : require('../../assets/images/alarma_1.png');
+
           return (
             <View
               ref={(el) => {
@@ -98,6 +103,16 @@ export default function CategoriesCard({
                   className={`py-1 px-4 ${category.id === 331 ? LaTorretaButtonActive : activeButtonClass}`}
                   style={{ borderRadius: 50 }}
                 >
+                  <Image
+                    // source={require('../../assets/images/alarma_1.png')}
+                    source={imageSource}
+                    style={{
+                      width: 10,
+                      height: 10,
+                      display: category.id === 331 ? 'flex' : 'none',
+                    }}
+                  />
+
                   <Text
                     // className={`capitalize ${activeTextClass}`}
                     className={`capitalize ${category.id === 331 ? LaTorretaButtonActiveText : activeTextClass}`}
