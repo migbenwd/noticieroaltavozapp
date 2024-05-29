@@ -51,13 +51,29 @@ export default function CategoriesCard({
         contentContainerStyle={styles.scrollViewContent}
       >
         {categories.map((category, index) => {
+          // console.log('index en CardCat');
+          // console.log(category.title);
+          // console.log(category.id);
+          // console.log(index);
+
           const isActive = category.id === activeCategory;
+          const isLaTorreta = 331;
+
           const activeButtonClass = isActive
             ? 'bg-[#0303B2]'
             : 'border-2 bg-slate-50';
+
           const activeTextClass = isActive
             ? 'text-white'
             : 'text-white-600 dark:text-neutral-100 ';
+
+          const LaTorretaButtonActive = isActive
+            ? 'border border-[#FF0000] bg-red-600'
+            : 'border-2 border-[#FF0000] bg-white';
+
+          const LaTorretaButtonActiveText = isActive
+            ? 'text-[#FFFFFF]'
+            : 'text-[#FF0000]';
 
           return (
             <View
@@ -72,15 +88,19 @@ export default function CategoriesCard({
                 onPress={() => {
                   handleTagPress(index);
                   handleChangeCategory(category);
+                  // console.log(category);
                 }}
                 className="flex items-center space-y-1"
               >
                 <View
-                  className={`py-1 px-4 ${activeButtonClass}`}
+                  // className={`py-1 px-4 ${activeButtonClass}`}
+
+                  className={`py-1 px-4 ${category.id === 331 ? LaTorretaButtonActive : activeButtonClass}`}
                   style={{ borderRadius: 50 }}
                 >
                   <Text
-                    className={`capitalize ${activeTextClass}`}
+                    // className={`capitalize ${activeTextClass}`}
+                    className={`capitalize ${category.id === 331 ? LaTorretaButtonActiveText : activeTextClass}`}
                     style={{
                       fontSize: hp(2),
                       fontFamily: 'Poppins_400Regular',
