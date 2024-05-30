@@ -45,18 +45,21 @@ export default function AppNavigation() {
               iconName = 'radio';
             }
 
-            const customizeSize = 22;
+            const customizeSize = 18;
 
             return (
               <View
                 style={{
                   // position: 'absolute',
-                  marginTop: 12,
+                  // marginTop: 120,
+                  // marginBottom: 100,
                   marginVertical: 'center',
-                  borderRadius: 5,
-                  padding: 5,
-                  height: 45,
+                  borderRadius: 16,
+                  // padding: 10,
+                  width: 48,
+                  height: 46,
                   alignItems: 'center',
+                  flexDirection: 'column',
                   backgroundColor: focused ? 'blue' : 'transparent',
                 }}
               >
@@ -64,11 +67,12 @@ export default function AppNavigation() {
                   name={iconName}
                   size={customizeSize}
                   color={focused ? 'white' : 'gray'}
+                  marginTop={6}
                 />
 
                 <Text
                   style={{
-                    fontSize: 12,
+                    fontSize: 8,
                     color: focused ? 'white' : 'gray',
                   }}
                 >
@@ -86,7 +90,11 @@ export default function AppNavigation() {
           },
 
           tabBarStyle: {
-            backgroundColor: colorScheme == 'dark' ? 'black' : 'white',
+            // backgroundColor: colorScheme == 'dark' ? 'black' : 'white',
+            // backgroundColor: 'red',
+            // height: 50,
+            paddingTop: 30,
+            paddingBottom: 30,
           },
         })}
       >
