@@ -83,9 +83,26 @@ export function RenderNewsItem({
             width: indexso !== 0 ? 180 : 325,
             // backgroundColor: 'red',
             marginLeft: 10,
-
           }}
         >
+          <Text
+            // className="leading-[2rem]"
+            style={{
+              display:
+                activeCategoryId === '77' && indexso === 0 ? 'flex' : 'none',
+              fontSize: 14,
+              fontFamily: 'Poppins_500Medium',
+              textAlign: 'center',
+              backgroundColor: '#0303B2',
+              width: 100,
+              color: 'white',
+              marginTop: 15,
+              borderRadius: 2,
+            }}
+          >
+            Nacional
+          </Text>
+
           <Text
             // className="leading-[2rem]"
             style={{
@@ -95,7 +112,6 @@ export function RenderNewsItem({
               textAlign: 'left',
               lineHeight: indexso !== 0 ? 16 : 22,
               paddingTop: indexso !== 0 ? 0 : 22,
-
             }}
           >
             {item.title.rendered}
