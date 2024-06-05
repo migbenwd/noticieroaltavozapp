@@ -224,9 +224,14 @@ export default function HomeScreen() {
               indexso={index}
             />
           )}
-          renderSectionHeader={({ section: { title } }) => (
+          renderSectionHeader={({ section: { title, id } }) => (
             // -------------- category tittle
-            <View className="flex-row">
+            <View
+              className="flex-row"
+              style={{
+                display: id === '77' ? 'none' : 'flex',
+              }}
+            >
               <Text
                 className="bg-[#FFCC29] uppercase rounded ml-2 py-0 px-7 mt-0 mb-4"
                 style={{

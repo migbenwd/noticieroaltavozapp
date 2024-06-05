@@ -48,16 +48,27 @@ export function RenderNewsItem({
 
   return (
     <TouchableOpacity
-      // className="mb-4 items-center"
-      className="mb-4 mt-2"
+      // className="mb-4 mt-2"
       key={item.id}
       onPress={() => handleClick(item)}
+      style={{
+        padding: 10,
+      }}
     >
       <View
-        className={`ml-4 mr-4 ${activeCategoryId === 77 && indexso !== 0 ? 'flex-row' : null}`}
+        // className={`ml-4 mr-4 ${activeCategoryId === 77 && indexso !== 0 ? 'flex-row' : null}`}
+        style={{
+          flexDirection: indexso !== 0 ? 'row' : 'column',
+          width: indexso !== 0 ? '45%' : '100%',
+        }}
       >
         <Image
-          className={`mb-2 rounded-md ${activeCategoryId === 77 && indexso !== 0 ? 'w-28 h-20' : 'w-[100%] h-64'}`}
+          // className={`mb-2 rounded-md ${indexso !== 0 ? 'w-[90%] h-20' : 'w-[100%] h-64'}`}
+          style={{
+            width: '100%',
+            height: indexso !== 0 ? 125 : 256,
+            borderRadius: indexso !== 0 ? 12 : 20,
+          }}
           source={{
             uri:
               item && item.yoast_head_json && item.yoast_head_json.og_image[0]
@@ -67,16 +78,24 @@ export function RenderNewsItem({
         />
 
         <View
-          className={`${activeCategoryId === 77 && indexso !== 0 ? 'w-[60%] ml-2' : null}`}
+          // className={`${activeCategoryId === 77 && indexso !== 0 ? 'w-[60%] ml-2' : null}`}
+          style={{
+            width: indexso !== 0 ? 180 : 325,
+            // backgroundColor: 'red',
+            marginLeft: 10,
+
+          }}
         >
           <Text
-            className="leading-[2rem]"
+            // className="leading-[2rem]"
             style={{
-              fontSize:
-                activeCategoryId === 77 && indexso !== 0 ? hp(1.65) : hp(2.5),
+              fontSize: indexso !== 0 ? 14 : 24,
+              // fontWeight: indexso !== 0 ? '600' : '800',
               fontFamily: 'Poppins_600SemiBold',
               textAlign: 'left',
-              // lineHeight: 18,
+              lineHeight: indexso !== 0 ? 16 : 22,
+              paddingTop: indexso !== 0 ? 0 : 22,
+
             }}
           >
             {item.title.rendered}
