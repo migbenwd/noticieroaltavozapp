@@ -8,10 +8,10 @@ import {
   Text,
   Image,
   ActivityIndicator,
-  // StyleSheet,
+  StyleSheet,
   SectionList,
   TouchableOpacity,
-  // Dimensions,
+  Dimensions,
 } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
@@ -24,7 +24,7 @@ import {
   Poppins_400Regular,
   Poppins_700Bold,
 } from '@expo-google-fonts/poppins';
-// import Carousel from 'react-native-snap-carousel';
+import Carousel from 'react-native-snap-carousel';
 import CategoriesCard from '../components/CategoriesCard';
 import NewsSection, {
   RenderNewsItem,
@@ -33,20 +33,20 @@ import NewsSection, {
 import {
   getNewsByCategoryId,
   getCategories,
-  // getPublicidad,
+  getPublicidad,
 } from '../services/NewsApi';
 
-// import { openInBrowser } from '../utils/openInBrowser';
+import { openInBrowser } from '../utils/openInBrowser';
 
-// const { width } = Dimensions.get('screen');
-// function wp(percentage) {
-//   const value = (percentage * width) / 100;
-//   return Math.round(value);
-// }
+const { width } = Dimensions.get('screen');
+function wp(percentage) {
+  const value = (percentage * width) / 100;
+  return Math.round(value);
+}
 
-// const slideWidth = wp(75);
-// const itemHorizontalMargin = wp(2);
-// const itemWidth = slideWidth + itemHorizontalMargin * 2;
+const slideWidth = wp(75);
+const itemHorizontalMargin = wp(2);
+const itemWidth = slideWidth + itemHorizontalMargin * 2;
 
 const CATEGORY_DEFAULT = { id: '77', title: 'Portada' };
 
@@ -79,7 +79,7 @@ export default function HomeScreen() {
   const [isLoading, setIsLoading] = useState(true);
   const [discoverNewsAV, setDiscoverNewsAV] = useState([]);
   const [newsPortada, setNewsPortada] = useState([]);
-  // const [adPublicidad, setadPublicidad] = useState([]);
+  const [adPublicidad, setadPublicidad] = useState([]);
 
   function fetchNewsByCategory(categoryId) {
     setIsLoading(true);
@@ -108,13 +108,28 @@ export default function HomeScreen() {
   };
 
   useEffect(() => {
-    // getPublicidad().then(setadPublicidad);
+    getPublicidad().then(setadPublicidad);
     fetchNewsByCategory(CATEGORY_DEFAULT.id);
   }, []);
 
   if (!fontsLoaded) {
     return <Text />;
   }
+
+  const renderItem = ({ item }) => {
+    return (
+      <TouchableOpacity
+        activeOpacity={0.6}
+        onPress={() => openInBrowser(item.src)}
+      >
+        <Image
+          source={{ uri: item.image }}
+          style={{ aspectRatio: 4 / 3, flex: 1 }}
+          resizeMode="cover"
+        />
+      </TouchableOpacity>
+    );
+  };
 
   return (
     <SafeAreaView style={{ flex: 1 }} edge={['bottom']}>
@@ -185,7 +200,10 @@ export default function HomeScreen() {
                     </Text>
                   </View>
                 </TouchableOpacity>
-                {/* <View className="mb-10 " style={{ alignItems: 'center' }}>
+
+                {console.log('adPublicidad')}
+
+                <View className="mb-10 " style={{ alignItems: 'center' }}>
                   <Carousel
                     data={adPublicidad}
                     renderItem={renderItem}
@@ -199,7 +217,7 @@ export default function HomeScreen() {
                     autoplayDelay={500}
                     autoplayInterval={3000}
                   />
-                </View> */}
+                </View>
               </>
             );
           }}
@@ -242,17 +260,17 @@ export default function HomeScreen() {
   );
 }
 
-// const styles = StyleSheet.create({
-//   container: {
-//     display: 'flex',
-//     flexDirection: 'column',
-//     justifyContent: 'space-around',
-//     alignItems: 'center',
-//     height: '10%',
-//     textAlign: 'center',
-//     backgroundColor: 'white',
-//   },
-//   slider: {
-//     overflow: 'hidden',
-//   },
-// });
+const styles = StyleSheet.create({
+  //   container: {
+  //     display: 'flex',
+  //     flexDirection: 'column',
+  //     justifyContent: 'space-around',
+  //     alignItems: 'center',
+  //     height: '10%',
+  //     textAlign: 'center',
+  //     backgroundColor: 'white',
+  //   },
+  slider: {
+    overflow: 'hidden',
+  },
+});

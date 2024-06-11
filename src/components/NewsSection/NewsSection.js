@@ -121,9 +121,6 @@ export function RenderNewsItem({
             }}
           >
             {console.log('NewsSection')}
-            {console.log(
-              item.yoast_head_json.schema['@graph'][0].articleSection
-            )}
             {/* {item.id} ... */}
             {item.title.rendered}
           </Text>
