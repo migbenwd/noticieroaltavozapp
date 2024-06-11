@@ -54,6 +54,8 @@ const getTheFirstFiveNewsByCategories = async () => {
   const categories = await getCategories();
   const newsByCategoriesId = [CATEGORY_DEFAULT, ...categories].map(
     async (category) => {
+      // console.log('category...');
+      // console.log(category);
       const news = await getNewsByCategoryId(category.id);
       return {
         title: category.title,
@@ -113,21 +115,6 @@ export default function HomeScreen() {
   if (!fontsLoaded) {
     return <Text />;
   }
-
-  // const renderItem = ({ item }) => {
-  //   return (
-  //     <TouchableOpacity
-  //       activeOpacity={0.6}
-  //       onPress={() => openInBrowser(item.src)}
-  //     >
-  //       <Image
-  //         source={{ uri: item.image }}
-  //         style={{ aspectRatio: 4 / 3, flex: 1 }}
-  //         resizeMode="cover"
-  //       />
-  //     </TouchableOpacity>
-  //   );
-  // };
 
   return (
     <SafeAreaView style={{ flex: 1 }} edge={['bottom']}>

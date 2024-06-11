@@ -72,6 +72,8 @@ export const getCategories = async () => {
       }))
     );
 
+    // console.log(result);
+
   const arrayCategoriasApi = result;
 
   /*

@@ -55,6 +55,7 @@ export function RenderNewsItem({
         padding: 10,
       }}
     >
+      
       <View
         // className={`ml-4 mr-4 ${activeCategoryId === 77 && indexso !== 0 ? 'flex-row' : null}`}
         style={{
@@ -94,13 +95,13 @@ export function RenderNewsItem({
               fontFamily: 'Poppins_500Medium',
               textAlign: 'center',
               backgroundColor: '#0303B2',
-              width: 100,
+              width: '100%',
               color: 'white',
               marginTop: 15,
               borderRadius: 2,
             }}
           >
-            Nacional
+            {item.yoast_head_json.schema['@graph'][0]['articleSection']}
           </Text>
 
           <Text
@@ -114,6 +115,9 @@ export function RenderNewsItem({
               paddingTop: indexso !== 0 ? 0 : 22,
             }}
           >
+            {console.log('NewsSection')}
+            {console.log(item.yoast_head_json.schema['@graph'][0]['articleSection'])}
+            {/* {item.id} ... */}
             {item.title.rendered}
           </Text>
 
