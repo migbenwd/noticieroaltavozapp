@@ -41,6 +41,12 @@ export function RenderNewsItem({
       tituloCategoria,
     });
   };
+ 
+  const tagArrayCategoria = item.yoast_head_json.schema['@graph'][0].articleSection;
+  const tagArray2Categoria = tagArrayCategoria;
+  const tagArray3Categoria = tagArray2Categoria.filter(elemento => elemento !== "Portada");
+  // Unir las palabras con espacios
+  const tagCategoria = tagArray3Categoria.join(" ");
 
   if (!fontsLoaded) {
     return <Text />;
@@ -55,7 +61,6 @@ export function RenderNewsItem({
         padding: 10,
       }}
     >
-      
       <View
         // className={`ml-4 mr-4 ${activeCategoryId === 77 && indexso !== 0 ? 'flex-row' : null}`}
         style={{
@@ -101,7 +106,7 @@ export function RenderNewsItem({
               borderRadius: 2,
             }}
           >
-            {item.yoast_head_json.schema['@graph'][0]['articleSection']}
+            {tagCategoria}
           </Text>
 
           <Text
@@ -116,7 +121,9 @@ export function RenderNewsItem({
             }}
           >
             {console.log('NewsSection')}
-            {console.log(item.yoast_head_json.schema['@graph'][0]['articleSection'])}
+            {console.log(
+              item.yoast_head_json.schema['@graph'][0].articleSection
+            )}
             {/* {item.id} ... */}
             {item.title.rendered}
           </Text>

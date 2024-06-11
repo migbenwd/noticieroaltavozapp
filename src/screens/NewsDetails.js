@@ -64,7 +64,7 @@ export default function NewsDetails() {
     BtnWhatsapp.remove();
 
     const IconosRedesSociales = document.querySelector("[data-id='69312eb']");
-    IconosRedesSociales.remove();
+    // IconosRedesSociales.remove();
 
     const HazPrimerComentario = document.querySelector('.elementor-post-info li:nth-child(3)');
     HazPrimerComentario.remove();
@@ -73,10 +73,12 @@ export default function NewsDetails() {
     
     const TituloNoticia = document.querySelector("[data-id='a86e2df']");
     TituloNoticia.style.width = "100%";
-
+    
     const TituloNoticiaFont = document.querySelector("[class='elementor-heading-title elementor-size-default']");
     TituloNoticiaFont.style.fontSize = "24px";
     TituloNoticiaFont.style.width = "99%";
+    TituloNoticiaFont.style.lineHeight = "25px";
+
     
     const TextoNoticia = document.querySelector("[data-id='4a7d0f5']");
     TextoNoticia.style.marginTop = "3%";
@@ -91,6 +93,10 @@ export default function NewsDetails() {
 
     const AutoriaFechaCuadro = document.querySelector(".elementor-inline-items.elementor-icon-list-items.elementor-post-info");
     AutoriaFechaCuadro.style.listStyle = "none";
+
+    FotoNoticia.style.marginTop = "-8%";
+
+    
 
 
 
