@@ -7,6 +7,14 @@ export const extractImagesWithTheirSource = (htmlString) => {
   const images = Array.from(htmlString.matchAll(imgRegex), (match) => match[1]);
   const urls = Array.from(htmlString.matchAll(linkRegex), (match) => match[1]);
 
+  console.log('images');
+  console.log(images);
+
+  console.log('urls');
+  console.log(urls);
+
+  // Implementar logica de si o no vacio en URL
+  
   return images.map((item, index) => {
     if (images.length === urls.length) {
       return {
@@ -17,7 +25,10 @@ export const extractImagesWithTheirSource = (htmlString) => {
 
     return {
       image: item,
-      src: urls[0],
+      // src: urls[0],
+      src: '#',
     };
   });
 };
+
+
