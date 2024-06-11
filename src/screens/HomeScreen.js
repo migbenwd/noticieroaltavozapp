@@ -117,8 +117,11 @@ export default function HomeScreen() {
   }
 
   const renderItem = ({ item }) => {
+    // -------------- item de publicidad
+
     // console.log('item de publicidad...');
     // console.log(item);
+
     return (
       <TouchableOpacity
         activeOpacity={0.6}
