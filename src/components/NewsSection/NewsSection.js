@@ -120,7 +120,7 @@ export function RenderNewsItem({
               paddingTop: indexso !== 0 ? 0 : 22,
             }}
           >
-            {console.log('NewsSection')}
+            {/* {console.log('NewsSection')} */}
             {/* {item.id} ... */}
             {item.title.rendered}
           </Text>

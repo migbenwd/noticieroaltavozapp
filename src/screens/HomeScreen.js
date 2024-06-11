@@ -117,6 +117,8 @@ export default function HomeScreen() {
   }
 
   const renderItem = ({ item }) => {
+    // console.log('item de publicidad...');
+    // console.log(item);
     return (
       <TouchableOpacity
         activeOpacity={0.6}
@@ -201,7 +203,8 @@ export default function HomeScreen() {
                   </View>
                 </TouchableOpacity>
 
-                {console.log('adPublicidad')}
+                {/* {console.log('adPublicidad')} */}
+                {/* console.log(adPublicidad) */}
 
                 <View className="mb-10 " style={{ alignItems: 'center' }}>
                   <Carousel

@@ -72,7 +72,7 @@ export const getCategories = async () => {
       }))
     );
 
-    // console.log(result);
+  // console.log(result);
 
   const arrayCategoriasApi = result;
 
@@ -116,6 +116,10 @@ export const getPublicidad = async () => {
   const url = `https://noticieroaltavoz.com/wp-json/wp/v2/publicidad-app`;
   const response = await axios.get(url);
   const htmlContent = response.data[0].content.rendered;
+
+  console.log('htmlContent');
+  console.log('...');
+  // console.log(htmlContent);
 
   return extractImagesWithTheirSource(htmlContent);
 };
