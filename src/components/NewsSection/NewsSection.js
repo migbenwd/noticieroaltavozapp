@@ -46,7 +46,7 @@ export function RenderNewsItem({
   const tagArray2Categoria = tagArrayCategoria;
   const tagArray3Categoria = tagArray2Categoria.filter(elemento => elemento !== "Portada");
   // Unir las palabras con espacios
-  const tagCategoria = tagArray3Categoria.join(" ");
+  const tagCategoria = tagArray3Categoria.join(", ");
 
   if (!fontsLoaded) {
     return <Text />;
@@ -116,7 +116,7 @@ export function RenderNewsItem({
               // fontWeight: indexso !== 0 ? '600' : '800',
               fontFamily: 'Poppins_600SemiBold',
               textAlign: 'left',
-              lineHeight: indexso !== 0 ? 16 : 22,
+              lineHeight: indexso !== 0 ? 16 : 26,
               paddingTop: indexso !== 0 ? 0 : 22,
             }}
           >
