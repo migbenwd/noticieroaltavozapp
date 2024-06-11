@@ -1,3 +1,5 @@
+// en este archivo se arma url para publicidad
+
 export const extractImagesWithTheirSource = (htmlString) => {
   const imgRegex = /<img.*?data-src="([^"]+)".*?>/g;
   const linkRegex = /<a.*?href="([^"]+)".*?>/g;
