@@ -117,9 +117,5 @@ export const getPublicidad = async () => {
   const response = await axios.get(url);
   const htmlContent = response.data[0].content.rendered;
 
-  console.log('htmlContent');
-  console.log('...');
-  // console.log(htmlContent);
-
   return extractImagesWithTheirSource(htmlContent);
 };

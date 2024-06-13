@@ -120,13 +120,24 @@ export default function HomeScreen() {
     // -------------- item de publicidad
 
     // console.log('item de publicidad...');
-    // console.log(item);
+    // console.log(item.puntoclick);
 
     return (
       <TouchableOpacity
         activeOpacity={0.6}
         onPress={() => openInBrowser(item.src)}
       >
+        <Text
+          style={{
+            fontSize: hp(2),
+            fontFamily: 'Poppins_400Regular',
+          }}
+        >
+          {item.src}
+          {'...'}
+          {item.puntoclick}
+        </Text>
+
         <Image
           source={{ uri: item.image }}
           style={{ aspectRatio: 4 / 3, flex: 1 }}
