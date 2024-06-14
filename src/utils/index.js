@@ -41,38 +41,55 @@ export const extractImagesWithTheirSource = (htmlString) => {
   // --- PARSEAR   ------------------------------------------------------------//
 
   const document = parse(htmlString);
-
-  // const divs = document.querySelectorAll('div');
-  // const divs = document.querySelectorAll('div.con-click');
   const divs = document.querySelectorAll('div.sin-click, div.con-click');
 
+  const arrayFinal = [];
+
   for (const [indice, div] of divs.entries()) {
-    console.log(`........DIV ${indice + 1}........`); // Se agrega el índice + 1 al título
     const valorix = div.toString();
-    console.log(valorix);
+
+    const imagenesExtraidas = Array.from(
+      valorix.matchAll(imgRegex),
+      (match) => match[1]
+    );
+
+    const enlacesExtraidas = Array.from(
+      valorix.matchAll(linkRegex),
+      (match) => match[1]
+    );
+
+    // Creamos un objeto con los datos extraídos
+    const objetoExtraido = {
+      image: imagenesExtraidas.toString(),
+      puntoclick: enlacesExtraidas.toString(),
+      src: enlacesExtraidas.toString(),
+    };
+
+    // Agregamos el objeto al arrayFinal
+    arrayFinal.push(objetoExtraido);
   }
 
-  // for (const div of divs) {
-  //   console.log('........DIV........');
+  console.log('array arrayFinal');
+  // console.log(arrayFinal);
+  console.log('..................');
+
+  return arrayFinal;
+
+  //   const arrayFinal = [];
+
+  //   for (const [indice, div] of divs.entries()) {
   //   const valorix = div.toString();
-  //   console.log(valorix);
-  // }
 
-  // -------------------------------------------------------------------//
+  //   const imagenesExtraidas = Array.from(
+  //     valorix.matchAll(imgRegex),
+  //     (match) => match[1]
+  //   );
 
-  // const p = 0;
-  // for (const match of likysx) {
-  //   console.log(match);
-  //   if (match === 'ms-slide con-click') {
-  //     const claseRox = /<div.*?class="ms-slide con-click".*?>/g;
-  //     const matches = html.matchAll(claseRox);
-  //     console.log(matches.map((match) => match[1]));
-  //   }
-  // }
+  //   const enlacesExtraidas = Array.from(
+  //     valorix.matchAll(linkRegex),
+  //     (match) => match[1]
+  //   );
 
-  // for (const match of imagix) {
-  //   console.log("Contenido MATCH 0:");
-  //   console.log(match[0]);
   // }
 
   const filteredArray = likysx.filter(
@@ -84,15 +101,11 @@ export const extractImagesWithTheirSource = (htmlString) => {
 
   return images.map((item, index) => {
     // console.log('../..');
-    // console.log('index:', index);
-    // console.log('imagen:', images[index]);
-    // console.log('url:', urls[index]);
-    // console.log('ConSinClickArray:', ConSinClickArray[index]);
-
-    return {
-      image: item,
-      src: urls[0],
-      puntoclick: ConSinClickArray[index],
-    };
+    // console.log(item);
+    // return {
+    //   image: item,
+    //   src: urls[0],
+    //   puntoclick: ConSinClickArray[index],
+    // };
   });
 };
