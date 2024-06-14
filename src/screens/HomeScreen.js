@@ -125,19 +125,8 @@ export default function HomeScreen() {
     return (
       <TouchableOpacity
         activeOpacity={0.6}
-        onPress={() => openInBrowser(item.src)}
+        onPress={item.src === 'sin-url' ? null : () => openInBrowser(item.src) } // Only set onPress if enabled
       >
-        <Text
-          style={{
-            fontSize: hp(2),
-            fontFamily: 'Poppins_400Regular',
-          }}
-        >
-          {item.src}
-          {'...'}
-          {item.puntoclick}
-        </Text>
-
         <Image
           source={{ uri: item.image }}
           style={{ aspectRatio: 4 / 3, flex: 1 }}
@@ -217,8 +206,8 @@ export default function HomeScreen() {
                   </View>
                 </TouchableOpacity>
 
-                {/* {console.log('adPublicidad')} */}
-                {/* console.log(adPublicidad) */}
+                {/* {console.log('adPublicidad')}
+                {console.log(adPublicidad)} */}
 
                 <View className="mb-10 " style={{ alignItems: 'center' }}>
                   <Carousel
