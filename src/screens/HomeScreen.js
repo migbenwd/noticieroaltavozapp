@@ -205,8 +205,7 @@ export default function HomeScreen() {
                     </Text>
                   </View>
                 </TouchableOpacity>
-
-                {console.log('adPublicidad')}
+                {/* {console.log('adPublicidad')} */}
 
                 <View className="mb-10 " style={{ alignItems: 'center' }}>
                   <Carousel
