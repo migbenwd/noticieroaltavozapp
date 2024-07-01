@@ -125,12 +125,16 @@ export default function HomeScreen() {
     return (
       <TouchableOpacity
         activeOpacity={0.6}
-        onPress={item.src === 'sin-url' ? null : () => openInBrowser(item.src) } // Only set onPress if enabled
+        style={{
+          width: '80%',
+        }}
+        onPress={item.src === 'sin-url' ? null : () => openInBrowser(item.src)} // Only set onPress if enabled
       >
         <Image
           source={{ uri: item.image }}
           style={{ aspectRatio: 4 / 3, flex: 1 }}
-          resizeMode="cover"
+          // resizeMode="repeat"
+          resizeMode="contain"
         />
       </TouchableOpacity>
     );
