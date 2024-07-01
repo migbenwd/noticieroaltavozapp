@@ -94,7 +94,7 @@ export default function NewsDetails() {
     const AutoriaFechaCuadro = document.querySelector(".elementor-inline-items.elementor-icon-list-items.elementor-post-info");
     AutoriaFechaCuadro.style.listStyle = "none";
 
-    FotoNoticia.style.marginTop = "-8%";
+    FotoNoticia.style.marginTop = "-5%";
 
     
 
