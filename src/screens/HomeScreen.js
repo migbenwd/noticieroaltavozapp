@@ -126,7 +126,7 @@ export default function HomeScreen() {
       <TouchableOpacity
         activeOpacity={0.6}
         style={{
-          width: '80%',
+          // width: '80%',
         }}
         onPress={item.src === 'sin-url' ? null : () => openInBrowser(item.src)} // Only set onPress if enabled
       >
@@ -211,7 +211,13 @@ export default function HomeScreen() {
                 </TouchableOpacity>
                 {/* {console.log('adPublicidad')} */}
 
-                <View className="mb-10 " style={{ alignItems: 'center' }}>
+                <View
+                  className="mb-10"
+                  style={{
+                    // backgroundColor: 'red',
+                    alignItems: 'center',
+                  }}
+                >
                   <Carousel
                     data={adPublicidad}
                     renderItem={renderItem}
