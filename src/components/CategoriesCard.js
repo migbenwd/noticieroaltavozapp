@@ -98,12 +98,9 @@ export default function CategoriesCard({
                 className="flex items-center space-y-1"
               >
                 <View
-                  // className={`py-1 px-4 ${activeButtonClass}`}
-
                   className={`py-1 px-4 ${category.id === 331 ? LaTorretaButtonActive : activeButtonClass}`}
                   style={{
                     borderRadius: 50,
-                    // flex: 1,
                     flexDirection: 'row',
                     alignItems: 'center',
                   }}
@@ -114,7 +111,7 @@ export default function CategoriesCard({
                     style={{
                       width: 12,
                       height: 12,
-                      marginRight:4,
+                      marginRight: 4,
                       display: category.id === 331 ? 'flex' : 'none',
                     }}
                   />
@@ -123,12 +120,14 @@ export default function CategoriesCard({
                     // className={`capitalize ${activeTextClass}`}
                     className={`capitalize ${category.id === 331 ? LaTorretaButtonActiveText : activeTextClass}`}
                     style={{
-                      marginTop:3.5,
+                      marginTop: 3.5,
                       fontSize: hp(2),
                       fontFamily: 'Poppins_400Regular',
                     }}
                   >
+                    {/* {category.title === "Los Mochis" ? "6" : category.title} */}
                     {category.title}
+
                   </Text>
                 </View>
               </TouchableOpacity>
