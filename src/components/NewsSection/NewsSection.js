@@ -41,12 +41,15 @@ export function RenderNewsItem({
       tituloCategoria,
     });
   };
- 
-  const tagArrayCategoria = item.yoast_head_json.schema['@graph'][0].articleSection;
+
+  const tagArrayCategoria =
+    item.yoast_head_json.schema['@graph'][0].articleSection;
   const tagArray2Categoria = tagArrayCategoria;
-  const tagArray3Categoria = tagArray2Categoria.filter(elemento => elemento !== "Portada");
+  const tagArray3Categoria = tagArray2Categoria.filter(
+    (elemento) => elemento !== 'Portada'
+  );
   // Unir las palabras con espacios
-  const tagCategoria = tagArray3Categoria.join(", ");
+  const tagCategoria = tagArray3Categoria.join(', ');
 
   if (!fontsLoaded) {
     return <Text />;
@@ -86,26 +89,25 @@ export function RenderNewsItem({
         <View
           // className={`${activeCategoryId === 77 && indexso !== 0 ? 'w-[60%] ml-2' : null}`}
           style={{
-            // backgroundColor: 'red',
+            // backgroundColor: 'green',
             width: indexso !== 0 ? 180 : 325,
             marginLeft: 10,
-            width:'99%'
-
+            width: '99%',
           }}
         >
           <Text
             // className="leading-[2rem]"
+            className="py-1 px-4"
             style={{
               display:
                 activeCategoryId === '77' && indexso === 0 ? 'flex' : 'none',
               fontSize: 14,
               fontFamily: 'Poppins_500Medium',
-              textAlign: 'center',
               backgroundColor: '#0303B2',
-              width: '100%',
               color: 'white',
               marginTop: 15,
               borderRadius: 2,
+              alignSelf: 'flex-start',
             }}
           >
             {tagCategoria}
@@ -121,7 +123,6 @@ export function RenderNewsItem({
               paddingTop: indexso !== 0 ? 0 : 22,
               // backgroundColor: 'yellow',
               width: indexso !== 0 ? '120%' : '100%',
-
             }}
           >
             {/* {console.log('NewsSection')} */}
