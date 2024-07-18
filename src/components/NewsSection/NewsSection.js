@@ -1,5 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+
 import { View, Text, TouchableOpacity, Image, FlatList } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
@@ -44,6 +45,9 @@ export function RenderNewsItem({
 
   const tagArrayCategoria =
     item.yoast_head_json.schema['@graph'][0].articleSection;
+
+  // console.log('tagArrayCategoria', tagArrayCategoria);
+
   const tagArray2Categoria = tagArrayCategoria;
   const tagArray3Categoria = tagArray2Categoria.filter(
     (elemento) => elemento !== 'Portada'
@@ -110,6 +114,7 @@ export function RenderNewsItem({
               alignSelf: 'flex-start',
             }}
           >
+            {/* {activeCategoryId} */}
             {tagCategoria}
           </Text>
 
