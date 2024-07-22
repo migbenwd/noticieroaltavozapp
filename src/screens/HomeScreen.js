@@ -13,7 +13,7 @@ import {
   TouchableOpacity,
   Dimensions,
 } from 'react-native';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState} from 'react';
 import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useColorScheme } from 'nativewind';
@@ -142,6 +142,9 @@ export default function HomeScreen() {
     );
   };
 
+  //  touchableOpacityRenderCount.current++; // Increment counter on each render
+  //  console.log('touchableOpacityRenderCount', touchableOpacityRenderCount);
+
   return (
     <SafeAreaView style={{ flex: 1 }} edge={['bottom']}>
       <View className="flex-row justify-between items-center px-2 pb-12 bg-[#0303B2]" />
@@ -172,7 +175,7 @@ export default function HomeScreen() {
             }}
           >
             {activeCategory.title}
-          </Text>
+            </Text>
         )}
       </View>
       {isLoading ? (
