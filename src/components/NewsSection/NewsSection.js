@@ -46,8 +46,6 @@ export function RenderNewsItem({
   const tagArrayCategoria =
     item.yoast_head_json.schema['@graph'][0].articleSection;
 
-  // console.log('tagArrayCategoria', tagArrayCategoria);
-
   const tagArray2Categoria = tagArrayCategoria;
   const tagArray3Categoria = tagArray2Categoria.filter(
     (elemento) => elemento !== 'Portada'
@@ -72,21 +70,17 @@ export function RenderNewsItem({
         // className={`ml-4 mr-4 ${activeCategoryId === 77 && indexso !== 0 ? 'flex-row' : null}`}
         style={{
           // backgroundColor: activeCategoryId === "77" ? 'red' : 'cyan',
-          flexDirection: indexso !== 0 && activeCategoryId === "77" ? 'row' : 'column',
-          width: indexso !== 0  && activeCategoryId === "77" ? '45%' : '100%',
+          flexDirection:
+            indexso !== 0 && activeCategoryId === '77' ? 'row' : 'column',
+          width: indexso !== 0 && activeCategoryId === '77' ? '45%' : '100%',
         }}
       >
-
-{console.log('activeCategoryId')}
-{console.log(activeCategoryId)}
-        
-
         <Image
           // className={`mb-2 rounded-md ${indexso !== 0 ? 'w-[90%] h-20' : 'w-[100%] h-64'}`}
           style={{
             width: '100%',
-            height: indexso !== 0 && activeCategoryId === "77" ? 115 : 256,
-            borderRadius: indexso !== 0 && activeCategoryId === "77" ? 12 : 20,
+            height: indexso !== 0 && activeCategoryId === '77' ? 115 : 256,
+            borderRadius: indexso !== 0 && activeCategoryId === '77' ? 12 : 20,
           }}
           source={{
             uri:
@@ -109,7 +103,7 @@ export function RenderNewsItem({
             className="py-0 px-2"
             style={{
               display:
-              activeCategoryId === '77' && indexso === 0 ? 'flex' : 'none',
+                activeCategoryId === '77' && indexso === 0 ? 'flex' : 'none',
               fontSize: 14,
               fontFamily: 'Poppins_500Medium',
               backgroundColor: '#0303B2',
@@ -119,7 +113,8 @@ export function RenderNewsItem({
               alignSelf: 'flex-start',
             }}
           >
-            {/* {activeCategoryId} */}
+            {/* ................ ETIQUETA AZUL  ................   */}
+
             {tagCategoria}
           </Text>
 
@@ -129,9 +124,10 @@ export function RenderNewsItem({
               fontSize: indexso !== 0 && activeCategoryId === '77' ? 14 : 24,
               fontFamily: 'Poppins_600SemiBold',
               textAlign: 'left',
-              lineHeight: indexso !== 0  && activeCategoryId === '77' ? 16 : 26,
-              paddingTop: indexso !== 0  && activeCategoryId === '77' ? 0 : 22,
-              width: indexso !== 0  && activeCategoryId === '77' ? '120%' : '99%',
+              lineHeight: indexso !== 0 && activeCategoryId === '77' ? 16 : 26,
+              paddingTop: indexso !== 0 && activeCategoryId === '77' ? 0 : 22,
+              width:
+                indexso !== 0 && activeCategoryId === '77' ? '120%' : '99%',
             }}
           >
             {/* {console.log('NewsSection')} */}
@@ -143,9 +139,9 @@ export function RenderNewsItem({
             className="font-bold text-gray-900 dark:text-neutral-300"
             style={{
               fontFamily: 'Poppins_500Medium',
-              fontSize: hp(1.70),
+              fontSize: hp(1.7),
               // backgroundColor: 'red',
-              marginTop:10
+              marginTop: 10,
             }}
           >
             <Text className="text-gray-500">Por</Text>
@@ -155,7 +151,7 @@ export function RenderNewsItem({
               className="text-gray-500"
               style={{
                 fontFamily: 'Poppins_400Regular',
-                fontSize: hp(1.60),
+                fontSize: hp(1.6),
               }}
             >
               <Text>{' • '}</Text>
