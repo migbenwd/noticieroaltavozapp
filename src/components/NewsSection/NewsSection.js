@@ -28,6 +28,7 @@ export function RenderNewsItem({
   tituloCategoria,
   indexso,
   activeCategoryId,
+  showTag,
 }) {
   const navigation = useNavigation();
   const [fontsLoaded] = useFonts({
@@ -114,7 +115,8 @@ export function RenderNewsItem({
             }}
           >
             {/* ................ ETIQUETA AZUL  ................   */}
-
+            
+            {showTag}
             {tagCategoria}
           </Text>
 

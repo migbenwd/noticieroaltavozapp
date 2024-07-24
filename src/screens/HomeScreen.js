@@ -13,7 +13,7 @@ import {
   TouchableOpacity,
   Dimensions,
 } from 'react-native';
-import React, { useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useColorScheme } from 'nativewind';
@@ -145,6 +145,21 @@ export default function HomeScreen() {
   //  touchableOpacityRenderCount.current++; // Increment counter on each render
   //  console.log('touchableOpacityRenderCount', touchableOpacityRenderCount);
 
+  {
+    console.log('newsPortada');
+  }
+
+  // {console.log(newsPortada)}
+  // {console.log(newsPortada[0].id)}
+
+  // newsPortada.map((noticia, index) => console.log(index));
+
+  // {console.log(newsPortada.data.id)}
+
+  // for (const item of newsPortada) {
+  //   console.log(item.id);
+  // }
+
   return (
     <SafeAreaView style={{ flex: 1 }} edge={['bottom']}>
       <View className="flex-row justify-between items-center px-2 pb-12 bg-[#0303B2]" />
@@ -175,7 +190,7 @@ export default function HomeScreen() {
             }}
           >
             {activeCategory.title}
-            </Text>
+          </Text>
         )}
       </View>
       {isLoading ? (
@@ -210,6 +225,7 @@ export default function HomeScreen() {
                         fontFamily: 'Poppins_400Regular',
                       }}
                     >
+                      {/* {newsPortada[0].id} */}
                       Ver Más
                     </Text>
                   </View>
@@ -246,6 +262,9 @@ export default function HomeScreen() {
               tituloCategoria={activeCategory.title}
               activeCategoryId={activeCategory.id}
               indexso={index}
+              // showTag={newsPortada.data[0].title === item.title}
+              // showTag={newsPortada[0].id}
+              showTag={newsPortada[0].id}
             />
           )}
           renderSectionHeader={({ section: { title, id } }) => (
