@@ -115,8 +115,7 @@ export function RenderNewsItem({
             }}
           >
             {/* ................ ETIQUETA AZUL  ................   */}
-            
-            {showTag}
+            {/* {showTag} */}
             {tagCategoria}
           </Text>
 
@@ -181,7 +180,7 @@ export default function NewsSection({
         <RenderNewsItem
           item={item}
           tituloCategoria={tituloCategoria}
-          indexso={index}
+          // indexso={index}
           activeCategoryId={activeCategoryId}
         />
       )}

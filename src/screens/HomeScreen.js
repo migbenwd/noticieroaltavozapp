@@ -54,8 +54,6 @@ const getTheFirstFiveNewsByCategories = async () => {
   const categories = await getCategories();
   const newsByCategoriesId = [CATEGORY_DEFAULT, ...categories].map(
     async (category) => {
-      // console.log('category...');
-      // console.log(category);
       const news = await getNewsByCategoryId(category.id);
       return {
         title: category.title,
@@ -145,16 +143,13 @@ export default function HomeScreen() {
   //  touchableOpacityRenderCount.current++; // Increment counter on each render
   //  console.log('touchableOpacityRenderCount', touchableOpacityRenderCount);
 
-  {
-    console.log('newsPortada');
-  }
-
   // {console.log(newsPortada)}
   // {console.log(newsPortada[0].id)}
 
   // newsPortada.map((noticia, index) => console.log(index));
 
-  // {console.log(newsPortada.data.id)}
+ // {console.log('newsPortada')}
+ // {console.log(newsPortada)}
 
   // for (const item of newsPortada) {
   //   console.log(item.id);
@@ -226,12 +221,11 @@ export default function HomeScreen() {
                       }}
                     >
                       {/* {newsPortada[0].id} */}
+                      {/* {categoryId} */}
                       Ver Más
                     </Text>
                   </View>
                 </TouchableOpacity>
-                {/* {console.log('adPublicidad')} */}
-
                 <View
                   className="mb-10"
                   style={{
@@ -256,7 +250,7 @@ export default function HomeScreen() {
               </>
             );
           }}
-          renderItem={({ item, index }) => (
+          renderItem={({ item, index, title }) => (
             <RenderNewsItem
               item={item}
               tituloCategoria={activeCategory.title}
@@ -264,7 +258,10 @@ export default function HomeScreen() {
               indexso={index}
               // showTag={newsPortada.data[0].title === item.title}
               // showTag={newsPortada[0].id}
-              showTag={newsPortada[0].id}
+              // showTag={newsPortada[0].id}
+              // showTag3={`item-${index}`} // Create a unique showTag using index
+              showTag={`migben-item-${title}`} // Agrega una clave única para mejorar el rendimiento
+              index={index}
             />
           )}
           renderSectionHeader={({ section: { title, id } }) => (
