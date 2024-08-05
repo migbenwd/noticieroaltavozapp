@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 
 import { View, Text, TouchableOpacity, Image, FlatList } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -104,7 +104,9 @@ export function RenderNewsItem({
             className="py-0 px-2"
             style={{
               display:
-                activeCategoryId === '77' && indexso === 0 ? 'flex' : 'none',
+                activeCategoryId === '77' && indexso === 0 && showTag === 0
+                  ? 'flex'
+                  : 'none',
               fontSize: 14,
               fontFamily: 'Poppins_500Medium',
               backgroundColor: '#0303B2',
@@ -115,8 +117,8 @@ export function RenderNewsItem({
             }}
           >
             {/* ................ ETIQUETA AZUL  ................   */}
-            {showTag}
-            { '---' }
+            {/* {showTag}
+            { '---' } */}
             {tagCategoria}
           </Text>
 
@@ -177,11 +179,10 @@ export default function NewsSection({
       data={data}
       showsVerticalScrollIndicator={false}
       keyExtractor={(item, index) => index.toString()}
-      renderItem={({ item, index }) => (
+      renderItem={({ item }) => (
         <RenderNewsItem
           item={item}
           tituloCategoria={tituloCategoria}
-          // indexso={index}
           activeCategoryId={activeCategoryId}
         />
       )}
