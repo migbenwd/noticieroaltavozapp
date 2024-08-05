@@ -115,7 +115,8 @@ export function RenderNewsItem({
             }}
           >
             {/* ................ ETIQUETA AZUL  ................   */}
-            {/* {showTag} */}
+            {showTag}
+            { '---' }
             {tagCategoria}
           </Text>
 

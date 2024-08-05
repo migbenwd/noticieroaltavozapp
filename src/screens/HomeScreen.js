@@ -148,8 +148,8 @@ export default function HomeScreen() {
 
   // newsPortada.map((noticia, index) => console.log(index));
 
- // {console.log('newsPortada')}
- // {console.log(newsPortada)}
+  // {console.log('newsPortada')}
+  // {console.log(newsPortada)}
 
   // for (const item of newsPortada) {
   //   console.log(item.id);
@@ -250,19 +250,33 @@ export default function HomeScreen() {
               </>
             );
           }}
+          // renderItem={({ item, index, title }) => (
+          //   <RenderNewsItem
+          //     item={item}
+          //     tituloCategoria={activeCategory.title}
+          //     activeCategoryId={activeCategory.id}
+          //     indexso={index}
+          //     // showTag={newsPortada.data[0].title === item.title}
+          //     // showTag={newsPortada[0].id}
+          //     // showTag={newsPortada[0].id}
+          //     // showTag3={`item-${index}`} // Create a unique showTag using index
+          //     showTag={`migben-item-${title}`} // Agrega una clave única para mejorar el rendimiento
+          //     index={index}
+          //   />
+          // )}
+
           renderItem={({ item, index, title }) => (
             <RenderNewsItem
               item={item}
               tituloCategoria={activeCategory.title}
               activeCategoryId={activeCategory.id}
               indexso={index}
-              // showTag={newsPortada.data[0].title === item.title}
-              // showTag={newsPortada[0].id}
-              // showTag={newsPortada[0].id}
-              // showTag3={`item-${index}`} // Create a unique showTag using index
-              showTag={`migben-item-${title}`} // Agrega una clave única para mejorar el rendimiento
+              // showTag={`migben-item-${title}`} // Original line, kept for reference
+              showTag={`migben-item-${title}`} // Original line, kept for reference
               index={index}
-            />
+            >
+              {console.log(`Item at index ${index}`)}
+            </RenderNewsItem>
           )}
           renderSectionHeader={({ section: { title, id } }) => (
             // -------------- category tittle
