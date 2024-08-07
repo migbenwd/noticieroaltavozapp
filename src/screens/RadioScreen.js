@@ -30,6 +30,7 @@ import {
   Poppins_400Regular,
   Poppins_700Bold,
 } from '@expo-google-fonts/poppins';
+import { getPlaybackState } from 'react-native-track-player/lib/src/trackPlayer';
 import { setupPlayer, addTracks } from '../../trackPlayerServices';
 
 function NombreEmisora() {
@@ -166,15 +167,12 @@ function Controls({ onShuffle }) {
 
   async function handlePlayPress() {
     if ((await TrackPlayer.getState()) === State.Playing) {
+      // if ((await getPlaybackState()) === State.Paused)
       TrackPlayer.pause();
     } else {
       TrackPlayer.play();
-
     }
   }
-
-  // console.log('playerState', playerState);
-  // console.log('State.Playing', State.Playing);
 
   return (
     <View
@@ -195,16 +193,10 @@ function Controls({ onShuffle }) {
       </View>
 
       <View style={styles.button}>
-        
-      {/* {console.log('playerState 1', playerState)}
-      {console.log('State.Playing', State.Playing)} */}
-
         <Icon
-          // name="play"
-          name={playerState === State.Playing ? 'pause' : 'play'}
+          name={playerState.state === 'paused' ? 'play' : 'pause'}
           size={25}
           color="white"
-          // eslint-disable-next-line react/jsx-no-bind
           onPress={handlePlayPress}
         />
       </View>
