@@ -197,6 +197,7 @@ function Controls({ onShuffle }) {
           name={playerState === State.Playing ? 'pause' : 'play'}
           size={25}
           color="white"
+          // eslint-disable-next-line react/jsx-no-bind
           onPress={handlePlayPress}
         />
       </View>
