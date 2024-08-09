@@ -28,11 +28,6 @@
       "channel":"production",
       "android": {
         "buildType": "app-bundle"
-      },
-      "ios":{
-        "appleId": "marcoslopez.jr@icloud.com",
-        "ascAppId": "6615062317",
-        "appleTeamId": "WWAS79CL6K"
       }
     }
   },
