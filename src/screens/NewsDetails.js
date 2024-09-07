@@ -149,7 +149,7 @@ export default function NewsDetails() {
         }}
         onLoadStart={() => setVisible(true)}
         onLoadEnd={() => setVisible(false)}
-        onLoadProgress={() => console.log('en migben Load Progress')}
+        // onLoadProgress={() => console.log('en migben Load Progress')}
       />
 
       {visible ? (
