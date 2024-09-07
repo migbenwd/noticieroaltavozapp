@@ -20,7 +20,9 @@
           "foregroundImage": "./assets/adaptive-icon.png",
           "backgroundColor": "#ffffff"
         },
-        "package": "com.noticieroaltavoz.noticieroaltavozapp"
+        "package": "com.noticieroaltavoz.noticieroaltavozapp",
+        "googleServicesFile": "./certificados/firebase/android/google-services.json"
+        
       },
       "web": {
         "favicon": "./assets/favicon.png"
