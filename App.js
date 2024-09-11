@@ -4,11 +4,15 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import React from 'react';
-import AppNavigation from './src/navigation';
 
-//One Signal
+// One Signal
+// import { LogLevel, OneSignal } from 'react-native-onesignal';
+// import Constants from 'expo-constants';
+
 import { LogLevel, OneSignal } from 'react-native-onesignal';
-import Constants from 'expo-constants'
+import Constants from 'expo-constants';
+
+import AppNavigation from './src/navigation';
 
 const queryClient = new QueryClient();
 
@@ -17,7 +21,6 @@ OneSignal.initialize(Constants.expoConfig.extra.oneSignalAppId);
 
 // Also need enable notifications to complete OneSignal setup
 OneSignal.Notifications.requestPermission(true);
-
 
 export default function App() {
   return (
