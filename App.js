@@ -33,17 +33,6 @@ export default function App() {
 
   // await OneSignal.User.pushSubscription.getTokenAsync();
 
-  const [OnesignalId, setOneSignalId] = useState('');
-
-  async function GetTokenUser() {
-    // const result = await OneSignal.User.pushSubscription.getTokenAsync();
-    const OnesignalId = await OneSignal.User.getOnesignalId();
-    setOneSignalId(OnesignalId);
-    console.log(OnesignalId);
-  }
-
-  GetTokenUser();
-
   return (
     <QueryClientProvider client={queryClient}>
       <AppNavigation />
