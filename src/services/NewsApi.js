@@ -2,7 +2,8 @@ import axios from 'axios';
 import { parse } from 'node-html-parser';
 import { extractImagesWithTheirSource } from '../utils';
 
-const apiBaseUrlAV = 'https://noticieroaltavoz.com/wp-json/wp/v2/posts/';
+const apiBaseUrlAV1 = 'https://noticieroaltavoz.com/wp-json/wp/v2/posts/';
+const apiBaseUrlAV = 'https://altavoz-adcenter-com-mx.preview-domain.com/wp-json/wp/v2/posts/'
 
 export const getNewsByCategoryId = async (categoryId) => {
   // return Promise<data>
