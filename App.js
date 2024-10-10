@@ -12,27 +12,10 @@ import AppNavigation from './src/navigation';
 
 const queryClient = new QueryClient();
 
+OneSignal.Debug.setLogLevel(LogLevel.Verbose);
+OneSignal.initialize('8497271c-4edb-486f-a683-063bd6205b5b');
+
 export default function App() {
-  // Remove this method to stop OneSignal Debugging
-  OneSignal.Debug.setLogLevel(LogLevel.Verbose);
-
-  // OneSignal Initialization
-  OneSignal.initialize('8497271c-4edb-486f-a683-063bd6205b5b');
-
-  // requestPermission will show the native iOS or Android notification permission prompt.
-  // We recommend removing the following code and instead using an In-App Message to prompt for notification permission
-
-  // OneSignal.Notifications.requestPermission(false);
-
-  // Method for listening for notification clicks
-  OneSignal.Notifications.addEventListener('click', (event) => {
-    console.log('OneSignal: notification clicked:', event);
-  });
-
-  // OneSignal.Notifications.canRequestPermission();
-
-  // await OneSignal.User.pushSubscription.getTokenAsync();
-
   return (
     <QueryClientProvider client={queryClient}>
       <AppNavigation />
