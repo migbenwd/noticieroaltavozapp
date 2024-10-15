@@ -6,7 +6,7 @@
 // migben - cambiar menu radical
 // migben jueves - 08:20 am
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import {
   CommonActions,
@@ -29,6 +29,8 @@ import NewsDetails from '../screens/NewsDetails';
 import WelcomeScreen from '../screens/WelcomeScreen';
 import SplashScreens from '../screens/SplashScreens';
 import RadioScreen from '../screens/RadioScreen';
+
+import { ApiRestURL } from '../services/NewsApi';
 
 const navigationRef = createNavigationContainerRef();
 const Tab = createBottomTabNavigator();
@@ -112,6 +114,10 @@ function TabNavigator() {
 
 export default function AppNavigation() {
   const { colorScheme } = useColorScheme();
+
+  useEffect(() => {
+    console.log(ApiRestURL);
+  }, []); // El array vacío indica que el efecto se ejecutará solo una vez después del montaje
 
   useEffect(() => {
     OneSignal.Notifications.addEventListener('click', (event) => {

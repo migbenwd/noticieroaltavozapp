@@ -3,7 +3,7 @@ import { parse } from 'node-html-parser';
 import { extractImagesWithTheirSource } from '../utils';
 
 const apiBaseUrlAV1 = 'https://noticieroaltavoz.com/wp-json/wp/v2/posts/';
-const apiBaseUrlAV = 'https://altavoz.adcenter.com.mx/wp-json/wp/v2/posts/'
+const apiBaseUrlAV = 'https://altavoz.adcenter.com.mx/wp-json/wp/v2/posts/';
 
 export const getNewsByCategoryId = async (categoryId) => {
   // return Promise<data>
@@ -15,6 +15,13 @@ export const getNewsByCategoryId = async (categoryId) => {
 export const fetchDiscoverNewsAV = async (id) => {
   return getNewsByCategoryId(id);
 };
+
+export const ConstAPIUrl = async () => {
+  return apiBaseUrlAV;
+};
+
+// constants.js
+export const ApiRestURL = apiBaseUrlAV;
 
 export const getCategories = async () => {
   const response = await fetch('https://noticieroaltavoz.com/');

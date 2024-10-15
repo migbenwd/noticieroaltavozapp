@@ -38,6 +38,12 @@ export function RenderNewsItem({
   });
 
   const handleClick = (data) => {
+    /*
+    console.log('data News Section');
+    console.log('');
+    console.log(data);
+    */
+
     navigation.navigate('NewsDetails', {
       item: data,
       tituloCategoria,
