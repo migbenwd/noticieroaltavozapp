@@ -22,7 +22,7 @@ import { useColorScheme } from 'nativewind';
 import TrackPlayer from 'react-native-track-player';
 
 import { View, Text } from 'react-native';
-import { LogLevel, OneSignal } from 'react-native-onesignal';
+import { OneSignal } from 'react-native-onesignal';
 
 import HomeScreen from '../screens/HomeScreen';
 import NewsDetails from '../screens/NewsDetails';
