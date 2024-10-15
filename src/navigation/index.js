@@ -114,17 +114,63 @@ function TabNavigator() {
 
 export default function AppNavigation() {
   const { colorScheme } = useColorScheme();
+  const [post, setPost] = useState(null);
+
+  const tituloCategoria = 'Portada';
 
   useEffect(() => {
-    console.log(ApiRestURL);
+    // console.log(ApiRestURL);
   }, []); // El array vacío indica que el efecto se ejecutará solo una vez después del montaje
 
   useEffect(() => {
+    /*
+    console.log('data / (post) NOTIFICADA...');
+    console.log('..................');
+    console.log(post.id);
+    */
+
     OneSignal.Notifications.addEventListener('click', (event) => {
       const url_v = event.notification.additionalData.url;
-      console.log('url_v: ', url_v);
+
+      /*
+      const fetchPost = async () => {
+        // const postId = await AsyncStorage.getItem('selectedPostId');
+        // Realizar la petición a tu servidor para obtener los detalles del post
+        // const url = `${ApiRestURL}?categories=${categoryId}`;
+        // const response = await fetch(`https://tu-sitio-wordpress/wp-json/wp/v2/posts/${postId}`);
+
+        const response111 = await fetch(
+          `https://altavoz.adcenter.com.mx/wp-json/wp/v2/posts/186639`
+        );
+
+        const response = await fetch(
+          `{
+            "id": "186639",
+            "link": "https://altavoz.adcenter.com.mx/blog-migben/",
+          }`
+        );
+
+        const data = await response.json();
+        console.log('.............data await NOTIFICADA...');
+        console.log(data);
+        setPost(data);
+      };
+
+      fetchPost();
+      */
+
       if (navigationRef.isReady()) {
-        navigationRef.dispatch(CommonActions.navigate('RadioS'));
+        const tete = `{
+            "id": "186552",
+            "link": "https://altavoz.adcenter.com.mx/culiacan-esta-seguro-fue-un-hecho-violento-de-seguridad-focalizado-gobernador/",
+          }`;
+
+        navigationRef.dispatch(
+          CommonActions.navigate('NewsDetails', {
+            item: tete,
+            tituloCategoria,
+          })
+        );
       }
     });
   }, []);
