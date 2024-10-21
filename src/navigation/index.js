@@ -6,6 +6,7 @@
 // migben - cambiar menu radical
 // migben jueves - 08:20 am
 
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
 import {
@@ -29,6 +30,7 @@ import NewsDetails from '../screens/NewsDetails';
 import WelcomeScreen from '../screens/WelcomeScreen';
 import SplashScreens from '../screens/SplashScreens';
 import RadioScreen from '../screens/RadioScreen';
+import NewsDetailsMigben from '../screens/NewsDetailsMigben';
 
 import { ApiRestURL } from '../services/NewsApi';
 
@@ -117,60 +119,45 @@ export default function AppNavigation() {
   const [post, setPost] = useState(null);
 
   const tituloCategoria = 'Portada';
+  const tete1 = {
+    link: 'https://altavoz.adcenter.com.mx/culiacan-esta-seguro-fue-un-hecho-violento-de-seguridad-focalizado-gobernador/',
+  };
+
+  const tete = {
+    link: 'https://altavoz.adcenter.com.mx/atentos-papas-anuncian-vacunacion-a-ninas-contra-virus-del-papiloma-humano/',
+  };
 
   useEffect(() => {
-    // console.log(ApiRestURL);
-  }, []); // El array vacío indica que el efecto se ejecutará solo una vez después del montaje
-
-  useEffect(() => {
-    /*
-    console.log('data / (post) NOTIFICADA...');
-    console.log('..................');
-    console.log(post.id);
-    */
-
     OneSignal.Notifications.addEventListener('click', (event) => {
       const url_v = event.notification.additionalData.url;
-
-      /*
-      const fetchPost = async () => {
-        // const postId = await AsyncStorage.getItem('selectedPostId');
-        // Realizar la petición a tu servidor para obtener los detalles del post
-        // const url = `${ApiRestURL}?categories=${categoryId}`;
-        // const response = await fetch(`https://tu-sitio-wordpress/wp-json/wp/v2/posts/${postId}`);
-
-        const response111 = await fetch(
-          `https://altavoz.adcenter.com.mx/wp-json/wp/v2/posts/186639`
-        );
-
-        const response = await fetch(
-          `{
-            "id": "186639",
-            "link": "https://altavoz.adcenter.com.mx/blog-migben/",
-          }`
-        );
-
-        const data = await response.json();
-        console.log('.............data await NOTIFICADA...');
-        console.log(data);
-        setPost(data);
-      };
-
-      fetchPost();
-      */
+      console.log('url_v: ', url_v);
 
       if (navigationRef.isReady()) {
-        const tete = `{
-            "id": "186552",
-            "link": "https://altavoz.adcenter.com.mx/culiacan-esta-seguro-fue-un-hecho-violento-de-seguridad-focalizado-gobernador/",
-          }`;
+        const fetchPostUrl = async () => {
+          try {
+            const response = await axios.get(
+              'https://altavoz.adcenter.com.mx/wp-json/wp/v2/posts/186619'
+            );
 
-        navigationRef.dispatch(
-          CommonActions.navigate('NewsDetails', {
-            item: tete,
-            tituloCategoria,
-          })
-        );
+            const url_post = response.data.link;
+
+            const enlaceURL = {
+              link: url_post,
+            };
+
+            navigationRef.dispatch(
+              CommonActions.navigate('NewsDetailsMigben', {
+                item: enlaceURL,
+                tituloCategoria: 'Titulo Categoria',
+              })
+            );
+
+            setPost(url_post);
+          } catch (error) {
+            console.error('Error al obtener el enlace del post:', error);
+          }
+        };
+        fetchPostUrl();
       }
     });
   }, []);
@@ -186,6 +173,7 @@ export default function AppNavigation() {
         <Stack.Screen name="SplashS" component={SplashScreens} />
         <Stack.Screen name="Welcome" component={WelcomeScreen} />
         <Stack.Screen name="NewsDetails" component={NewsDetails} />
+        <Stack.Screen name="NewsDetailsMigben" component={NewsDetailsMigben} />
         <Stack.Screen name="HomeTabs" component={TabNavigator} />
         <Stack.Screen name="RadioS" component={RadioScreen} />
       </Stack.Navigator>
