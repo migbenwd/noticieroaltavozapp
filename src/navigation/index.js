@@ -114,50 +114,36 @@ function TabNavigator() {
   );
 }
 
+OneSignal.initialize('8497271c-4edb-486f-a683-063bd6205b5b');
+
 export default function AppNavigation() {
   const { colorScheme } = useColorScheme();
-  const [post, setPost] = useState(null);
-
   const tituloCategoria = 'Portada';
-  const tete1 = {
-    link: 'https://altavoz.adcenter.com.mx/culiacan-esta-seguro-fue-un-hecho-violento-de-seguridad-focalizado-gobernador/',
-  };
 
-  const tete = {
-    link: 'https://altavoz.adcenter.com.mx/atentos-papas-anuncian-vacunacion-a-ninas-contra-virus-del-papiloma-humano/',
-  };
+  const [post, setPost] = useState(null);
 
   useEffect(() => {
     OneSignal.Notifications.addEventListener('click', (event) => {
-      const url_v = event.notification.additionalData.url;
-      console.log('url_v: ', url_v);
+      const notifix = event.notification.additionalData.post_url;
+      console.log(notifix);
+
+      const EnlaceURL = {
+        link: notifix,
+      };
+
+      setPost(post);
 
       if (navigationRef.isReady()) {
-        const fetchPostUrl = async () => {
-          try {
-            const response = await axios.get(
-              'https://altavoz.adcenter.com.mx/wp-json/wp/v2/posts/186619'
-            );
 
-            const url_post = response.data.link;
+        console.log('ESTA READY y el valor de post es: ');
+        console.log(post);
 
-            const enlaceURL = {
-              link: url_post,
-            };
-
-            navigationRef.dispatch(
-              CommonActions.navigate('NewsDetailsMigben', {
-                item: enlaceURL,
-                tituloCategoria: 'Titulo Categoria',
-              })
-            );
-
-            setPost(url_post);
-          } catch (error) {
-            console.error('Error al obtener el enlace del post:', error);
-          }
-        };
-        fetchPostUrl();
+        navigationRef.dispatch(
+          CommonActions.navigate('NewsDetailsMigben', {
+            item: EnlaceURL,
+            tituloCategoria,
+          })
+        );
       }
     });
   }, []);
