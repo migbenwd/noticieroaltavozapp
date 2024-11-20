@@ -114,27 +114,73 @@ function TabNavigator() {
   );
 }
 
-OneSignal.initialize('8497271c-4edb-486f-a683-063bd6205b5b');
+// OneSignal.initialize('8497271c-4edb-486f-a683-063bd6205b5b');
 
 export default function AppNavigation() {
   const { colorScheme } = useColorScheme();
   const tituloCategoria = 'Portada';
 
-  const [post, setPost] = useState(null);
+  const [eventData, setEventData] = useState(null);
+  const [EnlaceURL, setEnlaceURL] = useState(null);
 
+  OneSignal.initialize('8497271c-4edb-486f-a683-063bd6205b5b');
+
+  useEffect(() => {
+    // Inicializar OneSignal (si es necesario)
+    // OneSignal.init('tu_app_id');
+
+    // Escuchar el evento de clic en la notificación
+    OneSignal.Notifications.addEventListener('click', (openResult) => {
+      console.log('... 1 - openResult...');
+      console.log(openResult.notification.additionalData.post_url);
+      console.log('.............///.....');
+
+      // const { notification } = openResult.notification.additionalData.post_url;
+      // const { notification } = openResult;
+      const { notification } = openResult;
+      console.log('...notification...');
+      console.log(notification.additionalData.post_url);
+
+      setEventData(notification);
+      setEnlaceURL({ link: notification });
+    });
+
+    // Limpiar el listener al desmontar el componente
+    return () => {
+      OneSignal.Notifications.removeEventListener('click');
+    };
+  }, []);
+
+  useEffect(() => {
+    if (eventData) {
+      console.log('Entra en UseEffect 2');
+      console.log('eventData tiene: ');
+      console.log(eventData);
+      // Navegar a la pantalla deseada con los datos de la notificación
+      navigationRef.current.navigate('NewsDetailsMigben', {
+        item: EnlaceURL,
+        tituloCategoria,
+      });
+    }
+  }, [eventData]);
+
+  /*
   useEffect(() => {
     OneSignal.Notifications.addEventListener('click', (event) => {
       const notifix = event.notification.additionalData.post_url;
-      console.log(notifix);
+      setPost(event.notification.additionalData.post_url);
+      console.log('..... post-1..... ');
+      console.log(post);
 
       const EnlaceURL = {
         link: notifix,
       };
 
-      setPost(post);
+      console.log('..... post-2..... ');
+      setPost(null);
+      console.log(post);
 
       if (navigationRef.isReady()) {
-
         console.log('ESTA READY y el valor de post es: ');
         console.log(post);
 
@@ -147,6 +193,7 @@ export default function AppNavigation() {
       }
     });
   }, []);
+  */
 
   return (
     <NavigationContainer ref={navigationRef}>
