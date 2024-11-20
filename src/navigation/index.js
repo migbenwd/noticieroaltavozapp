@@ -33,6 +33,7 @@ import RadioScreen from '../screens/RadioScreen';
 import NewsDetailsMigben from '../screens/NewsDetailsMigben';
 
 import { ApiRestURL } from '../services/NewsApi';
+import PantallaDestino from '../screens/PantallaDestino';
 
 const navigationRef = createNavigationContainerRef();
 const Tab = createBottomTabNavigator();
@@ -155,7 +156,7 @@ export default function AppNavigation() {
         <Stack.Screen name="SplashS" component={SplashScreens} />
         <Stack.Screen name="Welcome" component={WelcomeScreen} />
         <Stack.Screen name="NewsDetails" component={NewsDetails} />
-        <Stack.Screen name="NewsDetailsMigben" component={NewsDetailsMigben} />
+        <Stack.Screen name="PantallaDestino" component={PantallaDestino} />
         <Stack.Screen name="HomeTabs" component={TabNavigator} />
         <Stack.Screen name="RadioS" component={RadioScreen} />
       </Stack.Navigator>
