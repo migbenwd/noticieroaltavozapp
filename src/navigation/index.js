@@ -6,6 +6,7 @@
 // migben - cambiar menu radical
 // migben jueves - 08:20 am
 
+/*
 import React, { useEffect } from 'react';
 import {
   createNavigationContainerRef,
@@ -178,3 +179,155 @@ export default function AppNavigation() {
     </NavigationContainer>
   );
 }
+
+*/
+
+import React, { useEffect } from 'react';
+import {
+  createNavigationContainerRef,
+  NavigationContainer,
+} from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Ionicons } from '@expo/vector-icons';
+import TrackPlayer from 'react-native-track-player';
+import { View, Text, Alert } from 'react-native';
+import { OneSignal } from 'react-native-onesignal';
+
+import HomeScreen from '../screens/HomeScreen';
+import NewsDetails from '../screens/NewsDetails';
+import WelcomeScreen from '../screens/WelcomeScreen';
+import SplashScreens from '../screens/SplashScreens';
+import RadioScreen from '../screens/RadioScreen';
+import PantallaDestino from '../screens/PantallaDestino';
+
+const navigationRef = createNavigationContainerRef();
+const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
+
+TrackPlayer.registerPlaybackService(() => require('../../service'));
+
+function TabNavigator() {
+  return (
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        headerShown: false,
+        tabBarIcon: ({ focused }) => {
+          let iconName = route.name === 'Inicio' ? 'home' : 'radio';
+
+          return (
+            <View
+              style={{
+                marginVertical: 'center',
+                borderRadius: 16,
+                width: 48,
+                height: 46,
+                alignItems: 'center',
+                flexDirection: 'column',
+                backgroundColor: focused ? 'blue' : 'transparent',
+              }}
+            >
+              <Ionicons
+                name={iconName}
+                size={18}
+                color={focused ? 'white' : 'gray'}
+                marginTop={6}
+              />
+              <Text
+                style={{
+                  fontSize: 8,
+                  color: focused ? 'white' : 'gray',
+                }}
+              >
+                {route.name}
+              </Text>
+            </View>
+          );
+        },
+        tabBarActiveTintColor: 'white',
+        tabBarInactiveTintColor: 'gray',
+        tabBarStyle: {
+          paddingTop: 30,
+          paddingBottom: 30,
+        },
+      })}
+    >
+      <Tab.Screen name="Inicio" component={HomeScreen} />
+      <Tab.Screen name="Radio" component={RadioScreen} />
+    </Tab.Navigator>
+  );
+}
+
+OneSignal.initialize('8497271c-4edb-486f-a683-063bd6205b5b');
+
+export default function AppNavigation() {
+  useEffect(() => {
+    // Manejo del clic en una notificación
+    const onNotificationClick = (event) => {
+      const url = event.notification.additionalData?.post_url;
+
+      if (navigationRef.isReady() && url) {
+        navigationRef.navigate('NewsDetails', {
+          item: { link: url },
+          tituloCategoria: 'Portada',
+        });
+      }
+    };
+
+    // Manejo de notificaciones en primer plano
+    const onForegroundNotification = (event) => {
+      const url = event.notification.additionalData?.post_url;
+
+      if (url) {
+        Alert.alert('Nueva notificación', '¿Quieres ver esta noticia?', [
+          {
+            text: 'Ver noticia',
+            onPress: () => {
+              if (navigationRef.isReady()) {
+                navigationRef.navigate('NewsDetails', {
+                  item: { link: url },
+                  tituloCategoria: 'Portada',
+                });
+              }
+            },
+          },
+          { text: 'Omitir', style: 'cancel' },
+        ]);
+      }
+    };
+
+    // Agregar eventos de OneSignal
+    OneSignal.Notifications.addEventListener('click', onNotificationClick);
+    OneSignal.Notifications.addEventListener(
+      'foregroundWillDisplay',
+      onForegroundNotification
+    );
+
+    // Limpiar eventos al desmontar
+    return () => {
+      OneSignal.Notifications.removeEventListener('click', onNotificationClick);
+      OneSignal.Notifications.removeEventListener(
+        'foregroundWillDisplay',
+        onForegroundNotification
+      );
+    };
+  }, []);
+
+  return (
+    <NavigationContainer ref={navigationRef}>
+      <Stack.Navigator
+        initialRouteName="Welcome"
+        screenOptions={{ headerShown: false }}
+      >
+        <Stack.Screen name="SplashS" component={SplashScreens} />
+        <Stack.Screen name="Welcome" component={WelcomeScreen} />
+        <Stack.Screen name="NewsDetails" component={NewsDetails} />
+        <Stack.Screen name="PantallaDestino" component={PantallaDestino} />
+        <Stack.Screen name="HomeTabs" component={TabNavigator} />
+        <Stack.Screen name="RadioS" component={RadioScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+
+console.log('pasó index');
