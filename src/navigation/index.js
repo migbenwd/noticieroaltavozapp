@@ -6,20 +6,14 @@
 // migben - cambiar menu radical
 // migben jueves - 08:20 am
 
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-
+import React, { useEffect } from 'react';
 import {
-  CommonActions,
   createNavigationContainerRef,
   NavigationContainer,
-  StackActions,
-  useNavigation,
 } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
-import { useColorScheme } from 'nativewind';
 import TrackPlayer from 'react-native-track-player';
 
 import { View, Text } from 'react-native';
@@ -30,9 +24,7 @@ import NewsDetails from '../screens/NewsDetails';
 import WelcomeScreen from '../screens/WelcomeScreen';
 import SplashScreens from '../screens/SplashScreens';
 import RadioScreen from '../screens/RadioScreen';
-import NewsDetailsMigben from '../screens/NewsDetailsMigben';
 
-import { ApiRestURL } from '../services/NewsApi';
 import PantallaDestino from '../screens/PantallaDestino';
 
 const navigationRef = createNavigationContainerRef();
@@ -116,32 +108,25 @@ function TabNavigator() {
 }
 
 OneSignal.initialize('8497271c-4edb-486f-a683-063bd6205b5b');
-
 export default function AppNavigation() {
-  const { colorScheme } = useColorScheme();
   const tituloCategoria = 'Portada';
   useEffect(() => {
-    const subscription = OneSignal.Notifications.addEventListener(
-      'click',
-      (event) => {
-        console.log('POST URL de Event es ....................');
-        console.log(event.notification.additionalData.post_url);
-        const EnlaceURL = {
-          link: event.notification.additionalData.post_url,
-        };
+    OneSignal.Notifications.addEventListener('click', (event) => {
+      const EnlaceURL = {
+        link: event.notification.additionalData.post_url,
+      };
 
-        // Verifica y navega a la pantalla NewsDetails pasando los datos de la notificación
-        if (navigationRef.isReady()) {
-          navigationRef.current.navigate('NewsDetails', {
-            item: EnlaceURL,
-            tituloCategoria,
-          });
-        }
+      // Verifica y navega a la pantalla NewsDetails pasando los datos de la notificación
+      if (navigationRef.isReady()) {
+        navigationRef.current.navigate('NewsDetails', {
+          item: EnlaceURL,
+          tituloCategoria,
+        });
       }
-    );
+    });
 
     return () => {
-      subscription.remove();
+      OneSignal.Notifications.removeEventListener('click');
     };
   }, []);
 
@@ -163,5 +148,3 @@ export default function AppNavigation() {
     </NavigationContainer>
   );
 }
-
-console.log('pasó por index.js de navigation');
