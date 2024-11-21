@@ -16,7 +16,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 import TrackPlayer from 'react-native-track-player';
 
-import { View, Text } from 'react-native';
+import { View, Text, Alert } from 'react-native';
 import { OneSignal } from 'react-native-onesignal';
 
 import HomeScreen from '../screens/HomeScreen';
@@ -124,9 +124,39 @@ export default function AppNavigation() {
         });
       }
     });
+    OneSignal.Notifications.addEventListener(
+      'foregroundWillDisplay',
+      (event) => {
+        const data = {
+          link: event.notification.additionalData.post_url,
+          title: event.notification.title,
+          description: event.notification.body,
+        };
+
+        const onPress = () => {
+          if (!navigationRef.isReady()) return;
+          navigationRef.current.navigate('NewsDetails', {
+            item: data,
+            tituloCategoria,
+          });
+        };
+
+        Alert.alert('Nueva notificación', data.title, [
+          {
+            text: 'Ver noticia',
+            onPress,
+          },
+          {
+            text: 'Omitir',
+            style: 'destructive',
+          },
+        ]);
+      }
+    );
 
     return () => {
       OneSignal.Notifications.removeEventListener('click');
+      OneSignal.Notifications.removeEventListener('foregroundWillDisplay');
     };
   }, []);
 
