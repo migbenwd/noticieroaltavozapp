@@ -76,8 +76,8 @@ export default function HomeScreen() {
   const { colorScheme } = useColorScheme();
   const [activeCategory, setActiveCategory] = useState(CATEGORY_DEFAULT);
   const [isLoading, setIsLoading] = useState(true);
-  // este trae las noticias
-  const [discoverNewsAV, setDiscoverNewsAV] = useState([]);
+  const [discoverNewsAV, setDiscoverNewsAV] = useState([]); // Noticias Actuales
+  const [isRefreshing, setIsRefreshing] = useState(false); // Indicador de "Pull to Refresh"
   const [newsPortada, setNewsPortada] = useState([]);
   const [adPublicidad, setadPublicidad] = useState([]);
 
@@ -112,6 +112,37 @@ export default function HomeScreen() {
     fetchNewsByCategory(CATEGORY_DEFAULT.id);
   }, []);
 
+  // Función para obtener datos de la API
+  const fetchNews = async () => {
+    try {
+      const response = await fetch(
+        'https://altavoz.adcenter.com.mx/wp-json/wp/v2/posts/?categories=48'
+      ); // Reemplaza con tu API
+      const result = await response.json();
+      console.log('nuevas noticias');
+      console.log('........................');
+
+      const resultox = result.slice(0, 3);
+      // console.log(resultox);
+
+      setDiscoverNewsAV([...discoverNewsAV, ...resultox]);
+    } catch (error) {
+      console.error('Error fetching news:', error);
+    }
+  };
+
+  // Llama a la API al cargar la pantalla
+  useEffect(() => {
+    fetchNews();
+  }, []);
+
+  // Función para el "Pull to Refresh"
+  const handleRefresh = async () => {
+    setIsRefreshing(true);
+    await fetchNews(); // Vuelve a llamar a la API para obtener datos nuevos
+    setIsRefreshing(false);
+  };
+
   if (!fontsLoaded) {
     return <Text />;
   }
@@ -141,21 +172,6 @@ export default function HomeScreen() {
       </TouchableOpacity>
     );
   };
-
-  //  touchableOpacityRenderCount.current++; // Increment counter on each render
-  //  console.log('touchableOpacityRenderCount', touchableOpacityRenderCount);
-
-  // {console.log(newsPortada)}
-  // {console.log(newsPortada[0].id)}
-
-  // newsPortada.map((noticia, index) => console.log(index));
-
-  // {console.log('newsPortada')}
-  // {console.log(newsPortada)}
-
-  // for (const item of newsPortada) {
-  //   console.log(item.id);
-  // }
 
   return (
     <SafeAreaView style={{ flex: 1 }} edge={['bottom']}>
@@ -289,6 +305,8 @@ export default function HomeScreen() {
           data={discoverNewsAV}
           tituloCategoria={activeCategory.title}
           activeCategoryId={activeCategory.id}
+          isRefreshing={isRefreshing}
+          onRefresh={handleRefresh}
         />
       )}
     </SafeAreaView>

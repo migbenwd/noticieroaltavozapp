@@ -1,7 +1,14 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useEffect } from 'react';
 
-import { View, Text, TouchableOpacity, Image, FlatList } from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  FlatList,
+  RefreshControl,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
@@ -176,6 +183,8 @@ export function RenderNewsItem({
 
 export default function NewsSection({
   data,
+  isRefreshing,
+  onRefresh,
   tituloCategoria,
   activeCategoryId,
 }) {
@@ -193,6 +202,14 @@ export default function NewsSection({
         />
       )}
       ListFooterComponent={<SafeAreaView edge={['bottom']} />}
+      // Agrega RefreshControl para "Pull to Refresh"
+      refreshControl={
+        <RefreshControl
+          refreshing={isRefreshing}
+          onRefresh={onRefresh}
+          colors={['#FF5733']} // Personaliza el color del indicador
+        />
+      }
     />
   );
 }
