@@ -76,6 +76,7 @@ export default function HomeScreen() {
   const { colorScheme } = useColorScheme();
   const [activeCategory, setActiveCategory] = useState(CATEGORY_DEFAULT);
   const [isLoading, setIsLoading] = useState(true);
+  // este trae las noticias
   const [discoverNewsAV, setDiscoverNewsAV] = useState([]);
   const [newsPortada, setNewsPortada] = useState([]);
   const [adPublicidad, setadPublicidad] = useState([]);
