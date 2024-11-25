@@ -116,7 +116,7 @@ export default function HomeScreen() {
   const fetchNews = async () => {
     try {
       const response = await fetch(
-        'https://altavoz.adcenter.com.mx/wp-json/wp/v2/posts/?categories=48'
+        'https://noticieroaltavoz.com/wp-json/wp/v2/posts/?categories=48'
       ); // Reemplaza con tu API
       const result = await response.json();
       console.log('nuevas noticias');
