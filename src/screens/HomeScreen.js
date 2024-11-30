@@ -116,16 +116,18 @@ export default function HomeScreen() {
   const fetchNews = async () => {
     try {
       const response = await fetch(
-        'https://noticieroaltavoz.com/wp-json/wp/v2/posts/?categories=48'
-      ); // Reemplaza con tu API
+        `https://noticieroaltavoz.com/wp-json/wp/v2/posts/?categories=${activeCategory.id}`
+      );
+
       const result = await response.json();
       console.log('nuevas noticias');
       console.log('........................');
 
-      const resultox = result.slice(0, 3);
+      // const resultox = result.slice(0, 3);
       // console.log(resultox);
 
-      setDiscoverNewsAV([...discoverNewsAV, ...resultox]);
+      // setDiscoverNewsAV([...discoverNewsAV, ...result]);
+      setDiscoverNewsAV([ ...result, ...discoverNewsAV]);
     } catch (error) {
       console.error('Error fetching news:', error);
     }
