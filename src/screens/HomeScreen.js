@@ -80,6 +80,7 @@ export default function HomeScreen() {
   const [isRefreshing, setIsRefreshing] = useState(false); // Indicador de "Pull to Refresh"
   const [newsPortada, setNewsPortada] = useState([]);
   const [adPublicidad, setadPublicidad] = useState([]);
+  const [page, setPage] = useState(1);
 
   function fetchNewsByCategory(categoryId) {
     setIsLoading(true);
@@ -95,6 +96,8 @@ export default function HomeScreen() {
       .then((data) => {
         setIsLoading(false);
         setDiscoverNewsAV(data);
+        // setPage(1);
+
       })
       .catch((err) => {
         console.log('Error fetching news by category id', err);
@@ -105,6 +108,9 @@ export default function HomeScreen() {
     setDiscoverNewsAV([]);
     setActiveCategory(category);
     fetchNewsByCategory(category.id);
+    setPage(1);
+    console.log('cmabio de categoria y page vale', page);
+
   };
 
   useEffect(() => {
@@ -115,8 +121,12 @@ export default function HomeScreen() {
   // Función para obtener datos de la API
   const fetchNews = async () => {
     try {
+      console.log('page');
+      console.log(page);
+
+      setPage(page + 1);
       const response = await fetch(
-        `https://noticieroaltavoz.com/wp-json/wp/v2/posts/?categories=${activeCategory.id}`
+        `https://noticieroaltavoz.com/wp-json/wp/v2/posts/?categories=${activeCategory.id}&page=${page}`
       );
 
       const result = await response.json();
@@ -127,7 +137,8 @@ export default function HomeScreen() {
       // console.log(resultox);
 
       // setDiscoverNewsAV([...discoverNewsAV, ...result]);
-      setDiscoverNewsAV([ ...result, ...discoverNewsAV]);
+      // setDiscoverNewsAV([...result, ...discoverNewsAV]);
+      setDiscoverNewsAV([...result, ...discoverNewsAV]);
     } catch (error) {
       console.error('Error fetching news:', error);
     }
@@ -240,8 +251,6 @@ export default function HomeScreen() {
                         fontFamily: 'Poppins_400Regular',
                       }}
                     >
-                      {/* {newsPortada[0].id} */}
-                      {/* {categoryId} */}
                       Ver Más
                     </Text>
                   </View>
