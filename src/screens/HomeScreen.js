@@ -53,6 +53,16 @@ const CATEGORY_DEFAULT = { id: '77', title: 'Portada' };
 
 const getTheFirstFiveNewsByCategories = async () => {
   const categories = await getCategories();
+
+  // Crear una copia y agregar el elemento al inicio
+  /*
+  const newArray = [CATEGORY_DEFAULT].concat(categories);
+  const newArrayCategoria = newArray.map((item) => ({
+    page: 1,
+    ...item,
+  }));
+  */
+
   const newsByCategoriesId = [CATEGORY_DEFAULT, ...categories].map(
     async (category) => {
       const news = await getNewsByCategoryId(category.id);
@@ -82,6 +92,8 @@ export default function HomeScreen() {
   const [adPublicidad, setadPublicidad] = useState([]);
   const [page, setPage] = useState(1);
 
+  const [categoriasNoticiasPage, setcategoriasNoticiasPage] = useState([]);
+
   function fetchNewsByCategory(categoryId) {
     setIsLoading(true);
 
@@ -97,7 +109,6 @@ export default function HomeScreen() {
         setIsLoading(false);
         setDiscoverNewsAV(data);
         // setPage(1);
-
       })
       .catch((err) => {
         console.log('Error fetching news by category id', err);
@@ -109,14 +120,33 @@ export default function HomeScreen() {
     setActiveCategory(category);
     fetchNewsByCategory(category.id);
     setPage(1);
-    console.log('cmabio de categoria y page vale', page);
-
+    console.log('cmabio a la categoria', category);
+    // console.log('cmabio de categoria y page vale', page);
   };
 
   useEffect(() => {
     getPublicidad().then(setadPublicidad);
     fetchNewsByCategory(CATEGORY_DEFAULT.id);
   }, []);
+
+  // ------------------- Creo Array para Poder Paginar Categorias  --------------------------//
+
+  const fetchCategorias = async () => {
+    try {
+      const categorias_noticias = await getCategories();
+      const newArray1 = [CATEGORY_DEFAULT].concat(categorias_noticias);
+      const newArrayCategoria = newArray1.map((item) => ({
+        page: 1,
+        ...item,
+      }));
+
+      setcategoriasNoticiasPage([newArrayCategoria]);
+    } catch (error) {
+      console.error('Error fetching news:', error);
+    }
+  };
+
+  /* ---------------------------------------------------------------------------------------- */
 
   // Función para obtener datos de la API
   const fetchNews = async () => {
@@ -148,6 +178,13 @@ export default function HomeScreen() {
   useEffect(() => {
     fetchNews();
   }, []);
+
+  useEffect(() => {
+    fetchCategorias();
+  }, []);
+
+  console.log('categoriasNoticiasPage...');
+  // console.log(categoriasNoticiasPage);
 
   // Función para el "Pull to Refresh"
   const handleRefresh = async () => {
