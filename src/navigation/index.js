@@ -163,7 +163,7 @@ export default function AppNavigation() {
   */
 
   return (
-    <NavigationContainer ref={navigationRef}>
+    <NavigationContainer>
       <Stack.Navigator
         initialRouteName="Welcome"
         screenOptions={{
