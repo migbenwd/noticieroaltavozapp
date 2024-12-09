@@ -17,7 +17,7 @@ import { Ionicons } from '@expo/vector-icons';
 import TrackPlayer from 'react-native-track-player';
 
 import { View, Text, Alert } from 'react-native';
-import { OneSignal } from 'react-native-onesignal';
+// import { OneSignal } from 'react-native-onesignal';
 
 import HomeScreen from '../screens/HomeScreen';
 import NewsDetails from '../screens/NewsDetails';
@@ -107,9 +107,10 @@ function TabNavigator() {
   );
 }
 
-OneSignal.initialize('8497271c-4edb-486f-a683-063bd6205b5b');
 export default function AppNavigation() {
+  /*
   const tituloCategoria = 'Portada';
+  OneSignal.initialize('8497271c-4edb-486f-a683-063bd6205b5b');
   useEffect(() => {
     OneSignal.Notifications.addEventListener('click', (event) => {
       const EnlaceURL = {
@@ -159,6 +160,7 @@ export default function AppNavigation() {
       OneSignal.Notifications.removeEventListener('foregroundWillDisplay');
     };
   }, []);
+  */
 
   return (
     <NavigationContainer ref={navigationRef}>
@@ -179,6 +181,4 @@ export default function AppNavigation() {
   );
 }
 
-
-
-console.log('pasó index');
+console.log('pasó por index dic - 09');
