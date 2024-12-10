@@ -26,6 +26,7 @@ import {
   Poppins_700Bold,
 } from '@expo-google-fonts/poppins';
 import Carousel from 'react-native-snap-carousel';
+import { set } from 'lodash';
 import CategoriesCard from '../components/CategoriesCard';
 import NewsSection, {
   RenderNewsItem,
@@ -108,7 +109,6 @@ export default function HomeScreen() {
       .then((data) => {
         setIsLoading(false);
         setDiscoverNewsAV(data);
-        // setPage(1);
       })
       .catch((err) => {
         console.log('Error fetching news by category id', err);
@@ -116,13 +116,12 @@ export default function HomeScreen() {
   }
 
   const handleChangeCategory = (category) => {
+    console.log('cambio categoria en SLIDER CATEGORIES');
+    console.log('La el ID es ahora ', category.id);
+
     setDiscoverNewsAV([]);
     setActiveCategory(category);
     fetchNewsByCategory(category.id);
-    setPage(1);
-    console.log('cmabio a la categoria', category);
-    buscarPageEnCategorias(category.id);
-    // console.log('cmabio de categoria y page vale', page);
   };
 
   useEffect(() => {
@@ -131,11 +130,36 @@ export default function HomeScreen() {
   }, []);
 
   function buscarPageEnCategorias(categoryid) {
+    const findPageById = (categoryid) => {
+      const [category] = categoriasNoticiasPage; // Assuming a single category array
 
-    console.log('categoryid...');
-    console.log(categoryid);
+      const foundCategory = category.find((item) => item.id === categoryid);
 
+      return foundCategory ? foundCategory.page : null; // Return null if not found
+    };
 
+    // Example usage:
+    const idToFind = categoryid;
+    const pageValue = findPageById(idToFind);
+
+    const actualizarPagePorId = (idCat) => {
+      const nuevasCategorias = categoriasNoticiasPage.map((categoria) => {
+        return categoria.map((item) => {
+          if (item.id === idCat) {
+            return { ...item, page: item.page + 1 }; // Incrementa el valor de page
+          }
+          return item;
+        });
+      });
+
+      setcategoriasNoticiasPage(nuevasCategorias);
+      console.log(
+        'Se actualizaron valores de PAGE en buscarPageEnCategorias en el NUEVO ARRAY, y son los siguientes'
+      );
+      console.log(nuevasCategorias);
+    };
+
+    actualizarPagePorId(categoryid);
   }
 
   // ------------------- Creo Array para Poder Paginar Categorias  --------------------------//
@@ -160,23 +184,26 @@ export default function HomeScreen() {
   // Función para obtener datos de la API
   const fetchNews = async () => {
     try {
-      console.log('page');
+      console.log('el ID de categoria en Pull To Refesh es...');
+      console.log(activeCategory.id);
+
+      // Busca el valor de Page segun ID de Categoria
+      const lucas = fetchBuscaValorPage(activeCategory.id);
+      console.log('... lucas ... ');
+      console.log(lucas);
+
+      setPage(6);
+      setPage(7);
+      setPage(lucas);
+
+      console.log('valor de page para PULL TO REFRESH es...');
       console.log(page);
 
-      setPage(page + 1);
       const response = await fetch(
         `https://noticieroaltavoz.com/wp-json/wp/v2/posts/?categories=${activeCategory.id}&page=${page}`
       );
 
       const result = await response.json();
-      console.log('nuevas noticias');
-      console.log('........................');
-
-      // const resultox = result.slice(0, 3);
-      // console.log(resultox);
-
-      // setDiscoverNewsAV([...discoverNewsAV, ...result]);
-      // setDiscoverNewsAV([...result, ...discoverNewsAV]);
       setDiscoverNewsAV([...result, ...discoverNewsAV]);
     } catch (error) {
       console.error('Error fetching news:', error);
@@ -185,6 +212,7 @@ export default function HomeScreen() {
 
   // Llama a la API al cargar la pantalla
   useEffect(() => {
+    console.log('Cargando Pantalla SIN HACER PULL TO REFRESH');
     fetchNews();
   }, []);
 
@@ -192,18 +220,49 @@ export default function HomeScreen() {
     fetchCategorias();
   }, []);
 
-  console.log('categoriasNoticiasPage...');
+  // console.log('categoriasNoticiasPage...');
   // console.log(categoriasNoticiasPage);
 
   // Función para el "Pull to Refresh"
   const handleRefresh = async () => {
     setIsRefreshing(true);
+    buscarPageEnCategorias(activeCategory.id);
     await fetchNews(); // Vuelve a llamar a la API para obtener datos nuevos
     setIsRefreshing(false);
   };
 
   if (!fontsLoaded) {
     return <Text />;
+  }
+
+  // -----------------------------------------------------------------------------
+  /*
+  const fetchBuscaValorPage = async () => {
+    try {
+      console.log('entra en funcion fetchBuscaValorPage...');
+
+      const [category] = categoriasNoticiasPage; // Assuming a single category array
+
+      const foundCategory = category.find((item) => item.id === activeCategory.id);
+
+      // return foundCategory ? foundCategory.page : null; // Return null if not found
+
+      setPage(foundCategory);
+    } catch (error) {
+      console.error('Error fetchBuscaValorPage:', error);
+    }
+  };
+  */
+
+  function fetchBuscaValorPage(id) {
+    
+    console.log('entró en fetchBuscaValorPage y el id es:', id);
+    
+    const [category] = categoriasNoticiasPage; // Assuming a single category array
+
+    const foundCategory = category.find((item) => item.id === id);
+    const Valorinx = parseInt(foundCategory.page);
+    return Valorinx;
   }
 
   const renderItem = ({ item }) => {
