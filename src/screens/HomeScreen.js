@@ -118,6 +118,8 @@ export default function HomeScreen() {
   const handleChangeCategory = (category) => {
     console.log('cambio categoria en SLIDER CATEGORIES');
     console.log('La el ID es ahora ', category.id);
+    setPage(1);
+    console.log('En cambio SLIDER page ahoar vale', page);
 
     setDiscoverNewsAV([]);
     setActiveCategory(category);
@@ -213,18 +215,17 @@ export default function HomeScreen() {
       console.log('Entró a fetchNews y el ID de categoria es...');
       console.log(activeCategory.id);
 
-      const paginaCat = parseInt(buscarPageEnCategorias(activeCategory.id));
-      console.log('paginaCat');
-      console.log(paginaCat);
+      if (activeCategory.id !== '77') {
+        const paginaCat = parseInt(buscarPageEnCategorias(activeCategory.id));
+        console.log('paginaCat');
+        console.log(paginaCat);
 
-      // Actualiza SetPage
-      setPage(1);
-      const sumaPage = page + paginaCat;
+        actualizarValorPageEnCategorias(activeCategory.id, page);
+      }
 
-      console.log('Ahora page vale: ');
-      console.log(sumaPage);
-
-      actualizarValorPageEnCategorias(activeCategory.id, sumaPage);
+      setPage(page + 1);
+      console.log('page vale ahora:');
+      console.log(page);
 
       const response = await fetch(
         `https://noticieroaltavoz.com/wp-json/wp/v2/posts/?categories=${activeCategory.id}&page=${page}`
