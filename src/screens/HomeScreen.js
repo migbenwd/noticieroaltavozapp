@@ -130,18 +130,23 @@ export default function HomeScreen() {
   }, []);
 
   function buscarPageEnCategorias(categoryid) {
-    const findPageById = (categoryid) => {
-      const [category] = categoriasNoticiasPage; // Assuming a single category array
+    // const findPageById = (categoryid) => {
 
-      const foundCategory = category.find((item) => item.id === categoryid);
+    const [category] = categoriasNoticiasPage; // Assuming a single category array
 
-      return foundCategory ? foundCategory.page : null; // Return null if not found
-    };
+    const foundCategory = category.find((item) => item.id === categoryid);
+
+    return foundCategory ? foundCategory.page : null; // Return null if not found
+
+    // };
 
     // Example usage:
+    /*
     const idToFind = categoryid;
     const pageValue = findPageById(idToFind);
+    */
 
+    /*
     const actualizarPagePorId = (idCat) => {
       const nuevasCategorias = categoriasNoticiasPage.map((categoria) => {
         return categoria.map((item) => {
@@ -160,6 +165,27 @@ export default function HomeScreen() {
     };
 
     actualizarPagePorId(categoryid);
+    */
+  }
+
+  // ------------------- INCREMENTAR VALOR DE PAGE EN CATEGORIA CORRESPONDIENTE - SEGUN ID CAT  --------------------------//
+
+  function actualizarValorPageEnCategorias(cat_id, suma) {
+    console.log('el valor de suma es: ', suma);
+    const nuevasCategorias = categoriasNoticiasPage.map((categoria) => {
+      // const nuevoPage = page;
+      return categoria.map((item) => {
+        if (item.id === cat_id) {
+          // return { ...item, page: item.page + 1 }; // Incrementa el valor de page
+          return { ...item, page: suma }; // Incrementa el valor de page
+        }
+        return item;
+      });
+    });
+
+    setcategoriasNoticiasPage(nuevasCategorias);
+    console.log('Array actualizado en actualizarValorPageEnCategorias: ');
+    console.log(categoriasNoticiasPage);
   }
 
   // ------------------- Creo Array para Poder Paginar Categorias  --------------------------//
@@ -184,20 +210,21 @@ export default function HomeScreen() {
   // Función para obtener datos de la API
   const fetchNews = async () => {
     try {
-      console.log('el ID de categoria en Pull To Refesh es...');
+      console.log('Entró a fetchNews y el ID de categoria es...');
       console.log(activeCategory.id);
 
-      // Busca el valor de Page segun ID de Categoria
-      const lucas = fetchBuscaValorPage(activeCategory.id);
-      console.log('... lucas ... ');
-      console.log(lucas);
+      const paginaCat = parseInt(buscarPageEnCategorias(activeCategory.id));
+      console.log('paginaCat');
+      console.log(paginaCat);
 
-      setPage(6);
-      setPage(7);
-      setPage(lucas);
+      // Actualiza SetPage
+      setPage(1);
+      const sumaPage = page + paginaCat;
 
-      console.log('valor de page para PULL TO REFRESH es...');
-      console.log(page);
+      console.log('Ahora page vale: ');
+      console.log(sumaPage);
+
+      actualizarValorPageEnCategorias(activeCategory.id, sumaPage);
 
       const response = await fetch(
         `https://noticieroaltavoz.com/wp-json/wp/v2/posts/?categories=${activeCategory.id}&page=${page}`
@@ -226,7 +253,7 @@ export default function HomeScreen() {
   // Función para el "Pull to Refresh"
   const handleRefresh = async () => {
     setIsRefreshing(true);
-    buscarPageEnCategorias(activeCategory.id);
+    // buscarPageEnCategorias(activeCategory.id);
     await fetchNews(); // Vuelve a llamar a la API para obtener datos nuevos
     setIsRefreshing(false);
   };
@@ -255,9 +282,8 @@ export default function HomeScreen() {
   */
 
   function fetchBuscaValorPage(id) {
-    
     console.log('entró en fetchBuscaValorPage y el id es:', id);
-    
+
     const [category] = categoriasNoticiasPage; // Assuming a single category array
 
     const foundCategory = category.find((item) => item.id === id);
