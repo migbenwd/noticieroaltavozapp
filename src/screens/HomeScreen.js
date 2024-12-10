@@ -223,7 +223,8 @@ export default function HomeScreen() {
         actualizarValorPageEnCategorias(activeCategory.id, page);
       }
 
-      setPage(page + 1);
+      // setPage(page + 1);
+      setPage(page);
       console.log('page vale ahora:');
       console.log(page);
 
@@ -232,6 +233,8 @@ export default function HomeScreen() {
       );
 
       const result = await response.json();
+      // Condicional para que si viene nuevo lo actualiza...sino...no hace nada
+      
       setDiscoverNewsAV([...result, ...discoverNewsAV]);
     } catch (error) {
       console.error('Error fetching news:', error);
