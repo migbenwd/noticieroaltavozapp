@@ -121,6 +121,7 @@ export default function HomeScreen() {
     fetchNewsByCategory(category.id);
     setPage(1);
     console.log('cmabio a la categoria', category);
+    buscarPageEnCategorias(category.id);
     // console.log('cmabio de categoria y page vale', page);
   };
 
@@ -128,6 +129,14 @@ export default function HomeScreen() {
     getPublicidad().then(setadPublicidad);
     fetchNewsByCategory(CATEGORY_DEFAULT.id);
   }, []);
+
+  function buscarPageEnCategorias(categoryid) {
+
+    console.log('categoryid...');
+    console.log(categoryid);
+
+
+  }
 
   // ------------------- Creo Array para Poder Paginar Categorias  --------------------------//
 
