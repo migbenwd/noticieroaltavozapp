@@ -55,15 +55,6 @@ const CATEGORY_DEFAULT = { id: '77', title: 'Portada' };
 const getTheFirstFiveNewsByCategories = async () => {
   const categories = await getCategories();
 
-  // Crear una copia y agregar el elemento al inicio
-  /*
-  const newArray = [CATEGORY_DEFAULT].concat(categories);
-  const newArrayCategoria = newArray.map((item) => ({
-    page: 1,
-    ...item,
-  }));
-  */
-
   const newsByCategoriesId = [CATEGORY_DEFAULT, ...categories].map(
     async (category) => {
       const news = await getNewsByCategoryId(category.id);
@@ -116,9 +107,9 @@ export default function HomeScreen() {
   }
 
   const handleChangeCategory = (category) => {
+
     console.log('cambio categoria en SLIDER CATEGORIES');
     console.log('La el ID es ahora ', category.id);
-    setPage(1);
     console.log('En cambio SLIDER page ahoar vale', page);
 
     setDiscoverNewsAV([]);
@@ -212,29 +203,14 @@ export default function HomeScreen() {
   // Función para obtener datos de la API
   const fetchNews = async () => {
     try {
-      console.log('Entró a fetchNews y el ID de categoria es...');
-      console.log(activeCategory.id);
-
-      if (activeCategory.id !== '77') {
-        const paginaCat = parseInt(buscarPageEnCategorias(activeCategory.id));
-        console.log('paginaCat');
-        console.log(paginaCat);
-
-        actualizarValorPageEnCategorias(activeCategory.id, page);
-      }
-
-      // setPage(page + 1);
-      setPage(page);
-      console.log('page vale ahora:');
-      console.log(page);
-
+      // setPage(page);
       const response = await fetch(
         `https://noticieroaltavoz.com/wp-json/wp/v2/posts/?categories=${activeCategory.id}&page=${page}`
       );
 
       const result = await response.json();
       // Condicional para que si viene nuevo lo actualiza...sino...no hace nada
-      
+
       setDiscoverNewsAV([...result, ...discoverNewsAV]);
     } catch (error) {
       console.error('Error fetching news:', error);
@@ -251,13 +227,9 @@ export default function HomeScreen() {
     fetchCategorias();
   }, []);
 
-  // console.log('categoriasNoticiasPage...');
-  // console.log(categoriasNoticiasPage);
-
   // Función para el "Pull to Refresh"
   const handleRefresh = async () => {
     setIsRefreshing(true);
-    // buscarPageEnCategorias(activeCategory.id);
     await fetchNews(); // Vuelve a llamar a la API para obtener datos nuevos
     setIsRefreshing(false);
   };

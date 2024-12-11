@@ -7,8 +7,13 @@ const apiBaseUrlAV = 'https://noticieroaltavoz.com/wp-json/wp/v2/posts/';
 
 export const getNewsByCategoryId = async (categoryId) => {
   // return Promise<data>
-  const url = `${apiBaseUrlAV}?categories=${categoryId}`;
+  const url = `${apiBaseUrlAV}?categories=${categoryId}&per_page=5&_fields=id,title,link,date,yoast_head_json`;
   const response = await axios.get(url);
+
+  const respuestaApi = response.data.slice(0, 1);
+  console.log('respuestaApi');
+  console.log(respuestaApi);
+
   return response.data;
 };
 
