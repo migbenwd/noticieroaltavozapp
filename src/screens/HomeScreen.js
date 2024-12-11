@@ -87,6 +87,8 @@ export default function HomeScreen() {
   const [categoriasNoticiasPage, setcategoriasNoticiasPage] = useState([]);
 
   function fetchNewsByCategory(categoryId) {
+    console.log('entró en ... fetchNewsByCategory y su cat id es:', categoryId);
+
     setIsLoading(true);
 
     if (categoryId === CATEGORY_DEFAULT.id) {
@@ -98,6 +100,11 @@ export default function HomeScreen() {
 
     getNewsByCategoryId(categoryId)
       .then((data) => {
+        console.log(
+          'entró en ... getNewsByCategoryId y su cat id es:',
+          categoryId
+        );
+
         setIsLoading(false);
         setDiscoverNewsAV(data);
       })
@@ -107,7 +114,6 @@ export default function HomeScreen() {
   }
 
   const handleChangeCategory = (category) => {
-
     console.log('cambio categoria en SLIDER CATEGORIES');
     console.log('La el ID es ahora ', category.id);
     console.log('En cambio SLIDER page ahoar vale', page);
@@ -203,13 +209,14 @@ export default function HomeScreen() {
   // Función para obtener datos de la API
   const fetchNews = async () => {
     try {
+      console.log('entró en TRY fetchNews luego de hacer PULL TO REFRESH');
+
       // setPage(page);
+      /*
       const response = await fetch(
         `https://noticieroaltavoz.com/wp-json/wp/v2/posts/?categories=${activeCategory.id}&page=${page}`
       );
-
-      const result = await response.json();
-      // Condicional para que si viene nuevo lo actualiza...sino...no hace nada
+      */
 
       setDiscoverNewsAV([...result, ...discoverNewsAV]);
     } catch (error) {
@@ -220,7 +227,7 @@ export default function HomeScreen() {
   // Llama a la API al cargar la pantalla
   useEffect(() => {
     console.log('Cargando Pantalla SIN HACER PULL TO REFRESH');
-    fetchNews();
+    // fetchNews();
   }, []);
 
   useEffect(() => {
@@ -230,7 +237,8 @@ export default function HomeScreen() {
   // Función para el "Pull to Refresh"
   const handleRefresh = async () => {
     setIsRefreshing(true);
-    await fetchNews(); // Vuelve a llamar a la API para obtener datos nuevos
+    // await fetchNews(); // Vuelve a llamar a la API para obtener datos nuevos
+    await fetchNewsByCategory(activeCategory.id); // Llamamos a fetchNewsByCategory con la categoría activa
     setIsRefreshing(false);
   };
 

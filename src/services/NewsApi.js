@@ -11,8 +11,8 @@ export const getNewsByCategoryId = async (categoryId) => {
   const response = await axios.get(url);
 
   const respuestaApi = response.data.slice(0, 1);
-  console.log('respuestaApi');
-  console.log(respuestaApi);
+  // console.log('respuestaApi');
+  // console.log(respuestaApi);
 
   return response.data;
 };
