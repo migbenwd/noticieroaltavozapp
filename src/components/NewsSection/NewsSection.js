@@ -205,7 +205,7 @@ export default function NewsSection({
       // Agrega RefreshControl para "Pull to Refresh"
       refreshControl={
         <RefreshControl
-          progressViewOffset={165}
+          progressViewOffset={170}
           refreshing={isRefreshing}
           onRefresh={onRefresh}
           colors={['#0303B2']} // Personaliza el color del indicador
