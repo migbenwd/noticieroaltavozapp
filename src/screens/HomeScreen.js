@@ -83,13 +83,8 @@ export default function HomeScreen() {
   const [isRefreshing, setIsRefreshing] = useState(false); // Indicador de "Pull to Refresh"
   const [newsPortada, setNewsPortada] = useState([]);
   const [adPublicidad, setadPublicidad] = useState([]);
-  const [page, setPage] = useState(1);
-
-  const [categoriasNoticiasPage, setcategoriasNoticiasPage] = useState([]);
 
   function fetchNewsByCategory(categoryId) {
-    console.log('entró en ... fetchNewsByCategory y su cat id es:', categoryId);
-
     setIsLoading(true);
 
     if (categoryId === CATEGORY_DEFAULT.id) {
@@ -101,11 +96,6 @@ export default function HomeScreen() {
 
     getNewsByCategoryId(categoryId)
       .then((data) => {
-        console.log(
-          'entró en ... getNewsByCategoryId y su cat id es:',
-          categoryId
-        );
-
         setIsLoading(false);
         setDiscoverNewsAV(data);
       })
@@ -115,10 +105,6 @@ export default function HomeScreen() {
   }
 
   const handleChangeCategory = (category) => {
-    console.log('cambio categoria en SLIDER CATEGORIES');
-    console.log('La el ID es ahora ', category.id);
-    console.log('En cambio SLIDER page ahoar vale', page);
-
     setDiscoverNewsAV([]);
     setActiveCategory(category);
     fetchNewsByCategory(category.id);
@@ -129,151 +115,15 @@ export default function HomeScreen() {
     fetchNewsByCategory(CATEGORY_DEFAULT.id);
   }, []);
 
-  function buscarPageEnCategorias(categoryid) {
-    // const findPageById = (categoryid) => {
-
-    const [category] = categoriasNoticiasPage; // Assuming a single category array
-
-    const foundCategory = category.find((item) => item.id === categoryid);
-
-    return foundCategory ? foundCategory.page : null; // Return null if not found
-
-    // };
-
-    // Example usage:
-    /*
-    const idToFind = categoryid;
-    const pageValue = findPageById(idToFind);
-    */
-
-    /*
-    const actualizarPagePorId = (idCat) => {
-      const nuevasCategorias = categoriasNoticiasPage.map((categoria) => {
-        return categoria.map((item) => {
-          if (item.id === idCat) {
-            return { ...item, page: item.page + 1 }; // Incrementa el valor de page
-          }
-          return item;
-        });
-      });
-
-      setcategoriasNoticiasPage(nuevasCategorias);
-      console.log(
-        'Se actualizaron valores de PAGE en buscarPageEnCategorias en el NUEVO ARRAY, y son los siguientes'
-      );
-      console.log(nuevasCategorias);
-    };
-
-    actualizarPagePorId(categoryid);
-    */
-  }
-
-  // ------------------- INCREMENTAR VALOR DE PAGE EN CATEGORIA CORRESPONDIENTE - SEGUN ID CAT  --------------------------//
-
-  function actualizarValorPageEnCategorias(cat_id, suma) {
-    console.log('el valor de suma es: ', suma);
-    const nuevasCategorias = categoriasNoticiasPage.map((categoria) => {
-      // const nuevoPage = page;
-      return categoria.map((item) => {
-        if (item.id === cat_id) {
-          // return { ...item, page: item.page + 1 }; // Incrementa el valor de page
-          return { ...item, page: suma }; // Incrementa el valor de page
-        }
-        return item;
-      });
-    });
-
-    setcategoriasNoticiasPage(nuevasCategorias);
-    console.log('Array actualizado en actualizarValorPageEnCategorias: ');
-    console.log(categoriasNoticiasPage);
-  }
-
-  // ------------------- Creo Array para Poder Paginar Categorias  --------------------------//
-
-  const fetchCategorias = async () => {
-    try {
-      const categorias_noticias = await getCategories();
-      const newArray1 = [CATEGORY_DEFAULT].concat(categorias_noticias);
-      const newArrayCategoria = newArray1.map((item) => ({
-        page: 1,
-        ...item,
-      }));
-
-      setcategoriasNoticiasPage([newArrayCategoria]);
-    } catch (error) {
-      console.error('Error fetching news:', error);
-    }
-  };
-
-  /* ---------------------------------------------------------------------------------------- */
-
-  // Función para obtener datos de la API
-  const fetchNews = async () => {
-    try {
-      console.log('entró en TRY fetchNews luego de hacer PULL TO REFRESH');
-
-      // setPage(page);
-      /*
-      const response = await fetch(
-        `https://noticieroaltavoz.com/wp-json/wp/v2/posts/?categories=${activeCategory.id}&page=${page}`
-      );
-      */
-
-      setDiscoverNewsAV([...result, ...discoverNewsAV]);
-    } catch (error) {
-      console.error('Error fetching news:', error);
-    }
-  };
-
-  // Llama a la API al cargar la pantalla
-  useEffect(() => {
-    console.log('Cargando Pantalla SIN HACER PULL TO REFRESH');
-    // fetchNews();
-  }, []);
-
-  useEffect(() => {
-    fetchCategorias();
-  }, []);
-
   // Función para el "Pull to Refresh"
   const handleRefresh = async () => {
     setIsRefreshing(true);
-    // await fetchNews(); // Vuelve a llamar a la API para obtener datos nuevos
-    await fetchNewsByCategory(activeCategory.id); // Llamamos a fetchNewsByCategory con la categoría activa
+    await fetchNewsByCategory(activeCategory.id);
     setIsRefreshing(false);
   };
 
   if (!fontsLoaded) {
     return <Text />;
-  }
-
-  // -----------------------------------------------------------------------------
-  /*
-  const fetchBuscaValorPage = async () => {
-    try {
-      console.log('entra en funcion fetchBuscaValorPage...');
-
-      const [category] = categoriasNoticiasPage; // Assuming a single category array
-
-      const foundCategory = category.find((item) => item.id === activeCategory.id);
-
-      // return foundCategory ? foundCategory.page : null; // Return null if not found
-
-      setPage(foundCategory);
-    } catch (error) {
-      console.error('Error fetchBuscaValorPage:', error);
-    }
-  };
-  */
-
-  function fetchBuscaValorPage(id) {
-    console.log('entró en fetchBuscaValorPage y el id es:', id);
-
-    const [category] = categoriasNoticiasPage; // Assuming a single category array
-
-    const foundCategory = category.find((item) => item.id === id);
-    const Valorinx = parseInt(foundCategory.page);
-    return Valorinx;
   }
 
   const renderItem = ({ item }) => {
