@@ -5,6 +5,8 @@
 // migben 25-11-2024 - 4:18 pm
 // migben 11-12-2024 - 1:40 pm
 // migben 12-12-2024 - 10:30 am
+// migben 12-12-2024 - 11:30 am - FUNCIONA al crear archivo ipa, ya que se eleminó las dependencias de FIREBASE
+// migben 12-12-2024 - 11:36 am - Procedo a crear archivo APK para Android de la version "version 12-dic-2024"
 
 import {
   View,
