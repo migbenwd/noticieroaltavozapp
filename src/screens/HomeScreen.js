@@ -57,11 +57,13 @@ const itemWidth = slideWidth + itemHorizontalMargin * 2;
 const CATEGORY_DEFAULT = { id: '77', title: 'Portada' };
 
 const getTheFirstFiveNewsByCategories = async () => {
+
   const categories = await getCategories();
 
   const newsByCategoriesId = [CATEGORY_DEFAULT, ...categories].map(
     async (category) => {
       const news = await getNewsByCategoryId(category.id);
+
       return {
         title: category.title,
         id: category.id,
