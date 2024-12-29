@@ -5,6 +5,7 @@
 // func excel - 09-oct - 9:34 am
 // func excel - 09-oct - 9:34 am
 // probando en preview
+// - probar generar preview y development
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 // import { LogLevel, OneSignal } from 'react-native-onesignal';
