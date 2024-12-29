@@ -64,9 +64,7 @@ export default function CategoriesCard({
             ? 'bg-[#0303B2]'
             : 'border-2 bg-slate-50';
 
-          const activeTextClass = isActive
-            ? 'text-white'
-            : 'text-white-600 dark:text-neutral-100 ';
+          const activeTextClass = isActive ? 'text-white' : 'text-black';
 
           const LaTorretaButtonActive = isActive
             ? 'border border-[#FF0000] bg-red-600'
@@ -127,7 +125,6 @@ export default function CategoriesCard({
                   >
                     {/* {category.title === "Los Mochis" ? "6" : category.title} */}
                     {category.title}
-
                   </Text>
                 </View>
               </TouchableOpacity>

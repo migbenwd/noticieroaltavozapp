@@ -153,7 +153,7 @@ export function RenderNewsItem({
           </Text>
 
           <Text
-            className="font-bold text-gray-900 dark:text-neutral-300"
+            className="font-bold text-gray-900 dark:text-black"
             style={{
               fontFamily: 'Poppins_500Medium',
               fontSize: hp(1.7),

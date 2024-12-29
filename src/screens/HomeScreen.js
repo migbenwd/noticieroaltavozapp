@@ -180,7 +180,7 @@ export default function HomeScreen() {
 
         {activeCategory.id === CATEGORY_DEFAULT.id ? null : (
           <Text
-            className="dark:text-white ml-2 mb-2 mt-4"
+            className="dark:text-black ml-2 mb-2 mt-4"
             style={{
               fontSize: hp(3.25),
               fontFamily: 'Poppins_700Bold',
