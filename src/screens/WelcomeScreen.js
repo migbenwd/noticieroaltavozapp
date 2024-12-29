@@ -41,7 +41,7 @@ export default function Welcome() {
         className="bg-[#0303B2] rounded-full p-4 justify-center items-center w-[50%]"
         onPress={() => navigation.navigate('HomeTabs')}
       >
-        <Text className="text-base text-white">Ver Noticias</Text>
+        <Text className="text-base text-white justify-center items-center w-[60%]">Ver Noticias</Text>
       </TouchableOpacity>
     </ImageBackground>
   );

@@ -60,24 +60,36 @@ function TabNavigator() {
                 marginVertical: 'center',
                 borderRadius: 16,
                 // padding: 10,
-                width: 48,
+                width: 50,
                 height: 46,
                 alignItems: 'center',
                 flexDirection: 'column',
                 backgroundColor: focused ? 'blue' : 'transparent',
               }}
             >
-              <Ionicons
-                name={iconName}
-                size={customizeSize}
-                color={focused ? 'white' : 'gray'}
-                marginTop={6}
-              />
+              <View
+                style={{
+                  marginTop: 6,
+                  // backgroundColor: 'red',
+                  width: '50%',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                <Ionicons
+                  name={iconName}
+                  size={customizeSize}
+                  color={focused ? 'white' : 'gray'}
+                />
+              </View>
 
               <Text
                 style={{
                   fontSize: 8,
                   color: focused ? 'white' : 'gray',
+                  // backgroundColor: 'red',
+                  width: '50%',
+                  textAlign: 'center',
                 }}
               >
                 {route.name}
