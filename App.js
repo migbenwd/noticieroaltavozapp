@@ -6,7 +6,8 @@
 // func excel - 09-oct - 9:34 am
 // probando en preview
 // - probar generar preview y development
-// funciona en modo DEVELOPMENT en celular REDMI (ELENA)
+// funciona en modo DEVELOPMENT en celular REDMI (ELENA) 
+// corregido color gris en modo DARK y se ve bien en appetize.io 
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 // import { LogLevel, OneSignal } from 'react-native-onesignal';
