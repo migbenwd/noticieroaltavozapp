@@ -182,4 +182,4 @@ export default function AppNavigation() {
   );
 }
 
-console.log('pasó por index dic - 09');
+console.log('pasó por index dic - 29');
