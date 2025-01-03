@@ -8,6 +8,7 @@
 // - probar generar preview y development
 // funciona en modo DEVELOPMENT en celular REDMI (ELENA) 
 // corregido color gris en modo DARK y se ve bien en appetize.io 
+// Enero 2025
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 // import { LogLevel, OneSignal } from 'react-native-onesignal';
