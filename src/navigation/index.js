@@ -26,7 +26,8 @@ import WelcomeScreen from '../screens/WelcomeScreen';
 import SplashScreens from '../screens/SplashScreens';
 import RadioScreen from '../screens/RadioScreen';
 
-import PantallaDestino from '../screens/PantallaDestino';
+import PantallaDestino from '../screens/ContactScreen';
+import ContactScreen from '../screens/ContactScreen';
 
 const navigationRef = createNavigationContainerRef();
 const Tab = createBottomTabNavigator();
@@ -47,6 +48,8 @@ function TabNavigator() {
             iconName = 'home';
           } else if (route.name === 'Radio') {
             iconName = 'radio';
+          } else if (route.name === 'Contacto') {
+            iconName = 'compass-outline';
           }
 
           const customizeSize = 18;
@@ -88,7 +91,7 @@ function TabNavigator() {
                   fontSize: 8,
                   color: focused ? 'white' : 'gray',
                   // backgroundColor: 'red',
-                  width: '50%',
+                  width: '66%',
                   textAlign: 'center',
                 }}
               >
@@ -116,6 +119,7 @@ function TabNavigator() {
     >
       <Tab.Screen name="Inicio" component={HomeScreen} />
       <Tab.Screen name="Radio" component={RadioScreen} />
+      <Tab.Screen name="Contacto" component={ContactScreen} />
     </Tab.Navigator>
   );
 }
@@ -189,9 +193,10 @@ export default function AppNavigation() {
         <Stack.Screen name="PantallaDestino" component={PantallaDestino} />
         <Stack.Screen name="HomeTabs" component={TabNavigator} />
         <Stack.Screen name="RadioS" component={RadioScreen} />
+        <Stack.Screen name="Contacto" component={ContactScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
 
-console.log('pasó por index dic - 29');
+console.log('pasó por index ene - 07');
