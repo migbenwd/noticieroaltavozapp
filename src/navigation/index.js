@@ -7,6 +7,7 @@
 // migben jueves - 08:20 am
 // migben martes 9-dic - 07:02 pm - esta version tiene comentado el codigo de one signal y por ende, no funciona las push notifications
 // migben martes 7-ene-2025 ... 8:00 pm
+//.
 
 import React, { useEffect } from 'react';
 import {
