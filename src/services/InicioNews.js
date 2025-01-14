@@ -1,21 +1,29 @@
-import React, { useEffect, useState } from 'react';
-// import AppNavigation from './src/navigation';
-import { getCategories, getNewsByCategoryId } from './src/services/NewsApi';
+/* eslint-disable react/jsx-no-bind */
+/* eslint-disable react/no-unstable-nested-components */
 
-const [categories, setCategories] = useState([]);
-const [newsByCategory, setNewsByCategory] = useState({});
+import { useEffect, useState } from 'react';
+import { getCategories, getNewsByCategoryId } from './NewsApi';
+
 const CATEGORY_DEFAULT = 77;
 
-/*
-export const getInicioNews = async () => {
+// Hook personalizado para manejar categorías y noticias
+export const BuscarNoticiasPortadaData = () => {
+
+  const [categories, setCategories] = useState([]);
+  const [newsByCategory, setNewsByCategory] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
   useEffect(() => {
     const fetchCategoriesAndNews = async () => {
+      setLoading(true); // Indicador de carga
+      setError(null); // Reinicia el estado de error
+
       try {
         // Obtener las categorías
         const categoriesResponse = await getCategories();
         const categoryIds = categoriesResponse.map((category) => category.id);
         setCategories(categoryIds);
-        console.log('Category IDs:', categoryIds);
 
         // Registrar el inicio del tiempo
         const startTime = performance.now();
@@ -30,7 +38,7 @@ export const getInicioNews = async () => {
         const endTime = performance.now();
         const timeTaken = (endTime - startTime) / 1000; // Convertir a segundos
         console.log(
-          `Time taken to fetch news: ${timeTaken.toFixed(2)} seconds`
+          `Tiempo tomado para obtener las noticias: ${timeTaken.toFixed(2)} segundos`
         );
 
         // Organizar los resultados en un objeto con los IDs de las categorías como clave
@@ -40,25 +48,16 @@ export const getInicioNews = async () => {
         }, {});
 
         setNewsByCategory(newsData);
-        // console.log('News by Category:', newsData);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error('Error al obtener datos:', error);
+        setError(error); // Guarda el error para manejarlo en el componente
+      } finally {
+        setLoading(false); // Indica que la carga ha terminado
       }
-
-      return 77;
     };
 
     fetchCategoriesAndNews();
   }, []);
 
-  // return extractImagesWithTheirSource(htmlContent);
-};
-*/
-
-export const getPublicidad = async () => {
-  const url = `https://noticieroaltavoz.com/wp-json/wp/v2/publicidad-app`;
-  const response = await axios.get(url);
-  const htmlContent = response.data[0].content.rendered;
-
-  return extractImagesWithTheirSource(htmlContent);
+  return { categories, newsByCategory, loading, error }; // Devuelve todo el estado relevante
 };

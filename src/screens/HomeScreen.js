@@ -57,6 +57,7 @@ const itemWidth = slideWidth + itemHorizontalMargin * 2;
 const CATEGORY_DEFAULT = { id: '77', title: 'Portada' };
 
 const getTheFirstFiveNewsByCategories = async () => {
+  console.log('entró a BUSCAR 5 NOTICIAS');
 
   const categories = await getCategories();
 
