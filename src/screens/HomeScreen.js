@@ -43,6 +43,7 @@ import {
 } from '../services/NewsApi';
 
 import { openInBrowser } from '../utils/openInBrowser';
+import { BuscarNoticiasPortadaData } from '../services/InicioNews';
 
 const { width } = Dimensions.get('screen');
 function wp(percentage) {
@@ -58,13 +59,10 @@ const CATEGORY_DEFAULT = { id: '77', title: 'Portada' };
 
 const getTheFirstFiveNewsByCategories = async () => {
   console.log('entró a BUSCAR 5 NOTICIAS');
-
   const categories = await getCategories();
-
   const newsByCategoriesId = [CATEGORY_DEFAULT, ...categories].map(
     async (category) => {
       const news = await getNewsByCategoryId(category.id);
-
       return {
         title: category.title,
         id: category.id,
@@ -99,7 +97,6 @@ export default function HomeScreen() {
         setNewsPortada(data);
       });
     }
-
     getNewsByCategoryId(categoryId)
       .then((data) => {
         setIsLoading(false);
