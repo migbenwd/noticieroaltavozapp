@@ -8,7 +8,6 @@ const CATEGORY_DEFAULT = 77;
 
 // Hook personalizado para manejar categorías y noticias
 export const BuscarNoticiasPortadaData = () => {
-
   const [categories, setCategories] = useState([]);
   const [newsByCategory, setNewsByCategory] = useState({});
   const [loading, setLoading] = useState(true);

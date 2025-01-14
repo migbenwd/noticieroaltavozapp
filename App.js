@@ -12,6 +12,7 @@ export default function App() {
   useEffect(() => {
     console.log('NewsByCategory:', newsByCategory);
   }, [newsByCategory]);
+  
   */
   return (
     <QueryClientProvider client={queryClient}>
