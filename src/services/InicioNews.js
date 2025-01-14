@@ -8,23 +8,19 @@ const CATEGORY_DEFAULT = 77;
 
 // Hook personalizado para manejar categorías y noticias
 export const BuscarNoticiasPortadaData = () => {
-  const [categories, setCategories] = useState([]);
+  // const [categories, setCategories] = useState([]);
   const [newsByCategory, setNewsByCategory] = useState({});
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchCategoriesAndNews = async () => {
-      setLoading(true); // Indicador de carga
-      setError(null); // Reinicia el estado de error
-
       try {
         // Obtener las categorías
         const categoriesResponse = await getCategories();
         const categoryIds = categoriesResponse.map((category) => category.id);
-        setCategories(categoryIds);
+        // setCategories(categoryIds);
 
-        // Registrar el inicio del tiempo
+        // --------------------------- Registrar el inicio del tiempo
+
         const startTime = performance.now();
 
         // Realizar consultas en paralelo para obtener noticias por cada categoría
@@ -33,13 +29,6 @@ export const BuscarNoticiasPortadaData = () => {
         );
         const newsResults = await Promise.all(newsPromises);
 
-        // Registrar el final del tiempo
-        const endTime = performance.now();
-        const timeTaken = (endTime - startTime) / 1000; // Convertir a segundos
-        console.log(
-          `Tiempo tomado para obtener las noticias: ${timeTaken.toFixed(2)} segundos`
-        );
-
         // Organizar los resultados en un objeto con los IDs de las categorías como clave
         const newsData = categoryIds.reduce((acc, id, index) => {
           acc[id] = newsResults[index];
@@ -47,16 +36,22 @@ export const BuscarNoticiasPortadaData = () => {
         }, {});
 
         setNewsByCategory(newsData);
+
+        // --------------------------- Registrar el final del tiempo
+
+        const endTime = performance.now();
+        const timeTaken = (endTime - startTime) / 1000; // Convertir a segundos
+        console.log(
+          `Tiempo tomado para obtener las noticias: ${timeTaken.toFixed(2)} segundos-`
+        );
       } catch (error) {
         console.error('Error al obtener datos:', error);
-        setError(error); // Guarda el error para manejarlo en el componente
-      } finally {
-        setLoading(false); // Indica que la carga ha terminado
       }
     };
 
     fetchCategoriesAndNews();
   }, []);
 
-  return { categories, newsByCategory, loading, error }; // Devuelve todo el estado relevante
+  // return { categories, newsByCategory }; // Devuelve todo el estado relevante
+  return { newsByCategory };
 };
