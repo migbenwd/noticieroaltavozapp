@@ -57,8 +57,6 @@ const itemWidth = slideWidth + itemHorizontalMargin * 2;
 
 const CATEGORY_DEFAULT = { id: '77', title: 'Portada' };
 
-/*
-
 const getTheFirstFiveNewsByCategories = async () => {
   console.log('entró a BUSCAR 5 NOTICIAS');
   const categories = await getCategories();
@@ -76,19 +74,26 @@ const getTheFirstFiveNewsByCategories = async () => {
   return Promise.all(newsByCategoriesId);
 };
 
-*/
-
+/*
 const getTheFirstFiveNewsByCategories = async () => {
   console.log('Entró a BUSCAR 5 NOTICIAS');
   try {
     const portadaData = await BuscarNoticiasPortadaData();
-    console.log('portadaData:', portadaData);
-    return portadaData; // Devuelve los datos para el consumo posterior
+
+    console.log('que trae portadaData');
+    console.log(portadaData);
+
+    return {
+      title: portadaData.title,
+      id: portadaData.id,
+      data: portadaData.slice(0, 5),
+    };
   } catch (error) {
     console.error('Error en getTheFirstFiveNewsByCategories:', error);
     throw error;
   }
 };
+*/
 
 export default function HomeScreen() {
   const [fontsLoaded] = useFonts({

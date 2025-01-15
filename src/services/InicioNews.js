@@ -1,57 +1,32 @@
-/* eslint-disable react/jsx-no-bind */
-/* eslint-disable react/no-unstable-nested-components */
-
-import { useEffect, useState } from 'react';
 import { getCategories, getNewsByCategoryId } from './NewsApi';
 
-const CATEGORY_DEFAULT = 77;
+const CATEGORY_DEFAULT = { id: '77', title: 'Portada' };
 
-// Hook personalizado para manejar categorías y noticias
-export const BuscarNoticiasPortadaData = () => {
-  // const [categories, setCategories] = useState([]);
-  const [newsByCategory, setNewsByCategory] = useState({});
+export const BuscarNoticiasPortadaData = async () => {
+  try {
+    // Obtiene las categorías
+    const categoriesResponse = await getCategories();
 
-  useEffect(() => {
-    const fetchCategoriesAndNews = async () => {
-      try {
-        // Obtener las categorías
-        const categoriesResponse = await getCategories();
-        const categoryIds = categoriesResponse.map((category) => category.id);
-        // setCategories(categoryIds);
+    // Agrega la categoría predeterminada al inicio de las categorías
+    const allCategories = [CATEGORY_DEFAULT, ...categoriesResponse];
 
-        // --------------------------- Registrar el inicio del tiempo
+    // Obtiene noticias por cada categoría en paralelo y resuelve los datos completamente
+    const newsResults = await Promise.all(
+      allCategories.map(async (category) => {
+        const news = await getNewsByCategoryId(category.id);
+        return news.map((item) => ({
+          date: item.date,
+          id: item.id,
+          link: item.link,
+          title: item.title.rendered, // Aseguramos el acceso a la propiedad "rendered"
+          yoast_head_json: item.yoast_head_json, // Incluye los datos completos de yoast_head_json
+        }));
+      })
+    );
 
-        const startTime = performance.now();
-
-        // Realizar consultas en paralelo para obtener noticias por cada categoría
-        const newsPromises = [CATEGORY_DEFAULT, ...categoryIds].map((id) =>
-          getNewsByCategoryId(id)
-        );
-        const newsResults = await Promise.all(newsPromises);
-
-        // Organizar los resultados en un objeto con los IDs de las categorías como clave
-        const newsData = categoryIds.reduce((acc, id, index) => {
-          acc[id] = newsResults[index];
-          return acc;
-        }, {});
-
-        setNewsByCategory(newsData);
-
-        // --------------------------- Registrar el final del tiempo
-
-        const endTime = performance.now();
-        const timeTaken = (endTime - startTime) / 1000; // Convertir a segundos
-        console.log(
-          `Tiempo tomado para obtener las noticias: ${timeTaken.toFixed(2)} segundos-`
-        );
-      } catch (error) {
-        console.error('Error al obtener datos:', error);
-      }
-    };
-
-    fetchCategoriesAndNews();
-  }, []);
-
-  // return { categories, newsByCategory }; // Devuelve todo el estado relevante
-  return { newsByCategory };
+    return newsResults.slice(0, 2);
+  } catch (error) {
+    console.error('Error al obtener datos:', error);
+    throw error; // Lanza el error para manejarlo desde donde se llame a la función
+  }
 };
