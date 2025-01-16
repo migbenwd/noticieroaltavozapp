@@ -1,5 +1,4 @@
-/* eslint-disable global-require */
-
+import React, { useEffect, useState, useCallback } from 'react';
 import {
   View,
   Text,
@@ -10,19 +9,15 @@ import {
   TouchableOpacity,
   Dimensions,
 } from 'react-native';
-import React, { useEffect, useState } from 'react';
-import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useColorScheme } from 'nativewind';
 import { StatusBar } from 'expo-status-bar';
-
 import {
   useFonts,
   Poppins_400Regular,
   Poppins_700Bold,
 } from '@expo-google-fonts/poppins';
 import Carousel from 'react-native-snap-carousel';
-import { set } from 'lodash';
 import CategoriesCard from '../components/CategoriesCard';
 import NewsSection, {
   RenderNewsItem,
@@ -36,9 +31,13 @@ import {
 
 import { openInBrowser } from '../utils/openInBrowser';
 
-const { width } = Dimensions.get('screen');
+const { width, height } = Dimensions.get('screen');
 function wp(percentage) {
   const value = (percentage * width) / 100;
+  return Math.round(value);
+}
+function hp(percentage) {
+  const value = (percentage * height) / 100;
   return Math.round(value);
 }
 
@@ -47,44 +46,6 @@ const itemHorizontalMargin = wp(2);
 const itemWidth = slideWidth + itemHorizontalMargin * 2;
 
 const CATEGORY_DEFAULT = { id: '77', title: 'Portada' };
-
-const getTheFirstFiveNewsByCategories = async () => {
-  console.log('entró a BUSCAR 5 NOTICIAS');
-  const categories = await getCategories();
-  const newsByCategoriesId = [CATEGORY_DEFAULT, ...categories].map(
-    async (category) => {
-      const news = await getNewsByCategoryId(category.id);
-      return {
-        title: category.title,
-        id: category.id,
-        data: news.slice(0, 5),
-      };
-    }
-  );
-
-  return Promise.all(newsByCategoriesId);
-};
-
-/*
-const getTheFirstFiveNewsByCategories = async () => {
-  console.log('Entró a BUSCAR 5 NOTICIAS');
-  try {
-    const portadaData = await BuscarNoticiasPortadaData();
-
-    console.log('que trae portadaData');
-    console.log(portadaData);
-
-    return {
-      title: portadaData.title,
-      id: portadaData.id,
-      data: portadaData.slice(0, 5),
-    };
-  } catch (error) {
-    console.error('Error en getTheFirstFiveNewsByCategories:', error);
-    throw error;
-  }
-};
-*/
 
 export default function HomeScreen() {
   const [fontsLoaded] = useFonts({
@@ -95,10 +56,27 @@ export default function HomeScreen() {
   const { colorScheme } = useColorScheme();
   const [activeCategory, setActiveCategory] = useState(CATEGORY_DEFAULT);
   const [isLoading, setIsLoading] = useState(true);
-  const [discoverNewsAV, setDiscoverNewsAV] = useState([]); // Noticias Actuales
+  const [discoverNewsAV, setDiscoverNewsAV] = useState([]); // Noticias actuales
   const [isRefreshing, setIsRefreshing] = useState(false); // Indicador de "Pull to Refresh"
   const [newsPortada, setNewsPortada] = useState([]);
   const [adPublicidad, setadPublicidad] = useState([]);
+
+  const getTheFirstFiveNewsByCategories = useCallback(async () => {
+    console.log('Entró a buscar 5 noticias');
+    const categories = await getCategories();
+    const newsByCategoriesId = [CATEGORY_DEFAULT, ...categories].map(
+      async (category) => {
+        const news = await getNewsByCategoryId(category.id);
+        return {
+          title: category.title,
+          id: category.id,
+          data: news.slice(0, 5),
+        };
+      }
+    );
+
+    return Promise.all(newsByCategoriesId);
+  }, []); // Dependencias vacías porque no depende de variables externas
 
   function fetchNewsByCategory(categoryId) {
     setIsLoading(true);
@@ -109,6 +87,7 @@ export default function HomeScreen() {
         setNewsPortada(data);
       });
     }
+
     getNewsByCategoryId(categoryId)
       .then((data) => {
         setIsLoading(false);
@@ -120,7 +99,6 @@ export default function HomeScreen() {
   }
 
   const handleChangeCategory = (category) => {
-    // setDiscoverNewsAV([]);
     setActiveCategory(category);
     fetchNewsByCategory(category.id);
   };
@@ -128,7 +106,7 @@ export default function HomeScreen() {
   useEffect(() => {
     fetchNewsByCategory(CATEGORY_DEFAULT.id);
     getPublicidad().then(setadPublicidad);
-  }, []);
+  }, [getTheFirstFiveNewsByCategories]); // Agregar la función como dependencia
 
   // Función para el "Pull to Refresh"
   const handleRefresh = async () => {
@@ -142,25 +120,14 @@ export default function HomeScreen() {
   }
 
   const renderItem = ({ item }) => {
-    // -------------- item de publicidad
-
-    // console.log('item de publicidad...');
-    // console.log(item.puntoclick);
-
     return (
       <TouchableOpacity
         activeOpacity={0.6}
-        style={
-          {
-            // width: '80%',
-          }
-        }
-        onPress={item.src === 'sin-url' ? null : () => openInBrowser(item.src)} // Only set onPress if enabled
+        onPress={item.src === 'sin-url' ? null : () => openInBrowser(item.src)}
       >
         <Image
           source={{ uri: item.image }}
           style={{ aspectRatio: 4 / 3, flex: 1 }}
-          // resizeMode="repeat"
           resizeMode="contain"
         />
       </TouchableOpacity>
@@ -239,7 +206,6 @@ export default function HomeScreen() {
                 <View
                   className="mb-10"
                   style={{
-                    // backgroundColor: 'red',
                     alignItems: 'center',
                   }}
                 >
@@ -273,7 +239,6 @@ export default function HomeScreen() {
             />
           )}
           renderSectionHeader={({ section: { title, id } }) => (
-            // -------------- category tittle
             <View
               className="flex-row"
               style={{
@@ -306,15 +271,6 @@ export default function HomeScreen() {
 }
 
 const styles = StyleSheet.create({
-  //   container: {
-  //     display: 'flex',
-  //     flexDirection: 'column',
-  //     justifyContent: 'space-around',
-  //     alignItems: 'center',
-  //     height: '10%',
-  //     textAlign: 'center',
-  //     backgroundColor: 'white',
-  //   },
   slider: {
     overflow: 'hidden',
   },
