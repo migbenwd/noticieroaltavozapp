@@ -72,11 +72,11 @@ export default function HomeScreen() {
 
     const newsByCategoriesId = [CATEGORY_DEFAULT, ...categories].map(
       async (category) => {
-        const news = await getNewsByCategoryId(category.id);
+        const news = await getNewsByCategoryId(category.id, 5);
         return {
           title: category.title,
           id: category.id,
-          data: news.slice(0, 5),
+          data: news,
         };
       }
     );
@@ -113,7 +113,7 @@ export default function HomeScreen() {
       });
     }
 
-    getNewsByCategoryId(categoryId)
+    getNewsByCategoryId(categoryId, 10)
       .then((data) => {
         setIsLoading(false);
         setDiscoverNewsAV(data);
