@@ -34,10 +34,11 @@ export const getNewsByCategoryId = async (categoryId, PaginadorId) => {
 
     // Calcular tiempo transcurrido
     const elapsedTime = (endTime - startTime).toFixed(2);
-
+    /*
     console.log(
       `Consulta realizada para Category ID: ${categoryId} | Tiempo transcurrido: ${elapsedTime} ms`
     );
+    */
 
     return response.data;
   } catch (error) {

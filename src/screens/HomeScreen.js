@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, useContext } from 'react';
 import {
   View,
   Text,
@@ -31,6 +31,8 @@ import {
 
 import { openInBrowser } from '../utils/openInBrowser';
 
+import { NewsContext, NewsProvider } from './NewsContext';
+
 const { width, height } = Dimensions.get('screen');
 function wp(percentage) {
   const value = (percentage * width) / 100;
@@ -60,6 +62,8 @@ export default function HomeScreen() {
   const [isRefreshing, setIsRefreshing] = useState(false); // Indicador de "Pull to Refresh"
   const [newsPortada, setNewsPortada] = useState([]);
   const [adPublicidad, setadPublicidad] = useState([]);
+
+  const { newsData, loading } = useContext(NewsContext);
 
   const getTheFirstFiveNewsByCategories = useCallback(async () => {
     const categories = await getCategories();
@@ -104,13 +108,24 @@ export default function HomeScreen() {
 
   function fetchNewsByCategory(categoryId) {
     setIsLoading(true);
-
+    /*
     if (categoryId === CATEGORY_DEFAULT.id) {
       return getTheFirstFiveNewsByCategories().then((data) => {
-        // console.log(data);
+        console.log('----- data VIEJA');
+        console.log(data);
+        console.info('----- data Nueva');
+        console.info(newsData);
+
         setIsLoading(false);
         setNewsPortada(data);
       });
+    }
+      */
+
+    if (categoryId === CATEGORY_DEFAULT.id) {
+      // console.log(data);
+      setIsLoading(false);
+      setNewsPortada(newsData);
     }
 
     getNewsByCategoryId(categoryId, 10)
