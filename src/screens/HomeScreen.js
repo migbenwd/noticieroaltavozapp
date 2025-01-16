@@ -62,8 +62,14 @@ export default function HomeScreen() {
   const [adPublicidad, setadPublicidad] = useState([]);
 
   const getTheFirstFiveNewsByCategories = useCallback(async () => {
-    console.log('Entró a buscar 5 noticias');
     const categories = await getCategories();
+
+    // Extrae los valores de "id" de las categorías
+    const categoryIds = categories.map((category) => category.id);
+
+    // Muestra los valores de "id" en consola
+    console.log('Category IDs:', categoryIds);
+
     const newsByCategoriesId = [CATEGORY_DEFAULT, ...categories].map(
       async (category) => {
         const news = await getNewsByCategoryId(category.id);

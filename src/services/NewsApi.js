@@ -135,7 +135,7 @@ export const getNewsByCategoryId = async (categoryId) => {
     const elapsedTime = (endTime - startTime).toFixed(2);
 
     // Mostrar el ID de la categoría y tiempo transcurrido en la consola
-    // console.log(`Consulta realizada para Category ID: ${categoryId} | Tiempo transcurrido: ${elapsedTime} ms`);
+    console.log(`Consulta realizada para Category ID: ${categoryId} | Tiempo transcurrido: ${elapsedTime} ms`);
 
     return response.data;
   } catch (error) {
