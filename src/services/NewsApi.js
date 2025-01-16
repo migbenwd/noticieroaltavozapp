@@ -3,34 +3,6 @@ import { parse } from 'node-html-parser';
 import { extractImagesWithTheirSource } from '../utils';
 
 const apiBaseUrlAV = 'https://noticieroaltavoz.com/wp-json/wp/v2/posts/';
-
-/*
-export const getNewsByCategoryId = async (categoryId, PaginadorId) => {
-  const url = `${apiBaseUrlAV}?categories=${categoryId}&per_page=${PaginadorId}&_fields=id,title,link,date,yoast_head_json`;
-
-  // Capturar tiempo de inicio
-  const startTime = performance.now();
-
-  try {
-    const response = await axios.get(url);
-
-    // Capturar tiempo de finalización
-    const endTime = performance.now();
-
-    // Calcular tiempo transcurrido
-    const elapsedTime = (endTime - startTime).toFixed(2);
-
-    // Mostrar el ID de la categoría y tiempo transcurrido en la consola
-    console.log(`Consulta realizada para Category ID: ${categoryId} | Tiempo transcurrido: ${elapsedTime} ms`);
-
-    return response.data;
-  } catch (error) {
-    console.error(`Error al consultar la categoría ${categoryId}:`, error);
-    throw error;
-  }
-};
-*/
-
 // Crear instancia de Axios con configuraciones predeterminadas para mejorar el rendimiento
 const axiosInstance = axios.create({
   baseURL: apiBaseUrlAV,
