@@ -82,13 +82,32 @@ export default function HomeScreen() {
     );
 
     return Promise.all(newsByCategoriesId);
-  }, []); // Dependencias vacías porque no depende de variables externas
+  }, []);
+
+  /*
+  const getTheFirstFiveNewsByCategories = async () => {
+    const categories = await getCategories();
+
+    // Extrae los valores de "id" de las categorías
+    const categoryIds = categories.map((category) => category.id);
+
+    // const newsByCategoriesId = [CATEGORY_DEFAULT, ...categories].map(
+    // async (category) => {
+    const newsByCategoriesId = getNewsByCategoryId(categoryIds);
+    return {
+      title: 'category.title',
+      id: 77,
+      data: newsByCategoriesId.slice(0, 5),
+    };
+  };
+  */
 
   function fetchNewsByCategory(categoryId) {
     setIsLoading(true);
 
     if (categoryId === CATEGORY_DEFAULT.id) {
       return getTheFirstFiveNewsByCategories().then((data) => {
+        // console.log(data);
         setIsLoading(false);
         setNewsPortada(data);
       });
@@ -179,6 +198,8 @@ export default function HomeScreen() {
         </View>
       ) : activeCategory.id === CATEGORY_DEFAULT.id ? (
         <SectionList
+          initialNumToRender={3}
+          maxToRenderPerBatch={3}
           sections={newsPortada}
           keyExtractor={(item) => item.id}
           renderSectionFooter={({
