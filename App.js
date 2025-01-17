@@ -14,6 +14,12 @@ export default function App() {
   }, [newsByCategory]);
   */
   return (
+    // <QueryClientProvider client={queryClient}>
+    //   <NewsProvider>
+    //     <AppNavigation />
+    //   </NewsProvider>
+    // </QueryClientProvider>
+
     <QueryClientProvider client={queryClient}>
       <NewsProvider>
         <AppNavigation />
