@@ -5,6 +5,8 @@ import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
 
 import { LinearGradient } from 'expo-linear-gradient';
 
+console.log('Entró en Welcome');
+
 export default function Welcome() {
   const navigation = useNavigation();
 

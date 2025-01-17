@@ -5,6 +5,8 @@ import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { useNavigation } from '@react-navigation/native';
 
+console.log('Entró en Splash');
+
 export default function SplashScreens() {
   const navigation = useNavigation();
 
