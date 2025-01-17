@@ -88,46 +88,14 @@ export default function HomeScreen() {
     return Promise.all(newsByCategoriesId);
   }, []);
 
-  /*
-  const getTheFirstFiveNewsByCategories = async () => {
-    const categories = await getCategories();
-
-    // Extrae los valores de "id" de las categorías
-    const categoryIds = categories.map((category) => category.id);
-
-    // const newsByCategoriesId = [CATEGORY_DEFAULT, ...categories].map(
-    // async (category) => {
-    const newsByCategoriesId = getNewsByCategoryId(categoryIds);
-    return {
-      title: 'category.title',
-      id: 77,
-      data: newsByCategoriesId.slice(0, 5),
-    };
-  };
-  */
-
   function fetchNewsByCategory(categoryId) {
     setIsLoading(true);
-    /*
     if (categoryId === CATEGORY_DEFAULT.id) {
       return getTheFirstFiveNewsByCategories().then((data) => {
-        console.log('----- data VIEJA');
-        console.log(data);
-        console.info('----- data Nueva');
-        console.info(newsData);
-
         setIsLoading(false);
         setNewsPortada(data);
       });
     }
-      */
-
-    if (categoryId === CATEGORY_DEFAULT.id) {
-      // console.log(data);
-      setIsLoading(false);
-      setNewsPortada(newsData);
-    }
-
     getNewsByCategoryId(categoryId, 10)
       .then((data) => {
         setIsLoading(false);
