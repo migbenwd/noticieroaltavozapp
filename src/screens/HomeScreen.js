@@ -102,7 +102,7 @@ export default function HomeScreen() {
         setDiscoverNewsAV(data);
       })
       .catch((err) => {
-        console.log('Error fetching news by category id', err);
+        console.log('Error fetching news by category id.', err);
       });
   }
 
