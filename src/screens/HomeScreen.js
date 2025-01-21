@@ -181,8 +181,6 @@ export default function HomeScreen() {
         </View>
       ) : activeCategory.id === CATEGORY_DEFAULT.id ? (
         <SectionList
-          initialNumToRender={3}
-          maxToRenderPerBatch={3}
           sections={newsPortada}
           keyExtractor={(item) => item.id}
           renderSectionFooter={({
