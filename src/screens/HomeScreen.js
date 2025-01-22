@@ -49,8 +49,8 @@ export default function HomeScreen() {
     // const categories = await getCategories();
     const newsByCategoriesId = [CATEGORY_DEFAULT, ...categoriesData].map(
       async (category) => {
-        console.log('category.id');
-        console.log(category.id);
+        // console.log('category.id');
+        // console.log(category.id);
 
         const news = await getNewsByCategoryId(category.id, 5);
         return {
@@ -70,7 +70,7 @@ export default function HomeScreen() {
 
     if (categoryId === CATEGORY_DEFAULT.id) {
       return getTheFirstFiveNewsByCategories().then((data) => {
-        console.log(data);
+        // console.log(data);
         setIsLoading(false);
         setNewsPortada(data);
       });
@@ -88,6 +88,7 @@ export default function HomeScreen() {
   }
 
   const handleChangeCategory = (category) => {
+
     setActiveCategory(category);
     fetchNewsByCategory(category.id);
   };
@@ -149,12 +150,12 @@ export default function HomeScreen() {
           keyExtractor={(item, index) => item + index}
           renderItem={({ item }) => (
             <View>
-              <Text>{item.title.rendered}</Text>
+              <Text style={{ marginBottom: 11 }}>{item.title.rendered}</Text>
             </View>
           )}
           renderSectionHeader={({ section: { title } }) => (
             <View>
-              <Text>{title}</Text>
+              <Text style={{ backgroundColor: 'blue' }}>{title}</Text>
             </View>
           )}
         />
