@@ -9,7 +9,9 @@ import {
 } from 'react-native';
 import React, { useEffect, useState, useRef } from 'react';
 import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import { getCategories } from '../services/NewsApi';
+// import { getCategories } from '../services/NewsApi';
+
+import categoriesData from './categoria-lista.json'; // Ajusta la ruta si es necesario
 
 export default function CategoriesCard({
   activeCategory,
@@ -37,9 +39,10 @@ export default function CategoriesCard({
   };
 
   useEffect(() => {
-    getCategories().then((data) => {
-      setCategories([{ id: '77', title: 'Portada' }, ...data]);
-    });
+    // getCategories().then((data) => {
+    setCategories(categoriesData);
+    console.log(categoriesData);
+    // });
   }, []);
 
   return (

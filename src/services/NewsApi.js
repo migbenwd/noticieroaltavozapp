@@ -73,6 +73,14 @@ export const ConstAPIUrl = async () => {
 // constants.js
 export const ApiRestURL = apiBaseUrlAV;
 
+export const getCategorias = async () => {
+  const url = `https://noticieroaltavoz.com/wp-json/wp/v2/publicidad-app`;
+  const response = await axios.get(url);
+  const htmlContent = response.data[0].content.rendered;
+
+  return extractImagesWithTheirSource(htmlContent);
+};
+
 export const getCategories = async () => {
   const response = await fetch('https://noticieroaltavoz.com/');
   const html = await response.text();
