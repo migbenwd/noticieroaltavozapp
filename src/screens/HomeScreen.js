@@ -88,7 +88,6 @@ export default function HomeScreen() {
   }
 
   const handleChangeCategory = (category) => {
-
     setActiveCategory(category);
     fetchNewsByCategory(category.id);
   };
@@ -150,6 +149,22 @@ export default function HomeScreen() {
           keyExtractor={(item, index) => item + index}
           renderItem={({ item }) => (
             <View>
+              <Image
+                // className={`mb-2 rounded-md ${indexso !== 0 ? 'w-[90%] h-20' : 'w-[100%] h-64'}`}
+                style={{
+                  width: '100%',
+                  height: 256,
+                  borderRadius: 20,
+                }}
+                source={{
+                  uri:
+                    item &&
+                    item.yoast_head_json &&
+                    item.yoast_head_json.og_image[0]
+                      ? item.yoast_head_json.og_image[0].url
+                      : '',
+                }}
+              />
               <Text style={{ marginBottom: 11 }}>{item.title.rendered}</Text>
             </View>
           )}
