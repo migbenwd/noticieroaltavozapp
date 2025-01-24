@@ -18,6 +18,7 @@ import {
   Poppins_400Regular,
   Poppins_700Bold,
 } from '@expo-google-fonts/poppins';
+import Carousel from 'react-native-snap-carousel';
 import CategoriesCard from '../components/CategoriesCard';
 import { getPublicidad, getNewsByCategoryId } from '../services/NewsApi';
 import NewsSection, {
@@ -26,7 +27,36 @@ import NewsSection, {
 import { openInBrowser } from '../utils/openInBrowser';
 import categoriesData from '../components/categoria-lista.json'; // Ajusta la ruta si es necesario
 
+const { width, height } = Dimensions.get('screen');
+function wp(percentage) {
+  const value = (percentage * width) / 100;
+  return Math.round(value);
+}
+function hp(percentage) {
+  const value = (percentage * height) / 100;
+  return Math.round(value);
+}
+
+const slideWidth = wp(75);
+const itemHorizontalMargin = wp(2);
+const itemWidth = slideWidth + itemHorizontalMargin * 2;
+
 const CATEGORY_DEFAULT = { id: '77', title: 'Portada' };
+
+const renderItemPublicidad = ({ item }) => {
+  return (
+    <TouchableOpacity
+      activeOpacity={0.6}
+      onPress={item.src === 'sin-url' ? null : () => openInBrowser(item.src)}
+    >
+      <Image
+        source={{ uri: item.image }}
+        style={{ aspectRatio: 4 / 3, flex: 1 }}
+        resizeMode="contain"
+      />
+    </TouchableOpacity>
+  );
+};
 
 export default function HomeScreen() {
   const [fontsLoaded] = useFonts({
@@ -147,7 +177,7 @@ export default function HomeScreen() {
         <SectionList
           sections={newsPortada}
           keyExtractor={(item, index) => item + index}
-          renderItem={({ item }) => (
+          renderItem={({ item, index }) => (
             <View>
               <Image
                 // className={`mb-2 rounded-md ${indexso !== 0 ? 'w-[90%] h-20' : 'w-[100%] h-64'}`}
@@ -166,11 +196,25 @@ export default function HomeScreen() {
                 }}
               />
               <Text style={{ marginBottom: 11 }}>{item.title.rendered}</Text>
+              <Text style={{ marginBottom: 11 }}>{index}</Text>
             </View>
           )}
           renderSectionHeader={({ section: { title } }) => (
             <View>
               <Text style={{ backgroundColor: 'blue' }}>{title}</Text>
+              {/* <Carousel
+                data={adPublicidad}
+                renderItem={renderItemPublicidad}
+                sliderWidth={slideWidth}
+                itemWidth={itemWidth}
+                hasParallaxImages
+                containerCustomStyle={styles.slider}
+                loop
+                loopClonesPerSide={2}
+                autoplay
+                autoplayDelay={500}
+                autoplayInterval={3000}
+              /> */}
             </View>
           )}
         />
@@ -186,3 +230,9 @@ export default function HomeScreen() {
     </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  slider: {
+    overflow: 'hidden',
+  },
+});
