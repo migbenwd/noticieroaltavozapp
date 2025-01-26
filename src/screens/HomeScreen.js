@@ -8,7 +8,6 @@ import {
   SectionList,
   TouchableOpacity,
   Dimensions,
-  FlatList,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useColorScheme } from 'nativewind';
@@ -24,9 +23,7 @@ import Carousel from 'react-native-snap-carousel';
 import { useNavigation } from '@react-navigation/native';
 import CategoriesCard from '../components/CategoriesCard';
 import { getPublicidad, getNewsByCategoryId } from '../services/NewsApi';
-import NewsSection, {
-  RenderNewsItem,
-} from '../components/NewsSection/NewsSection';
+import NewsSection from '../components/NewsSection/NewsSection';
 import { openInBrowser } from '../utils/openInBrowser';
 import categoriesData from '../components/categoria-lista.json'; // Ajusta la ruta si es necesario
 
@@ -93,13 +90,8 @@ export default function HomeScreen() {
   }
 
   const getTheFirstFiveNewsByCategories = async () => {
-    console.log('entró a BUSCAR 5 NOTICIAS');
-    // const categories = await getCategories();
     const newsByCategoriesId = [CATEGORY_DEFAULT, ...categoriesData].map(
       async (category) => {
-        // console.log('category.id');
-        // console.log(category.id);
-
         const news = await getNewsByCategoryId(category.id, 5);
         return {
           title: category.title,
@@ -118,7 +110,6 @@ export default function HomeScreen() {
 
     if (categoryId === CATEGORY_DEFAULT.id) {
       return getTheFirstFiveNewsByCategories().then((data) => {
-        // console.log(data);
         setIsLoading(false);
         setNewsPortada(data);
       });
@@ -141,14 +132,6 @@ export default function HomeScreen() {
   };
 
   const handleClick = (data, sectionTitle) => {
-    /*
-    console.log('data News Section');
-    console.log('');
-    console.log(data);
-    console.log('sectionTitle............');
-    console.log(sectionTitle);
-    */
-
     const tituloCategoria = sectionTitle;
 
     navigation.navigate('NewsDetails', {
@@ -193,6 +176,7 @@ export default function HomeScreen() {
           activeCategory={activeCategory.id}
           handleChangeCategory={handleChangeCategory}
         />
+
         <Text
           className="dark:text-black ml-2 mb-2 mt-4"
           style={{
@@ -276,8 +260,6 @@ export default function HomeScreen() {
                           : '99%',
                     }}
                   >
-                    {/* {console.log('NewsSection')} */}
-                    {/* {item.id} ... */}
                     {item.title.rendered}
                   </Text>
 
