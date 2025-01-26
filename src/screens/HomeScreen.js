@@ -16,6 +16,8 @@ import { StatusBar } from 'expo-status-bar';
 import {
   useFonts,
   Poppins_400Regular,
+  Poppins_500Medium,
+  Poppins_600SemiBold,
   Poppins_700Bold,
 } from '@expo-google-fonts/poppins';
 import Carousel from 'react-native-snap-carousel';
@@ -64,6 +66,8 @@ export default function HomeScreen() {
 
   const [fontsLoaded] = useFonts({
     Poppins_400Regular,
+    Poppins_600SemiBold,
+    Poppins_500Medium,
     Poppins_700Bold,
   });
 
