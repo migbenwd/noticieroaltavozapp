@@ -280,6 +280,30 @@ export default function HomeScreen() {
                     {/* {item.id} ... */}
                     {item.title.rendered}
                   </Text>
+
+                  <Text
+                    className="font-bold text-gray-900 dark:text-black"
+                    style={{
+                      fontFamily: 'Poppins_500Medium',
+                      fontSize: hp(1.7),
+                      // backgroundColor: 'red',
+                      marginTop: 10,
+                    }}
+                  >
+                    <Text className="text-gray-500">Por</Text>
+                    <Text> </Text>
+                    {item.yoast_head_json.author}
+                    <Text
+                      className="text-gray-500"
+                      style={{
+                        fontFamily: 'Poppins_400Regular',
+                        fontSize: hp(1.6),
+                      }}
+                    >
+                      <Text>{' • '}</Text>
+                      {formatDate(item.date)}
+                    </Text>
+                  </Text>
                 </View>
               </View>
             </TouchableOpacity>
