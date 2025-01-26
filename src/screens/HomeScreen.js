@@ -77,6 +77,17 @@ export default function HomeScreen() {
 
   // Funciones ---------------------------------
 
+  function formatDate(isoDate) {
+    const options = {
+      // weekday: "short",
+      day: '2-digit',
+      month: 'long',
+      year: 'numeric',
+    };
+    const date = new Date(isoDate);
+    return date.toLocaleDateString(undefined, options);
+  }
+
   const getTheFirstFiveNewsByCategories = async () => {
     console.log('entró a BUSCAR 5 NOTICIAS');
     // const categories = await getCategories();
@@ -207,7 +218,18 @@ export default function HomeScreen() {
                 padding: 10,
               }}
             >
-              <View>
+              <View
+                // className={`ml-4 mr-4 ${activeCategoryId === 77 && indexso !== 0 ? 'flex-row' : null}`}
+                style={{
+                  // backgroundColor: activeCategoryId === "77" ? 'red' : 'cyan',
+                  flexDirection:
+                    index !== 0 && activeCategory.id === '77'
+                      ? 'row'
+                      : 'column',
+                  width:
+                    index !== 0 && activeCategory.id === '77' ? '45%' : '100%',
+                }}
+              >
                 <Image
                   // className={`mb-2 rounded-md ${indexso !== 0 ? 'w-[90%] h-20' : 'w-[100%] h-64'}`}
                   style={{
@@ -226,31 +248,72 @@ export default function HomeScreen() {
                         : '',
                   }}
                 />
-                <Text style={{ marginBottom: 11 }}>{item.title.rendered}</Text>
-                <Text style={{ marginBottom: 11 }}>{index}</Text>
+
+                <View
+                  style={{
+                    marginLeft: 10,
+                    width: '99%',
+                  }}
+                >
+                  <Text
+                    // className="leading-[2rem]"
+                    style={{
+                      fontSize:
+                        index !== 0 && activeCategory.id === '77' ? 14 : 24,
+                      fontFamily: 'Poppins_600SemiBold',
+                      textAlign: 'left',
+                      lineHeight:
+                        index !== 0 && activeCategory.id === '77' ? 16 : 26,
+                      paddingTop:
+                        index !== 0 && activeCategory.id === '77' ? 0 : 22,
+                      width:
+                        index !== 0 && activeCategory.id === '77'
+                          ? '120%'
+                          : '99%',
+                    }}
+                  >
+                    {/* {console.log('NewsSection')} */}
+                    {/* {item.id} ... */}
+                    {item.title.rendered}
+                  </Text>
+                </View>
               </View>
             </TouchableOpacity>
 
             // --------------- Fin de Render
           )}
-          renderSectionHeader={({ section: { title } }) => (
-            <View>
-              <Text style={{ backgroundColor: 'blue' }}>{title}</Text>
-              {/* <Carousel
-                data={adPublicidad}
-                renderItem={renderItemPublicidad}
-                sliderWidth={slideWidth}
-                itemWidth={itemWidth}
-                hasParallaxImages
-                containerCustomStyle={styles.slider}
-                loop
-                loopClonesPerSide={2}
-                autoplay
-                autoplayDelay={500}
-                autoplayInterval={3000}
-              /> */}
-            </View>
-          )}
+          renderSectionHeader={({ section }) => {
+            // Encontrar el índice de la sección
+            const sectionIndex = newsPortada.findIndex(
+              (s) => s.title === section.title
+            );
+
+            return (
+              <View
+                style={{
+                  // backgroundColor: 'yellow',
+                  marginLeft: 10,
+                  width: '99%',
+                }}
+              >
+                <Text
+                  className="py-0 px-2"
+                  style={{
+                    display: sectionIndex === 0 ? 'none' : 'flex',
+                    fontSize: 14,
+                    fontFamily: 'Poppins_500Medium',
+                    backgroundColor: '#0303B2',
+                    color: 'white',
+                    marginTop: 15,
+                    borderRadius: 2,
+                    alignSelf: 'flex-start',
+                  }}
+                >
+                  {section.title}
+                </Text>
+              </View>
+            );
+          }}
         />
       ) : (
         <NewsSection
