@@ -19,6 +19,7 @@ import {
   Poppins_700Bold,
 } from '@expo-google-fonts/poppins';
 import Carousel from 'react-native-snap-carousel';
+import { useNavigation } from '@react-navigation/native';
 import CategoriesCard from '../components/CategoriesCard';
 import { getPublicidad, getNewsByCategoryId } from '../services/NewsApi';
 import NewsSection, {
@@ -59,6 +60,8 @@ const renderItemPublicidad = ({ item }) => {
 };
 
 export default function HomeScreen() {
+  const navigation = useNavigation();
+
   const [fontsLoaded] = useFonts({
     Poppins_400Regular,
     Poppins_700Bold,
@@ -122,6 +125,23 @@ export default function HomeScreen() {
     fetchNewsByCategory(category.id);
   };
 
+  const handleClick = (data, sectionTitle) => {
+    /*
+    console.log('data News Section');
+    console.log('');
+    console.log(data);
+    console.log('sectionTitle............');
+    console.log(sectionTitle);
+    */
+
+    const tituloCategoria = sectionTitle;
+
+    navigation.navigate('NewsDetails', {
+      item: data,
+      tituloCategoria,
+    });
+  };
+
   useEffect(() => {
     fetchNewsByCategory(CATEGORY_DEFAULT.id);
     getPublicidad().then(setadPublicidad);
@@ -177,27 +197,41 @@ export default function HomeScreen() {
         <SectionList
           sections={newsPortada}
           keyExtractor={(item, index) => item + index}
-          renderItem={({ item, index }) => (
-            <View>
-              <Image
-                // className={`mb-2 rounded-md ${indexso !== 0 ? 'w-[90%] h-20' : 'w-[100%] h-64'}`}
-                style={{
-                  width: '100%',
-                  height: 256,
-                  borderRadius: 20,
-                }}
-                source={{
-                  uri:
-                    item &&
-                    item.yoast_head_json &&
-                    item.yoast_head_json.og_image[0]
-                      ? item.yoast_head_json.og_image[0].url
-                      : '',
-                }}
-              />
-              <Text style={{ marginBottom: 11 }}>{item.title.rendered}</Text>
-              <Text style={{ marginBottom: 11 }}>{index}</Text>
-            </View>
+          renderItem={({ item, index, section }) => (
+            // --------------- Inicio de Render
+
+            <TouchableOpacity
+              key={item.id}
+              onPress={() => handleClick(item, section.title)}
+              style={{
+                padding: 10,
+              }}
+            >
+              <View>
+                <Image
+                  // className={`mb-2 rounded-md ${indexso !== 0 ? 'w-[90%] h-20' : 'w-[100%] h-64'}`}
+                  style={{
+                    width: '100%',
+                    height:
+                      index !== 0 && activeCategory.id === '77' ? 115 : 256,
+                    borderRadius:
+                      index !== 0 && activeCategory.id === '77' ? 12 : 20,
+                  }}
+                  source={{
+                    uri:
+                      item &&
+                      item.yoast_head_json &&
+                      item.yoast_head_json.og_image[0]
+                        ? item.yoast_head_json.og_image[0].url
+                        : '',
+                  }}
+                />
+                <Text style={{ marginBottom: 11 }}>{item.title.rendered}</Text>
+                <Text style={{ marginBottom: 11 }}>{index}</Text>
+              </View>
+            </TouchableOpacity>
+
+            // --------------- Fin de Render
           )}
           renderSectionHeader={({ section: { title } }) => (
             <View>

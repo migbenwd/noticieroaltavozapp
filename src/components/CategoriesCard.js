@@ -40,7 +40,7 @@ export default function CategoriesCard({
 
   useEffect(() => {
     // getCategories().then((data) => {
-    setCategories(categoriesData);
+    setCategories([{ id: '77', title: 'Portada' }, ...categoriesData]);
     console.log(categoriesData);
     // });
   }, []);
