@@ -22,23 +22,9 @@ export const getNewsByCategoryId = async (categoryId, PaginadorId) => {
 
   const url = `?${urlParams}`;
 
-  // Capturar tiempo de inicio
-  const startTime = performance.now();
-
   try {
     // Utilizar instancia de Axios optimizada
     const response = await axiosInstance.get(url);
-
-    // Capturar tiempo de finalización
-    const endTime = performance.now();
-
-    // Calcular tiempo transcurrido
-    const elapsedTime = (endTime - startTime).toFixed(2);
-
-    console.log(
-      `Consulta realizada para Category ID: ${categoryId} | Tiempo transcurrido: ${elapsedTime} ms`
-    );
-
     return response.data;
   } catch (error) {
     console.error(
