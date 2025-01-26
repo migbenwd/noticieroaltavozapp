@@ -342,6 +342,57 @@ export default function HomeScreen() {
               </View>
             );
           }}
+          renderSectionFooter={({
+            section: { id: categoryId, title: categoryTitle },
+          }) => {
+            return (
+              <>
+                <TouchableOpacity
+                  onPress={() =>
+                    handleChangeCategory({
+                      id: categoryId,
+                      title: categoryTitle,
+                    })
+                  }
+                  className="flex items-center space-y-1"
+                >
+                  <View
+                    className="mb-6 py-2 px-4 border-2 bg-slate-50  w-50"
+                    style={{ borderRadius: 50 }}
+                  >
+                    <Text
+                      style={{
+                        fontSize: hp(2),
+                        fontFamily: 'Poppins_400Regular',
+                      }}
+                    >
+                      Ver Más
+                    </Text>
+                  </View>
+                </TouchableOpacity>
+                <View
+                  className="mb-10"
+                  style={{
+                    alignItems: 'center',
+                  }}
+                >
+                  <Carousel
+                    data={adPublicidad}
+                    renderItem={renderItemPublicidad}
+                    sliderWidth={slideWidth}
+                    itemWidth={itemWidth}
+                    hasParallaxImages
+                    containerCustomStyle={styles.slider}
+                    loop
+                    loopClonesPerSide={2}
+                    autoplay
+                    autoplayDelay={500}
+                    autoplayInterval={3000}
+                  />
+                </View>
+              </>
+            );
+          }}
         />
       ) : (
         <NewsSection
