@@ -200,69 +200,61 @@ export default function HomeScreen() {
         <SectionList
           sections={newsPortada}
           keyExtractor={(item, index) => item + index}
-          renderItem={({ item, index, section }) => (
-            // --------------- Inicio de Render
+          renderItem={({ item, index, section }) => {
+            // Encontrar el índice de la sección
+            const sectionIndexRen = newsPortada.findIndex(
+              (s) => s.title === section.title
+            );
 
-            <TouchableOpacity
-              key={item.id}
-              onPress={() => handleClick(item, section.title)}
-              style={{
-                padding: 10,
-              }}
-            >
-              <View
+            // Mostrar el índice en la consola
+            // console.log('Índice de la sección:', sectionIndex);
+
+            return (
+              <TouchableOpacity
+                key={item.id}
+                onPress={() => handleClick(item, section.title)}
                 style={{
-                  flexDirection:
-                    index !== 0 && activeCategory.id === '77'
-                      ? 'row'
-                      : 'column',
-                  width:
-                    index !== 0 && activeCategory.id === '77' ? '45%' : '100%',
+                  padding: 10,
                 }}
               >
-                <Image
+                <View
                   style={{
-                    width: '100%',
-                    height:
-                      index !== 0 && activeCategory.id === '77' ? 115 : 256,
-                    borderRadius:
-                      index !== 0 && activeCategory.id === '77' ? 12 : 20,
-                  }}
-                  source={{
-                    uri:
-                      item &&
-                      item.yoast_head_json &&
-                      item.yoast_head_json.og_image[0]
-                        ? item.yoast_head_json.og_image[0].url
-                        : '',
-                  }}
-                />
-
-                {/* <Text
-                  className="py-0 px-2"
-                  style={{
-                    display:
-                      activeCategory.id === '77' && index === 0
-                        ? 'flex'
-                        : 'none',
-                    fontSize: 14,
-                    fontFamily: 'Poppins_500Medium',
-                    backgroundColor: '#0303B2',
-                    color: 'white',
-                    marginTop: 15,
-                    borderRadius: 2,
-                    alignSelf: 'flex-start',
+                    flexDirection:
+                      index !== 0 && activeCategory.id === '77'
+                        ? 'row'
+                        : 'column',
+                    width:
+                      index !== 0 && activeCategory.id === '77'
+                        ? '45%'
+                        : '100%',
                   }}
                 >
-                  AQUI VA DEBAJO DE LA FOTO SOLO EN PORTADA
-                </Text> */}
-
-                {/* {index !== 0 &&
-                activeCategory.id === '77' &&
-                section === newsPortada[0] ? null : (
-                  <Text
-                    className="py-0 px-2"
+                  <Image
                     style={{
+                      width: '100%',
+                      height:
+                        index !== 0 && activeCategory.id === '77' ? 115 : 256,
+                      borderRadius:
+                        index !== 0 && activeCategory.id === '77' ? 12 : 20,
+                    }}
+                    source={{
+                      uri:
+                        item &&
+                        item.yoast_head_json &&
+                        item.yoast_head_json.og_image[0]
+                          ? item.yoast_head_json.og_image[0].url
+                          : '',
+                    }}
+                  />
+
+                  <Text
+                    style={{
+                      display:
+                        sectionIndexRen === 0 &&
+                        index === 0 &&
+                        section.key === newsPortada[0].key
+                          ? 'flex'
+                          : 'none',
                       fontSize: 14,
                       fontFamily: 'Poppins_500Medium',
                       backgroundColor: '#0303B2',
@@ -272,64 +264,60 @@ export default function HomeScreen() {
                       alignSelf: 'flex-start',
                     }}
                   >
-                    AQUI VA DEBAJO DE LA FOTO SOLO EN PORTADA
-                  </Text>
-                )}
-                 */}
-
-                <View
-                  style={{
-                    marginLeft: 10,
-                    width: '99%',
-                  }}
-                >
-                  <Text
-                    style={{
-                      fontSize:
-                        index !== 0 && activeCategory.id === '77' ? 14 : 24,
-                      fontFamily: 'Poppins_600SemiBold',
-                      textAlign: 'left',
-                      lineHeight:
-                        index !== 0 && activeCategory.id === '77' ? 16 : 26,
-                      paddingTop:
-                        index !== 0 && activeCategory.id === '77' ? 0 : 22,
-                      width:
-                        index !== 0 && activeCategory.id === '77'
-                          ? '120%'
-                          : '99%',
-                    }}
-                  >
-                    {item.title.rendered}
+                    POR AQUI
                   </Text>
 
-                  <Text
-                    className="font-bold text-gray-900 dark:text-black"
+                  <View
                     style={{
-                      fontFamily: 'Poppins_500Medium',
-                      fontSize: hp(1.7),
-                      marginTop: 10,
+                      marginLeft: 10,
+                      width: '99%',
                     }}
                   >
-                    <Text className="text-gray-500">Por</Text>
-                    <Text> </Text>
-                    {item.yoast_head_json.author}
                     <Text
-                      className="text-gray-500"
                       style={{
-                        fontFamily: 'Poppins_400Regular',
-                        fontSize: hp(1.6),
+                        fontSize:
+                          index !== 0 && activeCategory.id === '77' ? 14 : 24,
+                        fontFamily: 'Poppins_600SemiBold',
+                        textAlign: 'left',
+                        lineHeight:
+                          index !== 0 && activeCategory.id === '77' ? 16 : 26,
+                        paddingTop:
+                          index !== 0 && activeCategory.id === '77' ? 0 : 22,
+                        width:
+                          index !== 0 && activeCategory.id === '77'
+                            ? '120%'
+                            : '99%',
                       }}
                     >
-                      <Text>{' • '}</Text>
-                      {formatDate(item.date)}
+                      {item.title.rendered}
                     </Text>
-                  </Text>
+                    <Text
+                      className="font-bold text-gray-900 dark:text-black"
+                      style={{
+                        fontFamily: 'Poppins_500Medium',
+                        fontSize: hp(1.7),
+                        marginTop: 10,
+                      }}
+                    >
+                      <Text className="text-gray-500">Por</Text>
+                      <Text> </Text>
+                      {item.yoast_head_json.author}
+                      <Text
+                        className="text-gray-500"
+                        style={{
+                          fontFamily: 'Poppins_400Regular',
+                          fontSize: hp(1.6),
+                        }}
+                      >
+                        <Text>{' • '}</Text>
+                        {formatDate(item.date)}
+                      </Text>
+                    </Text>
+                  </View>
                 </View>
-              </View>
-            </TouchableOpacity>
-
-            // --------------- Fin de Render
-          )}
+              </TouchableOpacity>
+            );
+          }}
           renderSectionHeader={({ section }) => {
             // Encontrar el índice de la sección
             const sectionIndex = newsPortada.findIndex(
