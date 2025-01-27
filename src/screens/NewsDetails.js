@@ -159,8 +159,8 @@ export default function NewsDetails() {
           color="blue"
           style={{
             position: 'absolute',
-            top: height / 2,
-            left: width / 2,
+            top: height / 1.65,
+            left: width / 2.21,
           }}
         />
       ) : null}
