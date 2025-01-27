@@ -76,6 +76,8 @@ export default function HomeScreen() {
   const [adPublicidad, setadPublicidad] = useState([]);
   const [isRefreshing, setIsRefreshing] = useState(false); // Indicador de "Pull to Refresh"
 
+  const [textShown, setTextShown] = useState(false);
+
   // Funciones ---------------------------------
 
   function formatDate(isoDate) {
@@ -209,9 +211,7 @@ export default function HomeScreen() {
               }}
             >
               <View
-                // className={`ml-4 mr-4 ${activeCategoryId === 77 && indexso !== 0 ? 'flex-row' : null}`}
                 style={{
-                  // backgroundColor: activeCategoryId === "77" ? 'red' : 'cyan',
                   flexDirection:
                     index !== 0 && activeCategory.id === '77'
                       ? 'row'
@@ -221,7 +221,6 @@ export default function HomeScreen() {
                 }}
               >
                 <Image
-                  // className={`mb-2 rounded-md ${indexso !== 0 ? 'w-[90%] h-20' : 'w-[100%] h-64'}`}
                   style={{
                     width: '100%',
                     height:
@@ -239,6 +238,45 @@ export default function HomeScreen() {
                   }}
                 />
 
+                {/* <Text
+                  className="py-0 px-2"
+                  style={{
+                    display:
+                      activeCategory.id === '77' && index === 0
+                        ? 'flex'
+                        : 'none',
+                    fontSize: 14,
+                    fontFamily: 'Poppins_500Medium',
+                    backgroundColor: '#0303B2',
+                    color: 'white',
+                    marginTop: 15,
+                    borderRadius: 2,
+                    alignSelf: 'flex-start',
+                  }}
+                >
+                  AQUI VA DEBAJO DE LA FOTO SOLO EN PORTADA
+                </Text> */}
+
+                {/* {index !== 0 &&
+                activeCategory.id === '77' &&
+                section === newsPortada[0] ? null : (
+                  <Text
+                    className="py-0 px-2"
+                    style={{
+                      fontSize: 14,
+                      fontFamily: 'Poppins_500Medium',
+                      backgroundColor: '#0303B2',
+                      color: 'white',
+                      marginTop: 15,
+                      borderRadius: 2,
+                      alignSelf: 'flex-start',
+                    }}
+                  >
+                    AQUI VA DEBAJO DE LA FOTO SOLO EN PORTADA
+                  </Text>
+                )}
+                 */}
+
                 <View
                   style={{
                     marginLeft: 10,
@@ -246,7 +284,6 @@ export default function HomeScreen() {
                   }}
                 >
                   <Text
-                    // className="leading-[2rem]"
                     style={{
                       fontSize:
                         index !== 0 && activeCategory.id === '77' ? 14 : 24,
@@ -270,7 +307,6 @@ export default function HomeScreen() {
                     style={{
                       fontFamily: 'Poppins_500Medium',
                       fontSize: hp(1.7),
-                      // backgroundColor: 'red',
                       marginTop: 10,
                     }}
                   >
