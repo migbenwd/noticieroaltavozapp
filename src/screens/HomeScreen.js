@@ -177,16 +177,6 @@ export default function HomeScreen() {
           handleChangeCategory={handleChangeCategory}
         />
 
-        <Text
-          className="dark:text-black ml-2 mb-2 mt-4"
-          style={{
-            fontSize: 19,
-            fontFamily: 'Poppins_700Bold',
-          }}
-        >
-          {activeCategory.title}
-        </Text>
-
         {activeCategory.id === CATEGORY_DEFAULT.id ? null : (
           <Text
             className="dark:text-black ml-2 mb-2 mt-4"
