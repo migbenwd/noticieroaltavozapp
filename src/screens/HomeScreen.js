@@ -186,6 +186,18 @@ export default function HomeScreen() {
         >
           {activeCategory.title}
         </Text>
+
+        {activeCategory.id === CATEGORY_DEFAULT.id ? null : (
+          <Text
+            className="dark:text-black ml-2 mb-2 mt-4"
+            style={{
+              fontSize: 25,
+              fontFamily: 'Poppins_700Bold',
+            }}
+          >
+            {activeCategory.title}
+          </Text>
+        )}
       </View>
 
       {isLoading ? (
@@ -300,23 +312,17 @@ export default function HomeScreen() {
 
             return (
               <View
-                style={{
-                  // backgroundColor: 'yellow',
-                  marginLeft: 10,
-                  width: '99%',
+                className="flex-row"
+                styles={{
+                  display: activeCategory.id === '77' ? 'none' : 'flex',
                 }}
               >
                 <Text
-                  className="py-0 px-2"
+                  className="bg-[#FFCC29] uppercase rounded ml-2 py-0 px-7 mt-0 mb-4"
                   style={{
                     display: sectionIndex === 0 ? 'none' : 'flex',
-                    fontSize: 14,
-                    fontFamily: 'Poppins_500Medium',
-                    backgroundColor: '#0303B2',
-                    color: 'white',
-                    marginTop: 15,
-                    borderRadius: 2,
-                    alignSelf: 'flex-start',
+                    fontSize: hp(2),
+                    fontFamily: 'Poppins_700Bold',
                   }}
                 >
                   {section.title}
