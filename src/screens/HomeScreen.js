@@ -206,6 +206,16 @@ export default function HomeScreen() {
               (s) => s.title === section.title
             );
 
+            const tagArrayCategoria =
+              item.yoast_head_json.schema['@graph'][0].articleSection;
+
+            const tagArray2Categoria = tagArrayCategoria;
+            const tagArray3Categoria = tagArray2Categoria.filter(
+              (elemento) => elemento !== 'Portada'
+            );
+            // Unir las palabras con espacios
+            const tagCategoria = tagArray3Categoria.join(', ');
+
             // Mostrar el índice en la consola
             // console.log('Índice de la sección:', sectionIndex);
 
@@ -262,9 +272,10 @@ export default function HomeScreen() {
                       marginTop: 15,
                       borderRadius: 2,
                       alignSelf: 'flex-start',
+                      padding: 7,
                     }}
                   >
-                    POR AQUI
+                    {tagCategoria}
                   </Text>
 
                   <View
