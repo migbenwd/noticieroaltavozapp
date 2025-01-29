@@ -151,23 +151,22 @@ export default function RadioScreen() {
             {/* <Text style={styles.stationTitle}>{station.title}</Text> */}
           </TouchableOpacity>
         ))}
-
-        <View style={styles.controls}>
-          <TouchableOpacity onPress={prevStation} style={styles.button}>
-            <Text style={styles.buttonText}>⏮️ Prev</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={togglePlayPause}>
-            <Text style={styles.buttonText}>
-              {/* {playbackState === State.Playing ? 'Pause' : 'Play'} */}
-              {playStatus}
-            </Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity onPress={nextStation} style={styles.button}>
-            <Text style={styles.buttonText}>Next ⏭️</Text>
-          </TouchableOpacity>
-        </View>
       </ScrollView>
+      <View style={styles.controls}>
+        <TouchableOpacity onPress={prevStation} style={styles.button}>
+          <Text style={styles.buttonText}>⏮️</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={togglePlayPause}>
+          <Text style={styles.buttonText}>
+            {/* {playbackState === State.Playing ? 'Pause' : 'Play'} */}
+            {playStatus}
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={nextStation} style={styles.button}>
+          <Text style={styles.buttonText}>⏭️</Text>
+        </TouchableOpacity>
+      </View>
     </SafeAreaView>
   );
 }
@@ -182,7 +181,10 @@ const styles = StyleSheet.create({
   },
   controls: {
     flexDirection: 'row',
-    marginTop: 10,
+    marginTop: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 20,
   },
   title: {
     fontSize: 24,
@@ -199,10 +201,11 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderColor: 'red',
     padding: 10,
-    margin: 2,
+    margin: 5,
     alignItems: 'center',
-    width: 150,
-    backgroundColor: 'red',
+    width: 140,
+    height: 130,
+    backgroundColor: 'blue',
   },
   stationImage: {
     width: 100,
@@ -225,8 +228,8 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: '#1DB954',
     padding: 15,
-    borderRadius: 10,
-    marginTop: 10,
+    borderRadius: 60,
+    marginTop: 1,
   },
 });
 
