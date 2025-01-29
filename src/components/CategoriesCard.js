@@ -41,7 +41,6 @@ export default function CategoriesCard({
   useEffect(() => {
     // getCategories().then((data) => {
     setCategories([{ id: '77', title: 'Portada' }, ...categoriesData]);
-    console.log(categoriesData);
     // });
   }, []);
 
@@ -55,11 +54,6 @@ export default function CategoriesCard({
         contentContainerStyle={styles.scrollViewContent}
       >
         {categories.map((category, index) => {
-          // console.log('index en CardCat');
-          // console.log(category.title);
-          // console.log(category.id);
-          // console.log(index);
-
           const isActive = category.id === activeCategory;
           const isLaTorreta = 331;
 
