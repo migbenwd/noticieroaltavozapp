@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Image,
+  ScrollView,
+} from 'react-native';
 import TrackPlayer, {
   Capability,
   State,
@@ -11,7 +18,6 @@ const radioStations = [
     id: '1',
     url: 'https://streaming.shoutcast.com/radio-65',
     title: 'RADIO 65',
-    duration: 66,
     artwork:
       'https://noticieroaltavoz.com/wp-content/uploads/2024/01/RADIO-65-BLANCO.png',
   },
@@ -19,7 +25,6 @@ const radioStations = [
     id: '2',
     url: 'https://streaming.shoutcast.com/gs-la-super-estacion',
     title: 'LA GS SUPER ESTACIÓN',
-    duration: 66,
     artwork:
       'https://noticieroaltavoz.com/wp-content/uploads/2024/01/LA-GS-BLANCO.png',
   },
@@ -27,7 +32,6 @@ const radioStations = [
     id: '3',
     url: 'https://streaming.shoutcast.com/la-jl',
     title: 'LA JL',
-    duration: 66,
     artwork:
       'https://noticieroaltavoz.com/wp-content/uploads/2024/01/LA-JL-BLANCO.png',
   },
@@ -35,7 +39,6 @@ const radioStations = [
     id: '4',
     url: 'https://streaming.shoutcast.com/la-maxi-gml',
     title: 'LA MAXI GML',
-    duration: 73,
     artwork:
       'https://noticieroaltavoz.com/wp-content/uploads/2024/01/A-MAXI-GML-1.png',
   },
@@ -43,7 +46,6 @@ const radioStations = [
     id: '5',
     url: 'https://streaming.shoutcast.com/la-maxi',
     title: 'LA MAXI',
-    duration: 73,
     artwork:
       'https://noticieroaltavoz.com/wp-content/uploads/2024/01/A-MAXI-LOGO-CONTORNO-BCO-1.png',
   },
@@ -59,8 +61,8 @@ const setupPlayer = async () => {
 
 function RadioApp() {
   const playbackState = usePlaybackState();
-  const [currentStationIndex, setCurrentStationIndex] = useState(0);
-  const [playStatus, setPlayStatus] = useState('DETENIDO'); // Cambia el estado inicial a 'DETENIDO'
+  const [currentStationIndex, setCurrentStationIndex] = useState(null);
+  const [playStatus, setPlayStatus] = useState('DETENIDO');
 
   useEffect(() => {
     setupPlayer();
@@ -76,17 +78,17 @@ function RadioApp() {
     });
     await TrackPlayer.play();
     setCurrentStationIndex(index);
-    setPlayStatus('SONANDO'); // Actualiza el estado a 'SONANDO' cuando se inicia la reproducción
+    setPlayStatus('SONANDO');
   };
 
   const togglePlayPause = async () => {
     const state = await TrackPlayer.getState();
     if (state === State.Playing) {
       await TrackPlayer.pause();
-      setPlayStatus('DETENIDO'); // Actualiza el estado a 'DETENIDO' cuando se pausa
+      setPlayStatus('DETENIDO');
     } else {
       await TrackPlayer.play();
-      setPlayStatus('SONANDO'); // Actualiza el estado a 'SONANDO' cuando se reanuda
+      setPlayStatus('SONANDO');
     }
   };
 
@@ -104,19 +106,35 @@ function RadioApp() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Radio App</Text>
+      <ScrollView contentContainerStyle={styles.radioContainer}>
+        {radioStations.map((station, index) => (
+          <TouchableOpacity
+            key={station.id}
+            style={styles.stationBox}
+            onPress={() => playStation(index)}
+          >
+            <Image
+              source={{ uri: station.artwork }}
+              style={styles.stationImage}
+            />
+            <Text style={styles.stationTitle}>{station.title}</Text>
+          </TouchableOpacity>
+        ))}
+      </ScrollView>
       <Text style={styles.stationTitle}>
         {radioStations[currentStationIndex].title}
       </Text>
       <Text style={styles.statusText}>{playStatus}</Text>
-      {/* Nuevo texto para mostrar el estado actual */}
-      <TouchableOpacity style={styles.button} onPress={togglePlayPause}>
-        <Text style={styles.buttonText}>{playStatus}</Text>
-        {/* Botón actualizado para mostrar 'SONANDO' o 'DETENIDO' */}
-      </TouchableOpacity>
       <View style={styles.controls}>
         <TouchableOpacity onPress={prevStation} style={styles.button}>
           <Text style={styles.buttonText}>⏮️ Prev</Text>
         </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={togglePlayPause}>
+          <Text style={styles.buttonText}>
+            {playbackState === State.Playing ? 'Pause' : 'Play'}
+          </Text>
+        </TouchableOpacity>
+
         <TouchableOpacity onPress={nextStation} style={styles.button}>
           <Text style={styles.buttonText}>Next ⏭️</Text>
         </TouchableOpacity>
@@ -130,38 +148,55 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#121212',
+    backgroundColor: 'cyan',
+    paddingTop: 20,
+  },
+  controls: {
+    flexDirection: 'row',
+    marginTop: 20,
   },
   title: {
     fontSize: 24,
     color: '#fff',
     marginBottom: 20,
   },
+  radioContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    backgroundColor: 'green',
+  },
+  stationBox: {
+    borderRadius: 10,
+    padding: 10,
+    margin: 10,
+    alignItems: 'center',
+    width: 150,
+    backgroundColor: 'red',
+  },
+  stationImage: {
+    width: 100,
+    height: 100,
+    resizeMode: 'contain',
+  },
   stationTitle: {
-    fontSize: 20,
     color: '#fff',
-    marginBottom: 10,
+    marginTop: 5,
+    textAlign: 'center',
   },
   statusText: {
     fontSize: 18,
     color: '#fff',
-    marginBottom: 10,
+    marginTop: 20,
     backgroundColor: 'red',
-
+    padding: 5,
+    borderRadius: 5,
   },
   button: {
     backgroundColor: '#1DB954',
     padding: 15,
     borderRadius: 10,
     marginTop: 10,
-  },
-  buttonText: {
-    color: '#fff',
-    fontSize: 16,
-  },
-  controls: {
-    flexDirection: 'row',
-    marginTop: 20,
   },
 });
 
