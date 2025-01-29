@@ -1,3 +1,5 @@
+import { StatusBar } from 'expo-status-bar';
+import { useColorScheme } from 'nativewind';
 import React, { useEffect, useState } from 'react';
 import {
   View,
@@ -7,11 +9,14 @@ import {
   Image,
   ScrollView,
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import TrackPlayer, {
   Capability,
   State,
   usePlaybackState,
 } from 'react-native-track-player';
+
+
 
 const radioStations = [
   {
@@ -60,6 +65,7 @@ const setupPlayer = async () => {
 };
 
 function RadioApp() {
+  const { colorScheme } = useColorScheme();
   const playbackState = usePlaybackState();
   const [currentStationIndex, setCurrentStationIndex] = useState(null);
   const [playStatus, setPlayStatus] = useState('DETENIDO');
@@ -104,40 +110,56 @@ function RadioApp() {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Radio App</Text>
-      <ScrollView contentContainerStyle={styles.radioContainer}>
-        {radioStations.map((station, index) => (
-          <TouchableOpacity
-            key={station.id}
-            style={styles.stationBox}
-            onPress={() => playStation(index)}
-          >
-            <Image
-              source={{ uri: station.artwork }}
-              style={styles.stationImage}
-            />
-            <Text style={styles.stationTitle}>{station.title}</Text>
-          </TouchableOpacity>
-        ))}
-      </ScrollView>
-
-      <View style={styles.controls}>
-        <TouchableOpacity onPress={prevStation} style={styles.button}>
-          <Text style={styles.buttonText}>⏮️ Prev</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={togglePlayPause}>
-          <Text style={styles.buttonText}>
-            {/* {playbackState === State.Playing ? 'Pause' : 'Play'} */}
-            {playStatus}
-          </Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={nextStation} style={styles.button}>
-          <Text style={styles.buttonText}>Next ⏭️</Text>
-        </TouchableOpacity>
+    <SafeAreaView style={{ flex: 1 }} edge={['bottom']}>
+      <View className="flex-row justify-between items-center px-2 pb-12 bg-[#0303B2]">
+        <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
+        
+        <View style={styles.container}>
+          
+        <View className="items-center mb-2  bg-white">
+        <Image
+          source={require('../../assets/images/welcome/logo.png')}
+          style={{
+            resizeMode: 'contain',
+            width: '60%',
+          }}
+        />
       </View>
-    </View>
+
+          <ScrollView contentContainerStyle={styles.radioContainer}>
+            {radioStations.map((station, index) => (
+              <TouchableOpacity
+                key={station.id}
+                style={styles.stationBox}
+                onPress={() => playStation(index)}
+              >
+                <Image
+                  source={{ uri: station.artwork }}
+                  style={styles.stationImage}
+                />
+                <Text style={styles.stationTitle}>{station.title}</Text>
+              </TouchableOpacity>
+            ))}
+          </ScrollView>
+
+          <View style={styles.controls}>
+            <TouchableOpacity onPress={prevStation} style={styles.button}>
+              <Text style={styles.buttonText}>⏮️ Prev</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={togglePlayPause}>
+              <Text style={styles.buttonText}>
+                {/* {playbackState === State.Playing ? 'Pause' : 'Play'} */}
+                {playStatus}
+              </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={nextStation} style={styles.button}>
+              <Text style={styles.buttonText}>Next ⏭️</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </View>
+    </SafeAreaView>
   );
 }
 
@@ -147,11 +169,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'cyan',
-    paddingTop: 20,
+    paddingTop: 10,
   },
   controls: {
     flexDirection: 'row',
-    marginTop: 20,
+    marginTop: 10,
   },
   title: {
     fontSize: 24,
@@ -162,12 +184,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'center',
-    backgroundColor: 'green',
+    // backgroundColor: 'green',
   },
   stationBox: {
     borderRadius: 10,
+    borderColor: 'red',
     padding: 10,
-    margin: 10,
+    margin: 2,
     alignItems: 'center',
     width: 150,
     backgroundColor: 'red',
