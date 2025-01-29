@@ -152,6 +152,7 @@ export default function RadioScreen() {
           </TouchableOpacity>
         ))}
       </ScrollView>
+      <Text style={styles.stationTitle}>tiutlo radio</Text>
       <View style={styles.controls}>
         <TouchableOpacity onPress={prevStation} style={styles.button}>
           <Text style={styles.buttonText}>⏮️</Text>
@@ -213,7 +214,7 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   stationTitle: {
-    color: '#fff',
+    color: 'red',
     marginTop: 5,
     textAlign: 'center',
   },
