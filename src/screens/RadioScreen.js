@@ -78,17 +78,17 @@ function RadioApp() {
     });
     await TrackPlayer.play();
     setCurrentStationIndex(index);
-    setPlayStatus('SONANDO');
+    setPlayStatus('PLAY');
   };
 
   const togglePlayPause = async () => {
     const state = await TrackPlayer.getState();
     if (state === State.Playing) {
       await TrackPlayer.pause();
-      setPlayStatus('DETENIDO');
+      setPlayStatus('PLAY');
     } else {
       await TrackPlayer.play();
-      setPlayStatus('SONANDO');
+      setPlayStatus('PAUSA');
     }
   };
 
@@ -121,17 +121,15 @@ function RadioApp() {
           </TouchableOpacity>
         ))}
       </ScrollView>
-      <Text style={styles.stationTitle}>
-        {radioStations[currentStationIndex].title}
-      </Text>
-      <Text style={styles.statusText}>{playStatus}</Text>
+
       <View style={styles.controls}>
         <TouchableOpacity onPress={prevStation} style={styles.button}>
           <Text style={styles.buttonText}>⏮️ Prev</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button} onPress={togglePlayPause}>
           <Text style={styles.buttonText}>
-            {playbackState === State.Playing ? 'Pause' : 'Play'}
+            {/* {playbackState === State.Playing ? 'Pause' : 'Play'} */}
+            {playStatus}
           </Text>
         </TouchableOpacity>
 
