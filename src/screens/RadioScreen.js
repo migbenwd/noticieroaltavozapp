@@ -82,7 +82,8 @@ export default function RadioScreen() {
 
   const playbackState = usePlaybackState();
   const [currentStationIndex, setCurrentStationIndex] = useState(null);
-  const [playStatus, setPlayStatus] = useState('DETENIDO');
+  const [tituloEmisora, settituloEmisora] = useState(null);
+  const [playStatus, setPlayStatus] = useState('PLAY');
 
   useEffect(() => {
     setupPlayer();
@@ -98,7 +99,8 @@ export default function RadioScreen() {
     });
     await TrackPlayer.play();
     setCurrentStationIndex(index);
-    setPlayStatus('PLAY');
+    settituloEmisora(radioStations[index].title);
+    setPlayStatus('PAUSA');
   };
 
   const togglePlayPause = async () => {
@@ -152,7 +154,7 @@ export default function RadioScreen() {
           </TouchableOpacity>
         ))}
       </ScrollView>
-      <Text style={styles.stationTitle}>tiutlo radio</Text>
+      <Text style={styles.stationTitle}>{tituloEmisora}</Text>
       <View style={styles.controls}>
         <TouchableOpacity onPress={prevStation} style={styles.button}>
           <Text style={styles.buttonText}>⏮️</Text>
