@@ -251,12 +251,13 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     height: 120,
     width: 120,
-    marginLeft: 20,
-    marginTop: 10,
-    marginBottom: 1,
+    marginLeft: 15,
+    marginTop: 5,
+    marginBottom: 5,
     borderRadius: 12,
     borderColor: 'gray',
     borderWidth: 1,
+    backgroundColor: '#0303B2',
   },
 
   stationTitle: {
