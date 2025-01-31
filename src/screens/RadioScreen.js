@@ -87,7 +87,7 @@ export default function RadioScreen() {
   const [currentStationIndex, setCurrentStationIndex] = useState(null);
   const [tituloEmisora, settituloEmisora] = useState(null);
   const [playStatus, setPlayStatus] = useState('PLAY');
-  const [selectedIndex, setSelectedIndex] = useState(null);
+  const [selectedIndexRadio, setSelectedIndexRadio] = useState(null);
 
   useEffect(() => {
     setupPlayer();
@@ -103,6 +103,7 @@ export default function RadioScreen() {
     });
     await TrackPlayer.play();
     setCurrentStationIndex(index);
+    setSelectedIndexRadio(index);
     settituloEmisora(radioStations[index].title);
     setPlayStatus('PAUSA');
   };
@@ -172,7 +173,7 @@ export default function RadioScreen() {
           <TouchableOpacity
             key={station.id}
             onPress={() => {
-              setSelectedIndex(index);
+              setSelectedIndexRadio(index);
               playStation(index);
             }}
           >
@@ -180,7 +181,8 @@ export default function RadioScreen() {
               source={{ uri: station.artwork }}
               style={{
                 ...styles.stationImage,
-                backgroundColor: selectedIndex === index ? '#7070E7' : '#0404B2',
+                backgroundColor:
+                  selectedIndexRadio === index ? '#7070E7' : '#0404B2',
               }}
             />
           </TouchableOpacity>
