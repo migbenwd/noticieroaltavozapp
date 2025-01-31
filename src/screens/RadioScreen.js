@@ -251,8 +251,10 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   stationTitle: {
-    color: 'red',
-    marginTop: 5,
+    fontSize: 20,
+    marginBottom: 2,
+    marginTop: 7,
+    color: 'black',
     textAlign: 'center',
   },
   statusText: {
