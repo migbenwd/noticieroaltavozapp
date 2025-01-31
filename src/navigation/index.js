@@ -65,7 +65,7 @@ function TabNavigator() {
                 height: 46,
                 alignItems: 'center',
                 flexDirection: 'column',
-                backgroundColor: focused ? 'blue' : 'transparent',
+                backgroundColor: focused ? '#0303B2' : 'transparent',
               }}
             >
               <View
