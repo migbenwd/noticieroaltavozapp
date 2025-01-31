@@ -25,6 +25,7 @@ import TrackPlayer, {
   State,
   usePlaybackState,
 } from 'react-native-track-player';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default function RadioScreen() {
   const [fontsLoaded] = useFonts({
@@ -162,19 +163,38 @@ export default function RadioScreen() {
       </ScrollView>
       <Text style={styles.stationTitle}>{tituloEmisora}</Text>
       <View style={styles.controls}>
-        <TouchableOpacity onPress={prevStation} style={styles.button}>
-          <Text style={styles.buttonText}>⏮️</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={togglePlayPause}>
+        <View style={styles.button}>
+          <Icon
+            name="arrow-left"
+            size={25}
+            color="white"
+            onPress={prevStation}
+          />
+        </View>
+
+        <View style={styles.button}>
+          <Icon
+            name={playStatus === 'PAUSA' ? 'pause' : 'play'}
+            size={25}
+            color="white"
+            onPress={togglePlayPause}
+          />
+        </View>
+
+        <View style={styles.button}>
+          <Icon
+            name="arrow-right"
+            size={25}
+            color="white"
+            onPress={nextStation}
+          />
+        </View>
+
+        {/* <TouchableOpacity style={styles.button} onPress={togglePlayPause}>
           <Text style={styles.buttonText}>
-            {/* {playbackState === State.Playing ? 'Pause' : 'Play'} */}
             {playStatus}
           </Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={nextStation} style={styles.button}>
-          <Text style={styles.buttonText}>⏭️</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
     </SafeAreaView>
   );
@@ -244,10 +264,13 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   button: {
-    backgroundColor: '#1DB954',
-    padding: 15,
-    borderRadius: 60,
-    marginTop: 1,
+    width: 45,
+    height: 45,
+    borderRadius: 25,
+    backgroundColor: 'blue',
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: 8,
   },
 });
 
