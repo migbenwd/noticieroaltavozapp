@@ -189,12 +189,6 @@ export default function RadioScreen() {
             onPress={nextStation}
           />
         </View>
-
-        {/* <TouchableOpacity style={styles.button} onPress={togglePlayPause}>
-          <Text style={styles.buttonText}>
-            {playStatus}
-          </Text>
-        </TouchableOpacity> */}
       </View>
     </SafeAreaView>
   );
