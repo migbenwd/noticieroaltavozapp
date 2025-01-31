@@ -139,6 +139,12 @@ export default function RadioScreen() {
         />
       </View>
 
+      <View className="items-center mb-2">
+        <Text style={styles.nombreAviso}>
+          Escucha la <Text style={{ fontWeight: 'bold' }}>radio en vivo</Text>
+        </Text>
+      </View>
+
       <ScrollView contentContainerStyle={styles.radioContainer}>
         {radioStations.map((station, index) => (
           <TouchableOpacity
@@ -200,6 +206,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     // backgroundColor: 'green',
   },
+
+  nombreAviso: {
+    // backgroundColor: 'blue',
+    justifyContent: 'center',
+    alignItems: 'center',
+    fontSize: 20,
+    marginBottom: 5,
+  },
+
   stationBox: {
     borderRadius: 10,
     borderColor: 'red',
