@@ -147,13 +147,11 @@ export default function RadioScreen() {
         </Text>
       </View>
 
-      {/* <ScrollView contentContainerStyle={styles.radioContainer}> */}
       <View style={styles.radioContainer}>
-
         {radioStations.map((station, index) => (
           <TouchableOpacity
             key={station.id}
-            style={styles.stationBox}
+            // style={styles.stationBox}
             onPress={() => playStation(index)}
           >
             <Image
@@ -162,9 +160,13 @@ export default function RadioScreen() {
             />
           </TouchableOpacity>
         ))}
+
+        {/* <Text style={styles.button}>{tituloEmisora}</Text> */}
       </View>
-      
-      {/* </ScrollView> */}
+
+      <View className="items-center mt-1">
+        <Text style={styles.nombreAviso}>{tituloEmisora}</Text>
+      </View>
 
       <View style={styles.controls}>
         <View style={styles.button}>
@@ -194,7 +196,6 @@ export default function RadioScreen() {
           />
         </View>
       </View>
-
     </SafeAreaView>
   );
 }
@@ -213,7 +214,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 20,
-    backgroundColor: 'red',
+    // backgroundColor: 'red',
   },
   title: {
     fontSize: 24,
@@ -224,7 +225,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'center',
-    // backgroundColor: 'green',
+    backgroundColor: 'transparent',
   },
 
   nombreAviso: {
@@ -232,7 +233,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     fontSize: 20,
-    marginBottom: 5,
+    marginBottom: 0,
   },
 
   stationBox: {
@@ -245,17 +246,29 @@ const styles = StyleSheet.create({
     height: 130,
     backgroundColor: 'blue',
   },
+
   stationImage: {
-    width: 100,
-    height: 100,
     resizeMode: 'contain',
+    height: 120,
+    width: 120,
+    marginLeft: 20,
+    marginTop: 10,
+    marginBottom: 1,
+    borderRadius: 12,
+    borderColor: 'gray',
+    borderWidth: 1,
   },
+
   stationTitle: {
     fontSize: 20,
     marginBottom: 2,
-    marginTop: 7,
+    marginTop: 17,
     color: 'black',
-    textAlign: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
+
+    // textAlign: 'center',
+    // backgroundColor: 'green',
   },
   statusText: {
     fontSize: 18,
