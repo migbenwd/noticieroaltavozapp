@@ -87,6 +87,7 @@ export default function RadioScreen() {
   const [currentStationIndex, setCurrentStationIndex] = useState(null);
   const [tituloEmisora, settituloEmisora] = useState(null);
   const [playStatus, setPlayStatus] = useState('PLAY');
+  const [selectedIndex, setSelectedIndex] = useState(null);
 
   useEffect(() => {
     setupPlayer();
@@ -147,7 +148,7 @@ export default function RadioScreen() {
         </Text>
       </View>
 
-      <View style={styles.radioContainer}>
+      {/*       <View style={styles.radioContainer}>
         {radioStations.map((station, index) => (
           <TouchableOpacity
             key={station.id}
@@ -156,12 +157,34 @@ export default function RadioScreen() {
           >
             <Image
               source={{ uri: station.artwork }}
-              style={styles.stationImage}
+              style={{
+                ...styles.stationImage,
+                backgroundColor: key === index ? 'red' : 'green',
+              }}
             />
           </TouchableOpacity>
         ))}
+      </View>
+       */}
 
-        {/* <Text style={styles.button}>{tituloEmisora}</Text> */}
+      <View style={styles.radioContainer}>
+        {radioStations.map((station, index) => (
+          <TouchableOpacity
+            key={station.id}
+            onPress={() => {
+              setSelectedIndex(index);
+              playStation(index);
+            }}
+          >
+            <Image
+              source={{ uri: station.artwork }}
+              style={{
+                ...styles.stationImage,
+                backgroundColor: selectedIndex === index ? '#7070E7' : '#0404B2',
+              }}
+            />
+          </TouchableOpacity>
+        ))}
       </View>
 
       <View className="items-center mt-1">
@@ -283,7 +306,7 @@ const styles = StyleSheet.create({
     width: 45,
     height: 45,
     borderRadius: 25,
-    backgroundColor: 'blue',
+    backgroundColor: '#0303B2',
     justifyContent: 'center',
     alignItems: 'center',
     margin: 8,
