@@ -141,14 +141,15 @@ export default function RadioScreen() {
           }}
         />
       </View>
-
       <View className="items-center mb-2">
         <Text style={styles.nombreAviso}>
           Escucha la <Text style={{ fontWeight: 'bold' }}>radio en vivo</Text>
         </Text>
       </View>
 
-      <ScrollView contentContainerStyle={styles.radioContainer}>
+      {/* <ScrollView contentContainerStyle={styles.radioContainer}> */}
+      <View style={styles.radioContainer}>
+
         {radioStations.map((station, index) => (
           <TouchableOpacity
             key={station.id}
@@ -159,11 +160,12 @@ export default function RadioScreen() {
               source={{ uri: station.artwork }}
               style={styles.stationImage}
             />
-            {/* <Text style={styles.stationTitle}>{station.title}</Text> */}
           </TouchableOpacity>
         ))}
-      </ScrollView>
-      <Text style={styles.stationTitle}>{tituloEmisora}</Text>
+      </View>
+      
+      {/* </ScrollView> */}
+
       <View style={styles.controls}>
         <View style={styles.button}>
           <Icon
@@ -192,6 +194,7 @@ export default function RadioScreen() {
           />
         </View>
       </View>
+
     </SafeAreaView>
   );
 }
@@ -210,6 +213,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 20,
+    backgroundColor: 'red',
   },
   title: {
     fontSize: 24,
