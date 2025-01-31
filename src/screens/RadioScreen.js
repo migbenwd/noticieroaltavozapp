@@ -1,5 +1,7 @@
 /* eslint-disable global-require */
 
+// genial 1
+
 import React, { useEffect, useState } from 'react';
 import {
   StyleSheet,
