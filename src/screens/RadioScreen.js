@@ -25,7 +25,6 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { useKeepAwake } from 'expo-keep-awake';
 import { setupPlayer, addTracks } from '../../trackPlayerServices';
 
-
 export default function RadioScreen() {
   useKeepAwake();
 
@@ -104,9 +103,6 @@ export default function RadioScreen() {
   //     alwaysPauseOnInterruption: true,
   //   });
   // };
-
-
-
 
   const playbackState = usePlaybackState();
   const [currentStationIndex, setCurrentStationIndex] = useState(null);

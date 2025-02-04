@@ -1,4 +1,3 @@
-
 import TrackPlayer, {
   AppKilledPlaybackBehavior,
   Capability,
@@ -17,6 +16,10 @@ export async function setupPlayer() {
       android: {
         appKilledPlaybackBehavior:
           AppKilledPlaybackBehavior.StopPlaybackAndRemoveNotification,
+      },
+      ios: {
+        appCategory: 'playback',
+        appCategoryOptions: ['mixWithOthers'], // Esto permite que el audio se mezcle con otras aplicaciones si es necesario.
       },
       capabilities: [
         Capability.Play,
