@@ -1,16 +1,7 @@
 /* eslint-disable global-require */
 
-// genial 1
-
 import React, { useEffect, useState } from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  Image,
-  ScrollView,
-} from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useColorScheme } from 'nativewind';
@@ -28,8 +19,11 @@ import TrackPlayer, {
   usePlaybackState,
 } from 'react-native-track-player';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { useKeepAwake } from 'expo-keep-awake';
 
 export default function RadioScreen() {
+  useKeepAwake();
+
   const [fontsLoaded] = useFonts({
     Poppins_400Regular,
     Poppins_700Bold,
@@ -78,8 +72,19 @@ export default function RadioScreen() {
   const setupPlayer = async () => {
     await TrackPlayer.setupPlayer();
     await TrackPlayer.updateOptions({
-      stoppingAppPausesPlayback: true,
-      capabilities: [Capability.Play, Capability.Pause, Capability.Stop],
+      stoppingAppPausesPlayback: false,
+      capabilities: [
+        Capability.Play,
+        Capability.Pause,
+        Capability.SkipToNext,
+        Capability.SkipToPrevious,
+      ],
+      compactCapabilities: [
+        Capability.Play,
+        Capability.Pause,
+        Capability.SkipToNext,
+        Capability.SkipToPrevious,
+      ],
     });
   };
 
@@ -100,6 +105,7 @@ export default function RadioScreen() {
       url: radioStations[index].url,
       title: radioStations[index].title,
       artist: 'Live Stream',
+      artwork: radioStations[index].artwork,
     });
     await TrackPlayer.play();
     setCurrentStationIndex(index);
@@ -129,20 +135,18 @@ export default function RadioScreen() {
       (currentStationIndex - 1 + radioStations.length) % radioStations.length;
     playStation(prevIndex);
   };
+
   return (
     <SafeAreaView style={{ flex: 1 }} edge={['bottom']}>
-      <View className="flex-row justify-between items-center px-2 pb-12 bg-[#0303B2]" />
       <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
 
-      <View className="items-center mb-2  bg-white">
+      <View className="items-center mb-2 bg-white">
         <Image
           source={require('../../assets/images/welcome/logo.png')}
-          style={{
-            resizeMode: 'contain',
-            width: '60%',
-          }}
+          style={{ resizeMode: 'contain', width: '60%' }}
         />
       </View>
+
       <View className="items-center mb-2">
         <Text style={styles.nombreAviso}>
           Escucha la <Text style={{ fontWeight: 'bold' }}>radio en vivo</Text>
@@ -151,13 +155,7 @@ export default function RadioScreen() {
 
       <View style={styles.radioContainer}>
         {radioStations.map((station, index) => (
-          <TouchableOpacity
-            key={station.id}
-            onPress={() => {
-              setSelectedIndexRadio(index);
-              playStation(index);
-            }}
-          >
+          <TouchableOpacity key={station.id} onPress={() => playStation(index)}>
             <Image
               source={{ uri: station.artwork }}
               style={{
@@ -175,115 +173,50 @@ export default function RadioScreen() {
       </View>
 
       <View style={styles.controls}>
-        <View style={styles.button}>
-          <Icon
-            name="arrow-left"
-            size={25}
-            color="white"
-            onPress={prevStation}
-          />
-        </View>
+        <TouchableOpacity style={styles.button} onPress={prevStation}>
+          <Icon name="arrow-left" size={25} color="white" />
+        </TouchableOpacity>
 
-        <View style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={togglePlayPause}>
           <Icon
             name={playStatus === 'PAUSA' ? 'pause' : 'play'}
             size={25}
             color="white"
-            onPress={togglePlayPause}
           />
-        </View>
+        </TouchableOpacity>
 
-        <View style={styles.button}>
-          <Icon
-            name="arrow-right"
-            size={25}
-            color="white"
-            onPress={nextStation}
-          />
-        </View>
+        <TouchableOpacity style={styles.button} onPress={nextStation}>
+          <Icon name="arrow-right" size={25} color="white" />
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'cyan',
-    paddingTop: 10,
-  },
-  controls: {
-    flexDirection: 'row',
-    marginTop: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 20,
-    // backgroundColor: 'red',
-  },
-  title: {
-    fontSize: 24,
-    color: '#fff',
-    marginBottom: 20,
-  },
   radioContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'center',
-    backgroundColor: 'transparent',
   },
-
   nombreAviso: {
-    // backgroundColor: 'blue',
-    justifyContent: 'center',
-    alignItems: 'center',
     fontSize: 20,
     marginBottom: 0,
   },
-
-  stationBox: {
-    borderRadius: 10,
-    borderColor: 'red',
-    padding: 10,
-    margin: 5,
-    alignItems: 'center',
-    width: 140,
-    height: 130,
-    backgroundColor: 'blue',
-  },
-
   stationImage: {
     resizeMode: 'contain',
     height: 120,
     width: 120,
-    marginLeft: 15,
-    marginTop: 5,
-    marginBottom: 5,
+    margin: 5,
     borderRadius: 12,
     borderColor: 'gray',
     borderWidth: 1,
-    backgroundColor: '#0303B2',
   },
-
-  stationTitle: {
-    fontSize: 20,
-    marginBottom: 2,
-    marginTop: 17,
-    color: 'black',
+  controls: {
+    flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-
-    // textAlign: 'center',
-    // backgroundColor: 'green',
-  },
-  statusText: {
-    fontSize: 18,
-    color: '#fff',
-    marginTop: 20,
-    backgroundColor: 'red',
-    padding: 5,
-    borderRadius: 5,
+    marginBottom: 20,
   },
   button: {
     width: 45,
@@ -295,43 +228,3 @@ const styles = StyleSheet.create({
     margin: 8,
   },
 });
-
-/*
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    backgroundColor: 'blue',
-  },
-
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 20,
-    fontFamily: 'Poppins_400Regular',
-  },
-  description: {
-    fontSize: 16,
-    color: '#333',
-    marginBottom: 20,
-    lineHeight: 22,
-    fontFamily: 'Poppins_400Regular',
-    textAlign: 'center',
-  },
-  label: {
-    fontSize: 18,
-    fontWeight: '600',
-    marginTop: 15,
-    fontFamily: 'Poppins_400Regular',
-  },
-  link: {
-    fontSize: 16,
-    color: 'blue',
-    marginTop: 5,
-    fontFamily: 'Poppins_400Regular',
-  },
-  viewcontrol: {
-    backgroundColor: 'red',
-  },
-});
-*/
