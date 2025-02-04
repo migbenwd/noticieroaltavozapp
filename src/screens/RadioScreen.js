@@ -15,11 +15,16 @@ import {
 
 import TrackPlayer, {
   Capability,
+  Event,
   State,
   usePlaybackState,
+  useTrackPlayerEvents,
+  AppKilledPlaybackBehavior,
 } from 'react-native-track-player';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useKeepAwake } from 'expo-keep-awake';
+import { setupPlayer, addTracks } from '../../trackPlayerServices';
+
 
 export default function RadioScreen() {
   useKeepAwake();
@@ -69,24 +74,39 @@ export default function RadioScreen() {
     },
   ];
 
-  const setupPlayer = async () => {
-    await TrackPlayer.setupPlayer();
-    await TrackPlayer.updateOptions({
-      stoppingAppPausesPlayback: false,
-      capabilities: [
-        Capability.Play,
-        Capability.Pause,
-        Capability.SkipToNext,
-        Capability.SkipToPrevious,
-      ],
-      compactCapabilities: [
-        Capability.Play,
-        Capability.Pause,
-        Capability.SkipToNext,
-        Capability.SkipToPrevious,
-      ],
-    });
-  };
+  // const setupPlayer = async () => {
+  //   await TrackPlayer.setupPlayer();
+  //   await TrackPlayer.updateOptions({
+  //     stoppingAppPausesPlayback: false,
+  //     android: {
+  //       appKilledPlaybackBehavior:
+  //         AppKilledPlaybackBehavior.StopPlaybackAndRemoveNotification,
+  //     },
+  //     capabilities: [
+  //       Capability.Play,
+  //       Capability.Pause,
+  //       Capability.SkipToNext,
+  //       Capability.SkipToPrevious,
+  //       Capability.Stop,
+  //     ],
+  //     compactCapabilities: [
+  //       Capability.Play,
+  //       Capability.Pause,
+  //       Capability.SkipToNext,
+  //       Capability.SkipToPrevious,
+  //     ],
+  //     notificationCapabilities: [
+  //       Capability.Play,
+  //       Capability.Pause,
+  //       Capability.SkipToNext,
+  //       Capability.SkipToPrevious,
+  //     ],
+  //     alwaysPauseOnInterruption: true,
+  //   });
+  // };
+
+
+
 
   const playbackState = usePlaybackState();
   const [currentStationIndex, setCurrentStationIndex] = useState(null);
@@ -94,9 +114,48 @@ export default function RadioScreen() {
   const [playStatus, setPlayStatus] = useState('PLAY');
   const [selectedIndexRadio, setSelectedIndexRadio] = useState(null);
 
+  // useEffect(() => {
+  //   setupPlayer();
+  // }, []);
+
+  const [isPlayerReady, setIsPlayerReady] = useState(false);
+
   useEffect(() => {
-    setupPlayer();
+    async function setup() {
+      const isSetup = await setupPlayer();
+
+      const queue = await TrackPlayer.getQueue();
+      if (isSetup && queue.length <= 0) {
+        await addTracks();
+      }
+
+      setIsPlayerReady(isSetup);
+    }
+
+    setup();
   }, []);
+
+  useTrackPlayerEvents(
+    [
+      Event.RemoteNext,
+      Event.RemotePrevious,
+      Event.RemotePlay,
+      Event.RemotePause,
+    ],
+    (event) => {
+      if (event.type === Event.RemoteNext) {
+        nextStation();
+      } else if (event.type === Event.RemotePrevious) {
+        prevStation();
+      } else if (event.type === Event.RemotePlay) {
+        TrackPlayer.play();
+        setPlayStatus('PAUSA');
+      } else if (event.type === Event.RemotePause) {
+        TrackPlayer.pause();
+        setPlayStatus('PLAY');
+      }
+    }
+  );
 
   const playStation = async (index) => {
     await TrackPlayer.reset();
