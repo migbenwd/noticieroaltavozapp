@@ -149,25 +149,6 @@ export default function RadioScreen() {
         </Text>
       </View>
 
-      {/*       <View style={styles.radioContainer}>
-        {radioStations.map((station, index) => (
-          <TouchableOpacity
-            key={station.id}
-            // style={styles.stationBox}
-            onPress={() => playStation(index)}
-          >
-            <Image
-              source={{ uri: station.artwork }}
-              style={{
-                ...styles.stationImage,
-                backgroundColor: key === index ? 'red' : 'green',
-              }}
-            />
-          </TouchableOpacity>
-        ))}
-      </View>
-       */}
-
       <View style={styles.radioContainer}>
         {radioStations.map((station, index) => (
           <TouchableOpacity
