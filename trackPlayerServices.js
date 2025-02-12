@@ -20,6 +20,9 @@ export async function setupPlayer() {
       ios: {
         appCategory: 'playback',
         appCategoryOptions: ['mixWithOthers'], // Esto permite que el audio se mezcle con otras aplicaciones si es necesario.
+        alwaysPauseOnInterruption: false, // Evita que se pause con notificaciones
+        staysActiveInBackground: true, // Mantiene la app activa en segundo plano
+        remoteControl: true, // Habilita control de audio desde centro de control
       },
       capabilities: [
         Capability.Play,

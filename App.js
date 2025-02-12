@@ -1,25 +1,24 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import React, { useEffect } from 'react';
+
+import { AppState } from 'react-native';
+import TrackPlayer from 'react-native-track-player';
 import AppNavigation from './src/navigation';
-// import { BuscarNoticiasPortadaData } from './src/services/InicioNews';
-// import { NewsProvider } from './src/screens/NewsContext';
 
 const queryClient = new QueryClient();
 
 export default function App() {
-  /* const { newsByCategory } = BuscarNoticiasPortadaData();
-  
   useEffect(() => {
-    console.log('NewsByCategory::', newsByCategory);
-  }, [newsByCategory]);
-  */
-  return (
-    // <QueryClientProvider client={queryClient}>
-    //   <NewsProvider>
-    //     <AppNavigation />
-    //   </NewsProvider>
-    // </QueryClientProvider>
+    const subscription = AppState.addEventListener('change', (nextAppState) => {
+      if (nextAppState === 'background' || nextAppState === 'inactive') {
+        TrackPlayer.play(); // Asegura que la radio continúe en segundo plano
+      }
+    });
 
+    return () => subscription.remove();
+  }, []);
+
+  return (
     <QueryClientProvider client={queryClient}>
       <AppNavigation />
     </QueryClientProvider>
