@@ -18,6 +18,8 @@ export async function setupPlayer() {
           AppKilledPlaybackBehavior.StopPlaybackAndRemoveNotification,
       },
       ios: {
+        appKilledPlaybackBehavior: AppKilledPlaybackBehavior.ContinuePlayback,
+        allowsBackgroundAudio: true, 
         appCategory: 'playback',
         appCategoryOptions: ['mixWithOthers'], // Esto permite que el audio se mezcle con otras aplicaciones si es necesario.
         alwaysPauseOnInterruption: false, // Evita que se pause con notificaciones
