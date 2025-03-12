@@ -16,9 +16,7 @@
       ],
       "ios": {
         "infoPlist": {
-          "UIBackgroundModes": [
-            "audio", "fetch"
-          ]
+          "UIBackgroundModes": ["audio"]
         },
         "supportsTablet": true,
         "bundleIdentifier": "com.noticieroaltavoz.noticieroaltavozapp",
