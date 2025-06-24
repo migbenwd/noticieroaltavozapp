@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1027607228999",
+    "project_id": "noticiero-altavoz",
+    "storage_bucket": "noticiero-altavoz.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1027607228999:android:d4f2afae01394c23a03762",
+        "android_client_info": {
+          "package_name": "com.noticieroaltavoz.noticieroaltavozapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCSFQA0MsT0-UGvPFCchxCFU1gBmtYVvHg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
