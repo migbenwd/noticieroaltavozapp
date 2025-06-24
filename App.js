@@ -1,8 +1,8 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import React, { useEffect } from 'react';
+// import React, { useEffect } from 'react';
 
-import { AppState } from 'react-native';
-import TrackPlayer from 'react-native-track-player';
+// import { AppState } from 'react-native';
+// import TrackPlayer from 'react-native-track-player';
 import AppNavigation from './src/navigation';
 
 const queryClient = new QueryClient();
