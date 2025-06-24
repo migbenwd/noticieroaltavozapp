@@ -17,8 +17,10 @@
     "ios": {
       "infoPlist": {
         "UIBackgroundModes": [
+          "audio",
           "audio"
-        ]
+        ],
+        "ITSAppUsesNonExemptEncryption": false
       },
       "supportsTablet": true,
       "bundleIdentifier": "com.noticieroaltavoz.noticieroaltavoz",
