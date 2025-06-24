@@ -198,4 +198,4 @@ export default function AppNavigation() {
   );
 }
 
-console.log('pasó por index ene - 07');
+console.log('pasó por index 24 jun 2025');
