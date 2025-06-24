@@ -8,6 +8,8 @@ import AppNavigation from './src/navigation';
 const queryClient = new QueryClient();
 
 export default function App() {
+  // CONDICIONAL: SI DESMARCO EL UseEffect ... se ACTIVA la radio asi la haya pausado
+  /*
   useEffect(() => {
     const subscription = AppState.addEventListener('change', (nextAppState) => {
       if (nextAppState === 'background' || nextAppState === 'inactive') {
@@ -17,6 +19,7 @@ export default function App() {
 
     return () => subscription.remove();
   }, []);
+*/
 
   return (
     <QueryClientProvider client={queryClient}>
