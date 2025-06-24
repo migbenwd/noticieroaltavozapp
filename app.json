@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Noticiero Altavoz",
-    "slug": "noticieroaltavozapp",
+    "slug": "noticieroaltavoz",
     "version": "1.2.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -21,11 +21,11 @@
         ]
       },
       "supportsTablet": true,
-      "bundleIdentifier": "com.noticieroaltavoz.noticieroaltavozapp",
+      "bundleIdentifier": "com.noticieroaltavoz.noticieroaltavoz",
       "buildNumber": "9"
     },
     "android": {
-      "package": "com.noticieroaltavoz.noticieroaltavozapp",
+      "package": "com.noticieroaltavoz.noticieroaltavoz",
       "googleServicesFile": "./google-services.json"
     },
     "web": {
