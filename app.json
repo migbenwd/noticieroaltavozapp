@@ -11,10 +11,14 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "infoPlist": {
-        "UIBackgroundModes": ["audio"]
+        "UIBackgroundModes": [
+          "audio"
+        ]
       },
       "supportsTablet": true,
       "bundleIdentifier": "com.noticieroaltavoz.noticieroaltavozapp",
@@ -27,7 +31,13 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-
-    "plugins": ["expo-font"]
+    "plugins": [
+      "expo-font"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "94625891-88a4-4b58-800e-887abfbb0e74"
+      }
+    }
   }
 }
