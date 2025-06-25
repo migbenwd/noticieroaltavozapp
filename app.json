@@ -24,7 +24,7 @@
       },
       "supportsTablet": true,
       "bundleIdentifier": "com.noticieroaltavoz.noticieroaltavoz",
-      "buildNumber": "9"
+      "buildNumber": "1"
     },
     "android": {
       "package": "com.noticieroaltavoz.noticieroaltavoz",
