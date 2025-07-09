@@ -12,12 +12,15 @@ import {
   NavigationContainer,
 } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+// Importa la referencia que creaste
+import { navigationRef } from './RootNavigation'; 
+
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 import TrackPlayer from 'react-native-track-player';
 
 import { View, Text, Alert } from 'react-native';
-// import { OneSignal } from 'react-native-onesignal';
 
 import HomeScreen from '../screens/HomeScreen';
 import NewsDetails from '../screens/NewsDetails';
@@ -28,7 +31,7 @@ import RadioScreen from '../screens/RadioScreen';
 import PantallaDestino from '../screens/ContactScreen';
 import ContactScreen from '../screens/ContactScreen';
 
-const navigationRef = createNavigationContainerRef();
+// const navigationRef = createNavigationContainerRef();
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
@@ -151,11 +154,13 @@ export default function AppNavigation() {
         };
 
         const onPress = () => {
+
           if (!navigationRef.isReady()) return;
           navigationRef.current.navigate('NewsDetails', {
             item: data,
             tituloCategoria,
           });
+          
         };
 
         Alert.alert('Nueva notificación', data.title, [
@@ -179,7 +184,7 @@ export default function AppNavigation() {
   */
 
   return (
-    <NavigationContainer>
+    <NavigationContainer ref={navigationRef}>
       <Stack.Navigator
         initialRouteName="HomeTabs"
         screenOptions={{
