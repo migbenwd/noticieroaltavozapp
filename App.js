@@ -1,25 +1,23 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-// import React, { useEffect } from 'react';
 
-// import { AppState } from 'react-native';
-// import TrackPlayer from 'react-native-track-player';
+import React, { useEffect } from 'react';
+// Include the OneSignal package
+import { OneSignal, LogLevel } from 'react-native-onesignal';
 import AppNavigation from './src/navigation';
 
 const queryClient = new QueryClient();
 
 export default function App() {
-  // CONDICIONAL: SI DESMARCO EL UseEffect ... se ACTIVA la radio asi la haya pausado
-  /*
+  // Initialize OneSignal in useEffect to ensure it runs only once
   useEffect(() => {
-    const subscription = AppState.addEventListener('change', (nextAppState) => {
-      if (nextAppState === 'background' || nextAppState === 'inactive') {
-        TrackPlayer.play(); // Asegura que la radio continúe en segundo plano
-      }
-    });
-
-    return () => subscription.remove();
-  }, []);
-*/
+    // Enable verbose logging for debugging (remove in production)
+     OneSignal.Debug.setLogLevel(LogLevel.Verbose);
+    // Initialize with your OneSignal App ID
+    OneSignal.initialize('8497271c-4edb-486f-a683-063bd6205b5b');
+    // Use this method to prompt for push notifications.
+    // We recommend removing this method after testing and instead use In-App Messages to prompt for notification permission.
+    OneSignal.Notifications.requestPermission(false);
+  }, []); // Ensure this only runs once on app mount
 
   return (
     <QueryClientProvider client={queryClient}>
