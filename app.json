@@ -15,13 +15,23 @@
       "**/*"
     ],
     "ios": {
+      
       "infoPlist": {
         "UIBackgroundModes": [
           "audio",
-          "audio"
+          "remote-notification"
         ],
         "ITSAppUsesNonExemptEncryption": false
       },
+
+    "entitlements": {
+    "aps-environment": "development", // ✅ Required for push notification, change to "production" for Testflight and App Store builds
+    "com.apple.security.application-groups": [
+      "group.${ios.bundleIdentifier}.onesignal" // // ✅ Required for confirmed delivery
+    ]
+    },
+
+
       "supportsTablet": true,
       "bundleIdentifier": "com.noticieroaltavoz.noticieroaltavozapp",
       "buildNumber": "27"
