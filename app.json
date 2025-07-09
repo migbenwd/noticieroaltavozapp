@@ -25,9 +25,9 @@
       },
 
     "entitlements": {
-    "aps-environment": "development", // ✅ Required for push notification, change to "production" for Testflight and App Store builds
+    "aps-environment": "development", 
     "com.apple.security.application-groups": [
-      "group.${ios.bundleIdentifier}.onesignal" // // ✅ Required for confirmed delivery
+      "group.${ios.bundleIdentifier}.onesignal"
     ]
     },
 
@@ -44,7 +44,7 @@
       "favicon": "./assets/favicon.png"
     },
     
-    "plugins": [ // <-- SECCIÓN DE PLUGINS MODIFICADA
+    "plugins": [
       "expo-font",
       [
         "onesignal-expo-plugin",
