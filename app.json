@@ -49,11 +49,7 @@
       [
         "onesignal-expo-plugin",
         {
-          "mode": "development",
-          "smallIcons": [
-            "./assets/notification_small_icon_1.png",
-            "./assets/notification_small_icon_2.png"
-          ]
+          "mode": "development"
         }
       ]
     ],
