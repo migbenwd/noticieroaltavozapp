@@ -33,8 +33,19 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "plugins": [
-      "expo-font"
+    
+    "plugins": [ // <-- SECCIÓN DE PLUGINS MODIFICADA
+      "expo-font",
+      [
+        "onesignal-expo-plugin",
+        {
+          "mode": "development",
+          "smallIcons": [
+            "./assets/notification_small_icon_1.png",
+            "./assets/notification_small_icon_2.png"
+          ]
+        }
+      ]
     ],
     "extra": {
       "eas": {
