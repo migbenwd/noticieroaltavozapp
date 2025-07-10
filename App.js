@@ -21,10 +21,12 @@ export default function App() {
         link: event.notification.additionalData.post_url,
       };
 
+      /*
       console.log('OneSignal: URL:');
       console.log(url);
+      */
 
-      const tituloCategoria = 'Portada-Migben';
+      const tituloCategoria = event.notification.additionalData.post_category;
 
       if (url) {
         // Usa navigate global, no useNavigation

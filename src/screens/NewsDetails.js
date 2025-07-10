@@ -29,13 +29,6 @@ export default function NewsDetails() {
 
   const { item, tituloCategoria } = useRoute().params;
 
-  console.log('ABRIENDO NewsDetail.js...');
-  console.log('tituloCategoria');
-  console.log(tituloCategoria);
-
-  console.log('item');
-  console.log(item);
-
   const [visible, setVisible] = useState(false);
   const navigation = useNavigation();
   const runFirst = `(function(){
