@@ -52,11 +52,6 @@
           "mode": "development"
         }
       ]
-    ],
-    "extra": {
-      "eas": {
-        "projectId": "ef62bc99-616e-4839-867f-e63b22928822"
-      }
-    }
+    ]
   }
 }
