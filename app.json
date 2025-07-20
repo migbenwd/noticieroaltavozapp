@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Noticiero Altavoz",
-    "slug": "noticieroaltavozapp",
+    "slug": "noticieroaltavozapp1",
     "version": "1.2.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -37,7 +37,7 @@
       "buildNumber": "27"
     },
     "android": {
-      "package": "com.noticieroaltavoz.noticieroaltavozapp",
+      "package": "com.noticieroaltavoz.noticieroaltavozapp1",
       "googleServicesFile": "./google-services.json"
     },
     "web": {
