@@ -15,7 +15,6 @@
       "**/*"
     ],
     "ios": {
-      
       "infoPlist": {
         "UIBackgroundModes": [
           "audio",
@@ -23,15 +22,12 @@
         ],
         "ITSAppUsesNonExemptEncryption": false
       },
-
-    "entitlements": {
-    "aps-environment": "development", 
-    "com.apple.security.application-groups": [
-      "group.${ios.bundleIdentifier}.onesignal"
-    ]
-    },
-
-
+      "entitlements": {
+        "aps-environment": "development",
+        "com.apple.security.application-groups": [
+          "group.${ios.bundleIdentifier}.onesignal"
+        ]
+      },
       "supportsTablet": true,
       "bundleIdentifier": "com.noticieroaltavoz.noticieroaltavozapp",
       "buildNumber": "27"
@@ -43,7 +39,6 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    
     "plugins": [
       "expo-font",
       [
@@ -52,6 +47,28 @@
           "mode": "development"
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "build": {
+          "experimental": {
+            "ios": {
+              "appExtensions": [
+                {
+                  "targetName": "OneSignalNotificationServiceExtension",
+                  "bundleIdentifier": "com.noticieroaltavoz.noticieroaltavozapp.OneSignalNotificationServiceExtension",
+                  "entitlements": {
+                    "com.apple.security.application-groups": [
+                      "group.com.noticieroaltavoz.noticieroaltavozapp.onesignal"
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "projectId": "969f486c-c678-40a6-a1d8-8e2fcbf330a0"
+      }
+    }
   }
 }
