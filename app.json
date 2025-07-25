@@ -39,7 +39,7 @@
     "android": {
       "package": "com.noticieroaltavoz.noticieroaltavozapp",
       "googleServicesFile": "./google-services.json",
-      "versionCode": 4,
+      "versionCode": 11,
       "targetSdkVersion": 35
 
     },
