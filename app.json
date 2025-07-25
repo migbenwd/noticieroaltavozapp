@@ -38,7 +38,10 @@
     },
     "android": {
       "package": "com.noticieroaltavoz.noticieroaltavozapp",
-      "googleServicesFile": "./google-services.json"
+      "googleServicesFile": "./google-services.json",
+      "versionCode": 4,
+      "targetSdkVersion": 35
+
     },
     "web": {
       "favicon": "./assets/favicon.png"
