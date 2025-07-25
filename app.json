@@ -30,8 +30,6 @@
       "group.${ios.bundleIdentifier}.onesignal"
     ]
     },
-
-
       "supportsTablet": true,
       "bundleIdentifier": "com.noticieroaltavoz.noticieroaltavozapp",
       "buildNumber": "27"
@@ -41,7 +39,6 @@
       "googleServicesFile": "./google-services.json",
       "versionCode": 11,
       "targetSdkVersion": 35
-
     },
     "web": {
       "favicon": "./assets/favicon.png"
